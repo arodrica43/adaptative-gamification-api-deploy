@@ -1,0 +1,8 @@
+List courses:
+api/courses/v1/courses/
+
+List blocks of a course
+api/courses/v1/blocks/?course_id=<course_id>&all_blocks=true&depth=all
+
+User data:
+api/user/v1/accounts

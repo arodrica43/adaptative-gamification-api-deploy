@@ -1,0 +1,35 @@
+
+<div>
+
+  	<div id="incr"></div>
+
+  	<div id="incr5"></div>
+
+</div>
+
+<script>
+            fetch("http://127.0.0.1:8080/api/g_mechanics/6/?user=user2&increase=0")
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (myJson) {
+                  
+                  		fetch("http://127.0.0.1:8080/api/g_mechanics/2/")
+                        .then(function (response) {
+                            return response.json();
+                        })
+                        .then(function (myJson2) {
+                            document.querySelector("#incr5").innerHTML = (myJson2.html);
+                          	document.querySelector("#incr").innerHTML = (myJson.html);
+                            $(myJson2.html).appendTo(document.body);
+                          	$(myJson.html).appendTo(document.body);
+                        })
+                        .catch(function (error) {
+                            console.log("Error: " + error);
+                        });
+                })
+                .catch(function (error) {
+                    console.log("Error: " + error);
+                });
+    			
+</script>

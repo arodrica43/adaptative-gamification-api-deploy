@@ -1,0 +1,121 @@
+
+.profilecards {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.profilecards_item {
+  display: flex;
+  padding: 1rem;
+}
+
+@media (min-width: 40rem) {
+  .profilecards_item {
+    width: 50%;
+  }
+}
+
+@media (min-width: 56rem) {
+  .profilecards_item {
+    width: 33.3333%;
+  }
+}
+
+.profilecard {
+  background-color: white;
+  border-radius: 0.25rem;
+  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.profilecard_content {
+  padding: 1rem;
+  background: linear-gradient(to bottom left, #EF8D9C 40%, #FFC39E 100%);
+}
+
+.profilecard_title {
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+  margin: 0px;
+}
+
+.profilecard_text {
+  color: #ffffff;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;    
+  font-weight: 400;
+}
+
+
+  <ul class="profilecards">
+    <li class="profilecards_item">
+      <div class="profilecard">
+        <div class="profilecard_image"><img src="https://picsum.photos/500/300/?image=10"></div>
+        <div class="profilecard_content">
+          <h2 class="profilecard_title">profilecard Grid Layout</h2>
+          <p class="profilecard_text">Demo of pixel perfect pure CSS simple responsive profilecard grid layout</p>
+          <button class="btn profilecard_btn">Read More</button>
+        </div>
+      </div>
+    </li>
+    <li class="profilecards_item">
+      <div class="profilecard">
+        <div class="profilecard_image"><img src="https://picsum.photos/500/300/?image=5"></div>
+        <div class="profilecard_content">
+          <h2 class="profilecard_title">profilecard Grid Layout</h2>
+          <p class="profilecard_text">Demo of pixel perfect pure CSS simple responsive profilecard grid layout</p>
+          <button class="btn profilecard_btn">Read More</button>
+        </div>
+      </div>
+    </li>
+    <li class="profilecards_item">
+      <div class="profilecard">
+        <div class="profilecard_image"><img src="https://picsum.photos/500/300/?image=11"></div>
+        <div class="profilecard_content">
+          <h2 class="profilecard_title">profilecard Grid Layout</h2>
+          <p class="profilecard_text">Demo of pixel perfect pure CSS simple responsive profilecard grid layout</p>
+          <button class="btn profilecard_btn">Read More</button>
+        </div>
+      </div>
+    </li>
+    <li class="profilecards_item">
+      <div class="profilecard">
+        <div class="profilecard_image"><img src="https://picsum.photos/500/300/?image=14"></div>
+        <div class="profilecard_content">
+          <h2 class="profilecard_title">profilecard Grid Layout</h2>
+          <p class="profilecard_text">Demo of pixel perfect pure CSS simple responsive profilecard grid layout</p>
+          <button class="btn profilecard_btn">Read More</button>
+        </div>
+      </div>
+    </li>
+    <li class="profilecards_item">
+      <div class="profilecard">
+        <div class="profilecard_image"><img src="https://picsum.photos/500/300/?image=17"></div>
+        <div class="profilecard_content">
+          <h2 class="profilecard_title">profilecard Grid Layout</h2>
+          <p class="profilecard_text">Demo of pixel perfect pure CSS simple responsive profilecard grid layout</p>
+          <button class="btn profilecard_btn">Read More</button>
+        </div>
+      </div>
+    </li>
+    <li class="profilecards_item">
+      <div class="profilecard">
+        <div class="profilecard_image"><img src="https://picsum.photos/500/300/?image=2"></div>
+        <div class="profilecard_content">
+          <h2 class="profilecard_title">profilecard Grid Layout</h2>
+          <p class="profilecard_text">Demo of pixel perfect pure CSS simple responsive profilecard grid layout</p>
+          <button class="btn profilecard_btn">Read More</button>
+        </div>
+      </div>
+    </li>
+  </ul>
+

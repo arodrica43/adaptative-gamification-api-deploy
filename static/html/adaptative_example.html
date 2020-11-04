@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- <meta http-equiv="refresh" content="5" /> -->
+    <title>Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+
+<body style="margin-left: 3rem;">
+
+    <h1 style="text-align: center;">Adaptative Gamification Example</h1>
+
+    <h2 style="text-align: center;">Matrix-Based Example</h2>
+
+    <h3>
+        User Data:
+        <hr>
+    </h3>
+
+    <div>
+        User: {{ user.user.username}}
+    </div>
+    <br>
+    <div>
+        Gamer Type Vector: {{ gtype.1}}
+    </div>
+    <br>
+    <div>
+        Mechanics Utility Vector: {{ gtype.2}}
+    </div>
+    <br>
+    <div>
+        Error:
+        {% if error %}
+        {{error}}
+        {% else %}
+        ---
+        {% endif %}
+
+    </div>
+    <br>
+    <div>
+        <h3>
+            Gamification Mechanic
+            <hr>
+        </h3>
+
+        <div>
+            User interaction statistics: {{data.statistics.0.user}}
+        </div>
+        
+
+        {% comment %} <div id="incr"></div>
+            <script>
+            fetch("{{statistics.0}}")
+                            .then(function (response) {
+                                return response.json();
+                            })
+                            .then(function (myJson) {
+                                document.querySelector("#incr").innerHTML = (myJson.user);
+                                $(myJson.html).appendTo(document.body);    
+                            })
+                            .catch(function (error) {
+                                console.log("Error: " + error);
+                            });
+           </script> {% endcomment %}
+
+        <div>
+            Title: {{data.title}}
+        </div>
+        <br>
+        <div>
+            Mechanic Type: {{data.mechanic_type}}
+        </div>
+        <br>
+
+
+
+    </div>
+
+
+
+
+</body>
+
+</html>
