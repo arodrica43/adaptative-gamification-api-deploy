@@ -154,17 +154,24 @@ def preview_gmechanic(request, gmechanic_id):
     TO DO: Migrate to the main webapp
     """
     #print("hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
-    queryset, name = g_mechanic_cast(gmechanic_id)
-    import os
-    from django.conf import settings
-    
-    file = open(os.path.join(settings.TEMPLATES[0]['DIRS'][0], "mechanics/" + name + '.html'))
-    queryset.update(html = file.read().replace("called_mechanic_url","https://agmodule.herokuapp.com/api/" + name + "/" + str(gmechanic_id) + "/?" + request.GET.urlencode()))
-    #print(queryset[0].html)
-    #print(file.read())
-    serializer = GMechanicSerializer(queryset[0], context={'request': request}) 
-    #print(serializer.data)
-    return TemplateResponse(request, 'preview_mechanic.html', {"data":serializer.data, "url_query": request.GET.urlencode()})
+    lock6.acquire()
+    try:
+        queryset, name = g_mechanic_cast(gmechanic_id)
+        import os
+        from django.conf import settings
+        
+        file = open(os.path.join(settings.TEMPLATES[0]['DIRS'][0], "mechanics/" + name + '.html'))
+        queryset.update(html = file.read().replace("called_mechanic_url","https://agmodule.herokuapp.com/api/" + name + "/" + str(gmechanic_id) + "/?" + request.GET.urlencode()))
+        #print(queryset[0].html)
+        #print(file.read())
+        serializer = GMechanicSerializer(queryset[0], context={'request': request}) 
+        #print(serializer.data)
+        lock6.release()
+        return TemplateResponse(request, 'preview_mechanic.html', {"data":serializer.data, "url_query": request.GET.urlencode()})
+    except:
+        lock6.release()
+        return preview_gmechanic(request,gmechanic_id)
+
 
 
 # def preview_badge_icon(request, filename):
@@ -378,16 +385,19 @@ class GMechanicViewSet(viewsets.ModelViewSet):
         if pk:
             lock.acquire()
             try:
+                queryset, name = g_mechanic_cast(pk)
+            except:
+                lock.release()
+                raise Http404
+            try:
                 #print(self.concrete_model)
                 #main_queryset = self.concrete_model.objects.filter(id=pk)
-                queryset, name = g_mechanic_cast(pk)
                 file = open(os.path.join(settings.TEMPLATES[0]['DIRS'][0],  "mechanics/" + name + '.html'))
                 print("https://agmodule.herokuapp.com/api/" + name + "/" + pk + "/?" + request.GET.urlencode())
                 queryset.update(html = file.read().replace("called_mechanic_url","https://agmodule.herokuapp.com/api/" + name + "/" + pk + "/?" + request.GET.urlencode()))
                 queryset.update(html = queryset[0].html.replace("dynamic_mechanic_index", pk))
                 queryset.update(html = queryset[0].html.replace("dynamic_mechanic_name", name))
                 
-
                 # Dynamic properties of a g_mechanic :: dynamic_user
                 #                                       dynamic_index
                 ensamble_interaction_dynamic_properties(queryset)
@@ -401,7 +411,6 @@ class GMechanicViewSet(viewsets.ModelViewSet):
                     queryset.update(html = queryset[0].html.replace("dynamic_index",request.GET['dynamic_index']))
                 except:
                     print("Query url doesn't contain dynamic_index argument")
-                    
 
                 tmp_title = queryset[0].title
                 if 'show_title' in request.GET.keys():
@@ -418,6 +427,7 @@ class GMechanicViewSet(viewsets.ModelViewSet):
                 return Response(serializer.data)
             except:
                 lock.release() 
+                print("Error :: Unknown Error detected")
                 ensamble_interaction_dynamic_properties(queryset)
                 raise Http404
         else: 
@@ -950,6 +960,7 @@ class AdaptativeViewSet(GMechanicViewSet):
     # Concrete logic for leaderboards view
     def logic(self,queryset,request):
         print("DEFAULT :: Adaptative logic")
+        ensamble_interaction_dynamic_properties(queryset)
         args = request.GET
         if 'user' in args.keys():
             user = Gamer.objects.filter(user__username = args['user'])
@@ -967,7 +978,7 @@ class AdaptativeViewSet(GMechanicViewSet):
             file = open(os.path.join(settings.TEMPLATES[0]['DIRS'][0], "mechanics/adaptatives.html"))
             new_html = file.read().replace('called_mechanic_url', "https://agmodule.herokuapp.com/api/g_mechanics/" + str(5) + "/?" + args.urlencode())
             queryset.update(html = new_html)
-        ensamble_interaction_dynamic_properties(queryset)
+        
 
 
 class AdaptativeUtilitiesViewSet(AdaptativeViewSet):
