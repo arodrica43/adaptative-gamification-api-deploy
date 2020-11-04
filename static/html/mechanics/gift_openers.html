@@ -44,7 +44,7 @@ function openGift(gift,index){
     //console.log("Gift icon (at position " + index + ") clicked");
     log_click({itime: 1, message:"Open gift button (at position " + index + ") clicked", register : log, level:1,type:"ButtonClick"});
     // --------------------------------------------------------------------------
-    fetch("http://127.0.0.1:8080/api/gamers/dynamic_user/open_gift?index=" + gift.value) // WARNING: should be replaced by a concrete mechanic url
+    fetch("http://agmodule.herokuapp.com/api/gamers/dynamic_user/open_gift?index=" + gift.value) // WARNING: should be replaced by a concrete mechanic url
         .then(function (response) {
             return response.json();
         })
@@ -87,7 +87,7 @@ function openGift(gift,index){
             console.log("Error: " + error);
         });
 
-    fetch("http://127.0.0.1:8080/api/gamers/dynamic_user/") // WARNING: should be replaced by a concrete mechanic url
+    fetch("http://agmodule.herokuapp.com/api/gamers/dynamic_user/") // WARNING: should be replaced by a concrete mechanic url
         .then(function (response) {
             return response.json();
         })

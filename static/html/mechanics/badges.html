@@ -102,7 +102,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 icon = myJson.icon;
                 descr = myJson.by + ' is over ' + myJson.threshold;
             }else{
-                icon = "http://127.0.0.1:8080/media/badge_icons/locked.png"
+                icon = "http://agmodule.herokuapp.com/media/badge_icons/locked.png"
                 descr = 'Increase ' + myJson.by + ' over ' + myJson.threshold + ' to unlock it';
             }
             document.querySelector("#icon").innerHTML = '<div class="card" style="width:100%; text-align:center; border: none;">' +
@@ -176,7 +176,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
               // --------------------------------------------------------------------------
               modal.style.display = "block";
               document.querySelector("#badge-set").innerHTML = "";
-              fetch("http://127.0.0.1:8080/api/badges/retrieve_for_user/dynamic_user") // WARNING: should be replaced by a concrete username
+              fetch("http://agmodule.herokuapp.com/api/badges/retrieve_for_user/dynamic_user") // WARNING: should be replaced by a concrete username
               .then(function (response) {
                   return response.json();
               })
@@ -195,7 +195,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                         descr = item[0].by + ' is over ' + item[0].threshold;
                         
                       }else{
-                        icon = "http://127.0.0.1:8080/media/badge_icons/locked.png";
+                        icon = "http://agmodule.herokuapp.com/media/badge_icons/locked.png";
                         descr = 'Increase ' + item[0].by + ' over ' + item[0].threshold + ' to unlock it';
                       }
                       document.querySelector("#badge-set").innerHTML += '<div class="card" style="width:100%; border: none;">' +

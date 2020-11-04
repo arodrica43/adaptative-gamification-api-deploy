@@ -159,7 +159,7 @@ def preview_gmechanic(request, gmechanic_id):
     from django.conf import settings
     
     file = open(os.path.join(settings.TEMPLATES[0]['DIRS'][0], "mechanics/" + name + '.html'))
-    queryset.update(html = file.read().replace("called_mechanic_url","http://127.0.0.1:8080/api/" + name + "/" + str(gmechanic_id) + "/?" + request.GET.urlencode()))
+    queryset.update(html = file.read().replace("called_mechanic_url","http://agmodule.herokuapp.com/api/" + name + "/" + str(gmechanic_id) + "/?" + request.GET.urlencode()))
     #print(queryset[0].html)
     #print(file.read())
     serializer = GMechanicSerializer(queryset[0], context={'request': request}) 
@@ -382,8 +382,8 @@ class GMechanicViewSet(viewsets.ModelViewSet):
                 #main_queryset = self.concrete_model.objects.filter(id=pk)
                 queryset, name = g_mechanic_cast(pk)
                 file = open(os.path.join(settings.TEMPLATES[0]['DIRS'][0],  "mechanics/" + name + '.html'))
-                print("http://127.0.0.1:8080/api/" + name + "/" + pk + "/?" + request.GET.urlencode())
-                queryset.update(html = file.read().replace("called_mechanic_url","http://127.0.0.1:8080/api/" + name + "/" + pk + "/?" + request.GET.urlencode()))
+                print("http://agmodule.herokuapp.com/api/" + name + "/" + pk + "/?" + request.GET.urlencode())
+                queryset.update(html = file.read().replace("called_mechanic_url","http://agmodule.herokuapp.com/api/" + name + "/" + pk + "/?" + request.GET.urlencode()))
                 queryset.update(html = queryset[0].html.replace("dynamic_mechanic_index", pk))
                 queryset.update(html = queryset[0].html.replace("dynamic_mechanic_name", name))
                 
@@ -961,11 +961,11 @@ class AdaptativeViewSet(GMechanicViewSet):
                 serializer = GMechanicSerializer(gmechanic, context={'request': request}) 
                 data = serializer.data      
                 file = open(os.path.join(settings.TEMPLATES[0]['DIRS'][0], "mechanics/adaptatives.html"))
-                new_html = file.read().replace('called_mechanic_url', "http://127.0.0.1:8080/api/g_mechanics/" + str(data['id']) + "/?" + args.urlencode())
+                new_html = file.read().replace('called_mechanic_url', "http://agmodule.herokuapp.com/api/g_mechanics/" + str(data['id']) + "/?" + args.urlencode())
                 queryset.update(html = new_html)
         else:
             file = open(os.path.join(settings.TEMPLATES[0]['DIRS'][0], "mechanics/adaptatives.html"))
-            new_html = file.read().replace('called_mechanic_url', "http://127.0.0.1:8080/api/g_mechanics/" + str(5) + "/?" + args.urlencode())
+            new_html = file.read().replace('called_mechanic_url', "http://agmodule.herokuapp.com/api/g_mechanics/" + str(5) + "/?" + args.urlencode())
             queryset.update(html = new_html)
         ensamble_interaction_dynamic_properties(queryset)
 

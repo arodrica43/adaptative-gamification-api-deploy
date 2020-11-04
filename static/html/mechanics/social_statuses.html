@@ -190,7 +190,7 @@ document.querySelector("#scrollable-content-coin").onscroll = function(){
             // --------------------------------------------------------------------------
         }
 
-fetch("http://127.0.0.1:8080/api/g_mechanics/14/?user=dynaimic_user&show_title=false&dynamic_index=friendly")
+fetch("http://agmodule.herokuapp.com/api/g_mechanics/14/?user=dynaimic_user&show_title=false&dynamic_index=friendly")
     .then(function (response) {
         return response.json();
     })
@@ -202,7 +202,7 @@ fetch("http://127.0.0.1:8080/api/g_mechanics/14/?user=dynaimic_user&show_title=f
         console.log("Error: " + error);
     });
 
-fetch("http://127.0.0.1:8080/api/g_mechanics/15/?user=dynaimic_user&show_title=false&dynamic_index=followed")
+fetch("http://agmodule.herokuapp.com/api/g_mechanics/15/?user=dynaimic_user&show_title=false&dynamic_index=followed")
                 .then(function (response) {
                     return response.json();
                 })
@@ -213,7 +213,7 @@ fetch("http://127.0.0.1:8080/api/g_mechanics/15/?user=dynaimic_user&show_title=f
                 .catch(function (error) {
                     console.log("Error: " + error);
                 });
-fetch("http://127.0.0.1:8080/api/g_mechanics/16/?user=dynaimic_user&show_title=false&dynamic_index=views")
+fetch("http://agmodule.herokuapp.com/api/g_mechanics/16/?user=dynaimic_user&show_title=false&dynamic_index=views")
                         .then(function (response) {
                             return response.json();
                         })
@@ -224,7 +224,7 @@ fetch("http://127.0.0.1:8080/api/g_mechanics/16/?user=dynaimic_user&show_title=f
                         .catch(function (error) {
                             console.log("Error: " + error);
                         });
-fetch("http://127.0.0.1:8080/api/g_mechanics/11/?user=dynaimic_user&show_title=false&dynamic_index=score")
+fetch("http://agmodule.herokuapp.com/api/g_mechanics/11/?user=dynaimic_user&show_title=false&dynamic_index=score")
                             .then(function (response) {
                                 return response.json();
                             })
@@ -235,7 +235,7 @@ fetch("http://127.0.0.1:8080/api/g_mechanics/11/?user=dynaimic_user&show_title=f
                             .catch(function (error) {
                                 console.log("Error: " + error);
                             });
-fetch("http://127.0.0.1:8080/api/g_mechanics/12/?user=dynaimic_user&show_title=false&dynamic_index=level")
+fetch("http://agmodule.herokuapp.com/api/g_mechanics/12/?user=dynaimic_user&show_title=false&dynamic_index=level")
                         .then(function (response) {
                             return response.json();
                         })
@@ -246,7 +246,7 @@ fetch("http://127.0.0.1:8080/api/g_mechanics/12/?user=dynaimic_user&show_title=f
                         .catch(function (error) {
                             console.log("Error: " + error);
                         });
- fetch("http://127.0.0.1:8080/api/g_mechanics/13/?user=dynaimic_user&show_title=false&dynamic_index=coin")
+ fetch("http://agmodule.herokuapp.com/api/g_mechanics/13/?user=dynaimic_user&show_title=false&dynamic_index=coin")
                         .then(function (response) {
                             return response.json();
                         })
@@ -258,12 +258,12 @@ fetch("http://127.0.0.1:8080/api/g_mechanics/12/?user=dynaimic_user&show_title=f
                             console.log("Error: " + error);
                         });
 
-    fetch("http://127.0.0.1:8080/api/gamers/dynamic_user/")
+    fetch("http://agmodule.herokuapp.com/api/gamers/dynamic_user/")
         .then(function (response) {
             return response.json();
         })
         .then(function (myJson) {
-            document.querySelector("#prof-image-stat").innerHTML = '<hr><img id = "profile-image-stat" src="http://127.0.0.1:8080/media/social_icons/' + myJson.social_profile.image + '.png" id="friend-profile-img" />'+
+            document.querySelector("#prof-image-stat").innerHTML = '<hr><img id = "profile-image-stat" src="http://agmodule.herokuapp.com/media/social_icons/' + myJson.social_profile.image + '.png" id="friend-profile-img" />'+
                                                                 '<h2 id="uname-stat" style="margin-top:30px; text-align:center;"></h2><hr>';
             document.querySelector("#following-label").innerHTML = "<b>Following</b>";
             document.querySelector("#followers-label").innerHTML = "<b>Followers</b>";
@@ -273,7 +273,7 @@ fetch("http://127.0.0.1:8080/api/g_mechanics/12/?user=dynaimic_user&show_title=f
             document.querySelector("#coin-label").innerHTML = "<b>$</b>";
 
             document.querySelector("#uname-stat").innerHTML = myJson.user.username;
-            document.querySelector("#profile-image-stat").src = "http://127.0.0.1:8080/media/social_icons/" + myJson.social_profile.image + ".png";
+            document.querySelector("#profile-image-stat").src = "http://agmodule.herokuapp.com/media/social_icons/" + myJson.social_profile.image + ".png";
             document.querySelector("#following").innerHTML = myJson.social_profile.data.friends.length;
             document.querySelector("#followers").innerHTML = myJson.social_profile.data.followers;
             document.querySelector("#views").innerHTML = myJson.social_profile.data.views;

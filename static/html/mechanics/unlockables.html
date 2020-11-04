@@ -100,7 +100,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 descr = myJson.by + ' is over ' + myJson.threshold;
                 func = "loadGame(\'#game\',\'#ghtml\')";
             }else{
-                icon = "http://127.0.0.1:8080/media/badge_icons/locked.png"
+                icon = "http://agmodule.herokuapp.com/media/badge_icons/locked.png"
                 descr = 'Increase ' + myJson.by + ' over ' + myJson.threshold + ' to unlock it';
                 func = 'lockGame(\'' + descr + '\')';
             }
@@ -181,7 +181,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
               modal.style.display = "block";
 
               document.querySelector("#badge-set").innerHTML = "";
-              fetch("http://127.0.0.1:8080/api/unlockables/retrieve_for_user/dynamic_user") // WARNING: should be replaced by a concrete username
+              fetch("http://agmodule.herokuapp.com/api/unlockables/retrieve_for_user/dynamic_user") // WARNING: should be replaced by a concrete username
               .then(function (response) {
                   return response.json();
               })
@@ -201,12 +201,12 @@ body {font-family: Arial, Helvetica, sans-serif;}
                         icon = item[0].icon;
                         descr = item[0].by + ' is over ' + item[0].threshold;
                         
-                        href = "http://127.0.0.1:8080/api/g_mechancis/preview_game/"+item[0].id+"/dynamic_user";
+                        href = "http://agmodule.herokuapp.com/api/g_mechancis/preview_game/"+item[0].id+"/dynamic_user";
                         
                         
                         
                       }else{
-                        icon = "http://127.0.0.1:8080/media/badge_icons/locked.png";
+                        icon = "http://agmodule.herokuapp.com/media/badge_icons/locked.png";
                         descr = 'Increase ' + item[0].by + ' over ' + item[0].threshold + ' to unlock it';
                         func = 'lockGame(\'' + descr + '\')';
                       }
