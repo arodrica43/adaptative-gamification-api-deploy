@@ -960,7 +960,6 @@ class AdaptativeViewSet(GMechanicViewSet):
     # Concrete logic for leaderboards view
     def logic(self,queryset,request):
         print("DEFAULT :: Adaptative logic")
-        ensamble_interaction_dynamic_properties(queryset)
         args = request.GET
         if 'user' in args.keys():
             user = Gamer.objects.filter(user__username = args['user'])
@@ -978,7 +977,7 @@ class AdaptativeViewSet(GMechanicViewSet):
             file = open(os.path.join(settings.TEMPLATES[0]['DIRS'][0], "mechanics/adaptatives.html"))
             new_html = file.read().replace('called_mechanic_url', "https://agmodule.herokuapp.com/api/g_mechanics/" + str(5) + "/?" + args.urlencode())
             queryset.update(html = new_html)
-        
+        ensamble_interaction_dynamic_properties(queryset)
 
 
 class AdaptativeUtilitiesViewSet(AdaptativeViewSet):
