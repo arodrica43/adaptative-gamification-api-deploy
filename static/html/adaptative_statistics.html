@@ -67,7 +67,7 @@ function updateLogs(message){
 
 var num_bots = 0;
 function startBot(){
-    window.open("http://agmodule.herokuapp.com/api/g_mechanics/22/preview?user="+document.getElementById("uname_input").value,"","width=600,height=600");
+    window.open("https://agmodule.herokuapp.com/api/g_mechanics/22/preview?user="+document.getElementById("uname_input").value,"","width=600,height=600");
     num_bots++;
     updateLogs("Bot number " + num_bots + " created");
 }
@@ -104,7 +104,7 @@ function init_statistics(){
   var timer = setInterval(function() {
     count++;
     var new_values = [];
-    fetch('http://agmodule.herokuapp.com/api/gamers/'+ document.getElementById("uname_input").value + "/")
+    fetch('https://agmodule.herokuapp.com/api/gamers/'+ document.getElementById("uname_input").value + "/")
     .then(response => response.json())
     .then(function(data){
       new_values.push(data.gamer_profile.disruptor);
@@ -143,7 +143,7 @@ init_statistics();
 
 function create_user(){
     // POST request using fetch() 
-  fetch("http://agmodule.herokuapp.com/api/gamers/", { 
+  fetch("https://agmodule.herokuapp.com/api/gamers/", { 
         
       // Adding method type 
       method: "POST", 

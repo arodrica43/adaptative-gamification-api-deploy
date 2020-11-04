@@ -8,13 +8,13 @@
 </div>
 
 <script>
-            fetch("http://agmodule.herokuapp.com/api/g_mechanics/6/?user=user2&increase=0")
+            fetch("https://agmodule.herokuapp.com/api/g_mechanics/6/?user=user2&increase=0")
                 .then(function (response) {
                     return response.json();
                 })
                 .then(function (myJson) {
                   
-                  		fetch("http://agmodule.herokuapp.com/api/g_mechanics/2/")
+                  		fetch("https://agmodule.herokuapp.com/api/g_mechanics/2/")
                         .then(function (response) {
                             return response.json();
                         })

@@ -209,7 +209,7 @@ document.querySelector("#scrollable-content").onscroll = function(){
         }
 
 
-        fetch("http://agmodule.herokuapp.com/api/g_mechanics/20/?user=dynamic_user&show_title=false")
+        fetch("https://agmodule.herokuapp.com/api/g_mechanics/20/?user=dynamic_user&show_title=false")
             .then(function (response) {
                 return response.json();
             })
@@ -280,7 +280,7 @@ function sendGift(to){
     var type = document.getElementById("gift-options").value;
     var content = document.getElementById("gift-input-instance").value;
     
-    fetch("http://agmodule.herokuapp.com/api/gamers/" + to + "/add_gift?from=dynamic_user&type=" + type + "&content=" + content) 
+    fetch("https://agmodule.herokuapp.com/api/gamers/" + to + "/add_gift?from=dynamic_user&type=" + type + "&content=" + content) 
         .then(function (response) {
             return response.json();
         })
@@ -334,7 +334,7 @@ function sendGifts(){
             console.log("Error: " + error);
         });
 
-    fetch("http://agmodule.herokuapp.com/api/gamers/") // WARNING: should be replaced by a concrete mechanic url
+    fetch("https://agmodule.herokuapp.com/api/gamers/") // WARNING: should be replaced by a concrete mechanic url
         .then(function (response) {
             return response.json();
         })

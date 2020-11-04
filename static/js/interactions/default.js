@@ -132,7 +132,7 @@ try {
         log_data['shown_content_time'] = unlocked_time() / 100;
 
         //alert(log_data['main_time']);
-        fetch('http://127.0.0.1:8080/api/g_mechanics/' + mechanic_index + '/', { //if window is closing,  fetch answer fails, but it makes the put method!
+        fetch('https://agmodule.herokuapp.com/api/g_mechanics/' + mechanic_index + '/', { //if window is closing,  fetch answer fails, but it makes the put method!
                 method: 'PUT',
                 body: JSON.stringify({
                     "user": username,
