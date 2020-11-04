@@ -228,7 +228,7 @@ def view_challenge_set(request, username):
 
     unlocks_set = []
     for unlk in all_unlocks:
-         unlocks_set += [[UnlockableSerializer(unlk, context={'request': request}).data, unlk.id in unlock_ids]]
+         unlocks_set += [[ChallengeSerializer(unlk, context={'request': request}).data, unlk.id in unlock_ids]]
     
     return JsonResponse({'results':unlocks_set})
 

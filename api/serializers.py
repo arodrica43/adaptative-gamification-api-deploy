@@ -5,6 +5,7 @@ from api.models import unique_individual_group, InteractionStatistic, Adaptative
 from rest_framework.response import Response
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db.utils import IntegrityError
+from django.http import Http404
 from django.template.response import TemplateResponse
 from drf_enum_field.serializers import EnumFieldSerializerMixin
 from rest_framework.exceptions import ValidationError
@@ -123,10 +124,17 @@ class GamerSerializer(serializers.HyperlinkedModelSerializer):
                                     emotion_profile = eprofile,
                                     gamer_profile = gprofile,
                                     social_profile = sprofile
-                                    )         
-        for gm in GMechanic.objects.all():
-            InteractionStatistic.objects.update_or_create(mechanic = gm, user = user.username, interaction_index = 1e-2)
-        return gamer
+                                    ) 
+        lock.acquire()
+        try:        
+            for gm in GMechanic.objects.all():
+                InteractionStatistic.objects.create(mechanic = gm, user = user.username, interaction_index = 1e-2)
+            lock.release()
+            return gamer
+        except:
+            lock.release()
+            raise Http404
+        
         # except IntegrityError as error:
         #     print(error)
         #     print("Error creating user: The selected username alredy exists")
@@ -242,12 +250,10 @@ class GMechanicSerializer(EnumFieldSerializerMixin,serializers.HyperlinkedModelS
         lock.acquire()
         try:
             instance = super().create(validated_data)
-
             # Create default statistics for all users 
-
             users = Gamer.objects.all()
             for u in users:
-                InteractionStatistic.objects.update_or_create(mechanic = instance, user = u.user.username, interaction_index = 1e-2)
+                InteractionStatistic.objects.create(mechanic = instance, user = u.user.username, interaction_index = 1e-2)
             lock.release()
             return instance
         except:
