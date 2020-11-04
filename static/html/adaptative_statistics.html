@@ -4,30 +4,39 @@
 <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
 </head>
 <body>
+<style>
+p {
+  margin-left:30px;
+}
+</style>
 
+<h1 style="text-align:center;">Gamer Profile Test</h1>
 {% if not existing_user %}
-<div id = "form">
+<div id = "form" style="text-align:center;">
 <input type="text" placeholder="username..." id="uname_input"></input>
-<input type="number" step="0.001" id="Disruptor" min="0" max="1">
-<input type="number" step="0.001" id="Free Spirit" min="0" max="1">
-<input type="number" step="0.001" id="Achiever" min="0" max="1">
-<input type="number" step="0.001" id="Player" min="0" max="1">
-<input type="number" step="0.001" id="Socializer" min="0" max="1">
-<input type="number" step="0.001" id="Philantropist" min="0" max="1">
-<input type="number" step="0.001" id="No Player" min="0" max="1">
+<input type="number" step="0.001" id="Disruptor" min="0" max="1"></input>
+<input type="number" step="0.001" id="Free Spirit" min="0" max="1"></input>
+<input type="number" step="0.001" id="Achiever" min="0" max="1"></input>
+<input type="number" step="0.001" id="Player" min="0" max="1"></input>
+<input type="number" step="0.001" id="Socializer" min="0" max="1"></input>
+<input type="number" step="0.001" id="Philantropist" min="0" max="1"></input>
+<input type="number" step="0.001" id="No Player" min="0" max="1"></input>
 <button onclick="create_user()">Create User</button>
 </div>
-{% else %}
-<div id="existing"><param id="uname_input" value="{{user}}"></input></div>
-{% endif %}
 <hr>
+{% else %}
+<h3 style="text-align:center;">GProfile Evolution of {{user}}</h3>
+
+<div id="existing"><param id="uname_input" value="{{user}}"></div>
+{% endif %}
+
 	<div id='myDiv'></div>
 
-  <button onclick="startBot()">Start Bot</button>
+  <div style="text-align:center;"><button onclick="startBot()">Start Bot</button></div>
+  <br>
+  <div style="background:whitesmoke; overflow: scroll; height: 240px; font-size:12px;" id ="logs"></div>
 
 <script>
-
-
 
 var count = 0;
 var colors = ['red', 'green', 'blue','purple','pink','orange','gray'];
@@ -51,8 +60,16 @@ function adjustValue(idx,value_x,value_y) {
     Plotly.redraw('myDiv');
 }
 
+function updateLogs(message){
+  document.getElementById("logs").innerHTML += "<p>" + message + "</p>";
+  document.getElementById("logs").scrollTo(0, document.getElementById("logs").scrollHeight);
+}
+
+var num_bots = 0;
 function startBot(){
     window.open("http://127.0.0.1:8080/api/g_mechanics/22/preview?user="+document.getElementById("uname_input").value,"","width=600,height=600");
+    num_bots++;
+    updateLogs("Bot number " + num_bots + " created");
 }
 
 function init_statistics(){
@@ -97,7 +114,9 @@ function init_statistics(){
       new_values.push(data.gamer_profile.socializer);
       new_values.push(data.gamer_profile.philantropist);
       new_values.push(data.gamer_profile.no_player);
+      updateLogs("Gamer profile graph updated");
       for (var i = 0; i < traces.length;i++){
+        updateLogs("&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;" + (1+i) + " :: " + (Math.round(new_values[i]*1000))/1000);
         adjustValue(i,count,new_values[i]);
       } 
     });
