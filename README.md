@@ -1,4 +1,4 @@
-[![travis ci](https://travis-ci.org/arodrica43/adaptative-gamification-api-deploy.svg?branch=main)
+![travis ci](https://travis-ci.org/arodrica43/adaptative-gamification-api-deploy.svg?branch=main)
 
 # Adaptative Gamification Module
 
