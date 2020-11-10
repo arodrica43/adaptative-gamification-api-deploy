@@ -1,4 +1,4 @@
-https://github.com/arodrica43/adaptative-gamification-api-deploy/workflows/django.yml/badge.svg
+![example workflow file path](https://github.com/actions/adaptative-gamification-api-deploy/workflows/.github/django.yml/badge.svg)
 
 # Adaptative Gamification Module
 
