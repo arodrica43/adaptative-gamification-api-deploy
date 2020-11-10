@@ -1,4 +1,4 @@
-[![travis ci](https://travis-ci.org/jiaaro/django-badges.png)](https://travis-ci.org/jiaaro/django-badges)
+[![travis ci]https://travis-ci.org/arodrica43/adaptative-gamification-api-deploy.svg?branch=main
 
 # Adaptative Gamification Module
 
