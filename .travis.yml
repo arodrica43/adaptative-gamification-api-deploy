@@ -1,17 +1,23 @@
-language: python
+  language: python # => 1
 
-python:
-  - "3.6"
-  - "3.7"
-  - "3.8"
+    python: # => 2
 
-env:
-  - DJANGO_VERSION=3.0.8
-  - DJANGO_VERSION=dev
+      - "3.7"
 
-matrix:
-  allow_failures:
-    - env: DJANGO_VERSION=dev
+    services: # => 3
 
-install:
-    - pip install requirements.txt
+      - mysql
+
+    env: # => 4
+
+      -DJANGO=3.0 DB=mysql
+    install: # => 5
+
+      - pip install -r requirements.txt
+
+    before_script: # => 6
+
+      - mysql -e 'create database test;' -u root
+    script: # => 7
+
+      - python manage.py test
