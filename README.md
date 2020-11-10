@@ -1,6 +1,6 @@
 # Adaptative Gamification Module
 
-An api to embed adaptative gamification mechanics (as well as common mechanics) in your web project. All data involved with the mechanics is managed through this application, so content developers needn't care about managing gamification data, while they offer a gamified experience. This is a project from Barcelona University, namely NanoMOOC UB project, so for any use of it, contact with nanomoocsub@gmail.com
+An Django Web App (+ API!) to embed adaptative gamification mechanics (as well as common mechanics) in your web project. All data involved with the mechanics is managed through this application, so content developers needn't care about managing gamification data, while they offer a gamified experience. This is a project from Barcelona University, namely NanoMOOC UB project, so for any use of it, contact with nanomoocsub@gmail.com
 
 ## Features ##
 
@@ -30,7 +30,7 @@ Currently, the web-app have 2 main features:
 	- Emotional Profile (In dependence with Emotion Detection Module)
 	- Social Profile (Friends, Followers, Views, Avatar, ...)
 
-## Install and Run (Local)##
+## Install and Run (Local) ##
 
 This is a Django Application, so just install the python libraries from requirements.txt.
 To run locally the django project at port 8080 use 
