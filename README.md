@@ -1,4 +1,4 @@
-![example workflow file path](https://github.com/actions/adaptative-gamification-api-deploy/workflows/.github/django.yml/badge.svg)
+[![travis ci](https://travis-ci.org/jiaaro/django-badges.png)](https://travis-ci.org/jiaaro/django-badges)
 
 # Adaptative Gamification Module
 
