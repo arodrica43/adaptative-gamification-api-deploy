@@ -75,5 +75,11 @@ class GamerClientTest(ClientTest):
         self.write_data = {"username" : "test_user"}
         self.urls = ["/api/gamers"]
 
+class GMechanicClientTest(ClientTest):
+
+    def subsetUp(self):
+        self.write_data = {"title" : "test_gmechanic"}
+        self.urls = ["/api/g_mechanics"]
+
 
 
