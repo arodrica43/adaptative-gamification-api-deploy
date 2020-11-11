@@ -41,7 +41,7 @@ To run locally the django project at port 8080 use
 python manage.py runserver 8080
 ```
 
-## Deploy on a AWS instance ##
+## Deploy on an AWS instance ##
 
 I haven't tried this option yet, but the link below could help:
 
