@@ -59,6 +59,23 @@ router.register(r'gifts', views.GiftViewSet)
 router.register(r'gift_openers', views.GiftOpenerViewSet)
 #Adaptative mechanics
 router.register(r'adaptatives', views.AdaptativeViewSet)
+# Gamification widget mechanics urls
+router.register(r'development_tool_widgets', views.DevelopementToolWidgetViewSet)
+router.register(r'challenge_widgets', views.ChallengeWidgetViewSet)
+router.register(r'easter_egg_widgets', views.EasterEggWidgetViewSet)
+router.register(r'unlockable_widgets', views.UnlockableWidgetViewSet)
+router.register(r'badge_widgets', views.BadgeWidgetViewSet)
+router.register(r'level_widgets', views.LevelWidgetViewSet)
+router.register(r'point_widgets', views.PointWidgetViewSet)
+router.register(r'leaderboard_widgets', views.LeaderboardWidgetViewSet)
+router.register(r'lottery_widgets', views.LotteryWidgetViewSet)
+router.register(r'social_network_widgets', views.SocialNetworkWidgetViewSet)
+router.register(r'social_status_widgets', views.SocialStatusWidgetViewSet)
+router.register(r'knowledge_share_widgets', views.KnowledgeShareWidgetViewSet)
+router.register(r'gift_widgets', views.GiftWidgetViewSet)
+router.register(r'gift_opener_widgets', views.GiftOpenerWidgetViewSet)
+#Adaptative mechanics
+router.register(r'adaptative_widgets', views.AdaptativeWidgetViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

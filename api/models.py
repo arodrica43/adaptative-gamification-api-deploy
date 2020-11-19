@@ -121,10 +121,18 @@ class GMechanic(models.Model):
         Relatedness = "Relatedness"
         Purpose = "Purpose"
         Unknown = "Unknown"
+        WChange = "WChange"
+        WAutonomy = "WAutonomy"
+        WMastery = "WMastery"
+        WReward = "WReward"
+        WRelatedness = "WRelatedness"
+        WPurpose = "WPurpose"
+        WUnknown = "WUnknown"
+
 
     title = models.CharField(max_length=255)
     html = models.TextField(default="")
-    mechanic_type = EnumField(MechanicType,max_length=11,default = MechanicType.Unknown)
+    mechanic_type = EnumField(MechanicType,max_length=12,default = MechanicType.Unknown)
     #owners = models.CharField(max_length=200,default = '', validators=[username_exists])
     #owners = models.ManyToManyField(Group)
     #statistics = models.ManyToManyField(InteractionStatistic) #JSONField(default = list)
@@ -135,7 +143,14 @@ class GMechanic(models.Model):
         'Reward':3,
         'Relatedness':4,
         'Purpose':5,
-        'Unknown':-1
+        'Unknown':-1,
+        'WChange':6,
+        'WAutonomy':7,
+        'WMastery':8,
+        'WReward':9,
+        'WRelatedness':10,
+        'WPurpose':11,
+        'WUnknown':-1
     }
 
 
@@ -145,8 +160,19 @@ class GMechanic(models.Model):
         M = np.zeros((len(all_mechanics),7))
         for i in range(len(all_mechanics)):
             idx = all_mechanics[i].associated_profile[all_mechanics[i].mechanic_type.value]
-            if idx != -1:
+            if idx != -1 and idx < 6:
                 M[i,idx] = 1
+        #print(M)
+        return M
+
+    def widget_matrix(self):
+        import numpy as np
+        all_mechanics =  GMechanic.objects.all()
+        M = np.zeros((len(all_mechanics),7))
+        for i in range(len(all_mechanics)):
+            idx = all_mechanics[i].associated_profile[all_mechanics[i].mechanic_type.value]
+            if idx != -1 and idx >= 6:
+                M[i,idx % 6] = 1
         #print(M)
         return M
 
@@ -362,6 +388,135 @@ class Adaptative(GMechanic):
         self.mechanic_type = GMechanic.MechanicType.Unknown
             # self.fields.pop('parent') # or remove the field
 
+# Widgets for GMechanics -------------------------------------------------------
+
+class DevelopmentToolWidget(GMechanic):
+
+    def __init__(self, *args, **kwargs):
+        """If object is being updated don't allow contact to be changed."""
+        super().__init__(*args, **kwargs)
+        self.mechanic_type = GMechanic.MechanicType.WChange
+            # self.fields.pop('parent') # or remove the field
+
+class ChallengeWidget(GMechanic):
+
+    def __init__(self, *args, **kwargs):
+        """If object is being updated don't allow contact to be changed."""
+        super().__init__(*args, **kwargs)
+        self.mechanic_type = GMechanic.MechanicType.WChange
+            # self.fields.pop('parent') # or remove the field
+
+class EasterEggWidget(GMechanic):
+
+    def __init__(self, *args, **kwargs):
+        """If object is being updated don't allow contact to be changed."""
+        super().__init__(*args, **kwargs)
+        self.mechanic_type = GMechanic.MechanicType.WAutonomy
+            # self.fields.pop('parent') # or remove the field
+
+
+class UnlockableWidget(GMechanic):
+
+    def __init__(self, *args, **kwargs):
+        """If object is being updated don't allow contact to be changed."""
+        super().__init__(*args, **kwargs)
+        self.mechanic_type = GMechanic.MechanicType.WAutonomy
+            # self.fields.pop('parent') # or remove the field
+
+class BadgeWidget(GMechanic):
+
+    def __init__(self, *args, **kwargs):
+        """If object is being updated don't allow contact to be changed."""
+        super().__init__(*args, **kwargs)
+        self.mechanic_type = GMechanic.MechanicType.WMastery
+            # self.fields.pop('parent') # or remove the field
+
+class LevelWidget(GMechanic):
+
+    def __init__(self, *args, **kwargs):
+        """If object is being updated don't allow contact to be changed."""
+        super().__init__(*args, **kwargs)
+        self.mechanic_type = GMechanic.MechanicType.WMastery
+            # self.fields.pop('parent') # or remove the field
+
+class PointWidget(GMechanic):
+
+    def __init__(self, *args, **kwargs):
+        """If object is being updated don't allow contact to be changed."""
+        super().__init__(*args, **kwargs)
+        self.mechanic_type = GMechanic.MechanicType.WReward
+            # self.fields.pop('parent') # or remove the field
+
+class LeaderboardWidget(GMechanic):
+
+    def __init__(self, *args, **kwargs):
+        """If object is being updated don't allow contact to be changed."""
+        super().__init__(*args, **kwargs)
+        self.mechanic_type = GMechanic.MechanicType.WReward
+            # self.fields.pop('parent') # or remove the field
+
+class LotteryWidget(GMechanic):
+
+    def __init__(self, *args, **kwargs):
+        """If object is being updated don't allow contact to be changed."""
+        super().__init__(*args, **kwargs)
+        self.mechanic_type = GMechanic.MechanicType.WReward
+            # self.fields.pop('parent') # or remove the field
+
+class SocialNetworkWidget(GMechanic):
+
+    def __init__(self, *args, **kwargs):
+        """If object is being updated don't allow contact to be changed."""
+        super().__init__(*args, **kwargs)
+        self.mechanic_type = GMechanic.MechanicType.WRelatedness
+            # self.fields.pop('parent') # or remove the field
+
+
+class SocialStatusWidget(GMechanic):
+
+    def __init__(self, *args, **kwargs):
+        """If object is being updated don't allow contact to be changed."""
+        super().__init__(*args, **kwargs)
+        self.mechanic_type = GMechanic.MechanicType.WRelatedness
+            # self.fields.pop('parent') # or remove the field
+
+class KnowledgeShareWidget(GMechanic):
+
+    def __init__(self, *args, **kwargs):
+        """If object is being updated don't allow contact to be changed."""
+        super().__init__(*args, **kwargs)
+        self.mechanic_type = GMechanic.MechanicType.WPurpose
+            # self.fields.pop('parent') # or remove the field
+    messages = JSONField(default = dict)
+
+class GiftWidget(GMechanic):
+
+    def __init__(self, *args, **kwargs):
+        """If object is being updated don't allow contact to be changed."""
+        super().__init__(*args, **kwargs)
+        self.mechanic_type = GMechanic.MechanicType.WPurpose
+            # self.fields.pop('parent') # or remove the field
+    
+
+class GiftOpenerWidget(GMechanic):
+
+    def __init__(self, *args, **kwargs):
+        """If object is being updated don't allow contact to be changed."""
+        super().__init__(*args, **kwargs)
+        self.mechanic_type = GMechanic.MechanicType.WReward
+            # self.fields.pop('parent') # or remove the field
+ 
+
+class AdaptativeWidget(GMechanic):
+
+    def __init__(self, *args, **kwargs):
+        """If object is being updated don't allow contact to be changed."""
+        super().__init__(*args, **kwargs)
+        self.mechanic_type = GMechanic.MechanicType.WUnknown
+            # self.fields.pop('parent') # or remove the field
+
+
+
 
 class GComponent(models.Model):
 
@@ -388,7 +543,9 @@ class GComponent(models.Model):
     #     return result
             
 mechanics_list = [Adaptative, Badge, Challenge, DevelopmentTool, EasterEgg, Gift, GiftOpener, KnowledgeShare, Level, Lottery, Point, SocialNetwork, SocialStatus, Unlockable, Leaderboard]
+mechanics_list += [AdaptativeWidget, BadgeWidget, ChallengeWidget, DevelopmentToolWidget, EasterEggWidget, GiftWidget, GiftOpenerWidget, KnowledgeShareWidget, LevelWidget, LotteryWidget, PointWidget, SocialNetworkWidget, SocialStatusWidget, UnlockableWidget, LeaderboardWidget]
 mechanics_list_names = ['adaptatives','badges', 'challenges', 'development_tools', 'easter_eggs', 'gifts', 'gift_openers', 'knowledge_shares', 'levels', 'lotteries', 'points', 'social_networks', 'social_statuses', 'unlockables', 'leaderboards']
+mechanics_list_names += ['adaptative_widgets','badge_widgets', 'challenge_widgets', 'development_tool_widgets', 'easter_egg_widgets', 'gift_widgets', 'gift_opener_widgets', 'knowledge_share_widgets', 'level_widgets', 'lottery_widgets', 'point_widgets', 'social_network_widgets', 'social_status_widgets', 'unlockable_widgets', 'leaderboard_widgets']
 mechanic_list_total_interactions = {
     'badges':9, 
     'challenges':9, 
@@ -403,5 +560,19 @@ mechanic_list_total_interactions = {
     'social_networks':35, 
     'social_statuses':20, 
     'unlockables':10, 
-    'leaderboards':5
+    'leaderboards':5,
+    'badge_widgets':1, 
+    'challenge_widgets':1, 
+    'development_tool_widgets':1, 
+    'easter_egg_widgets':1, 
+    'gift_widgets':1, 
+    'gift_opener_widgets':1, 
+    'knowledge_share_widgets':1, 
+    'level_widgets':1, 
+    'lottery_widgets':1, 
+    'point_widgets':1, 
+    'social_network_widgets':1, 
+    'social_status_widgets':1, 
+    'unlockable_widgets':1, 
+    'leaderboard_widgets':1
 }
