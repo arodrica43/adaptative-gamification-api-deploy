@@ -403,10 +403,6 @@ class GMechanicViewSet(viewsets.ModelViewSet):
             try:
                 #print(self.concrete_model)
                 #main_queryset = self.concrete_model.objects.filter(id=pk)
-                try:             
-                    queryset.update(html = queryset[0].html.replace("dynamic_index",request.GET['dynamic_index']))
-                except:
-                    print("Query url doesn't contain dynamic_index argument")
                 try:
                     file = open(os.path.join(settings.TEMPLATES[0]['DIRS'][0],  "mechanics/" + name + '.html'))
                     print("https://agmodule.herokuapp.com/api/" + name + "/" + pk + "/?" + request.GET.urlencode())
@@ -423,10 +419,16 @@ class GMechanicViewSet(viewsets.ModelViewSet):
                 ensamble_interaction_dynamic_properties(queryset)
                 #file = open(os.path.join(settings.TEMPLATES[0]['DIRS'][1],  "interactions/onclick.js"))
                 #queryset.update(html = queryset[0].html.replace("include-onclick-tracking",file.read())) 
+                import re
                 try:             
                     queryset.update(html = queryset[0].html.replace("dynamic_user",request.GET['user']))
                 except:
                     print("Query url doesn't contain username argument")
+                try:  
+                    new_html = re.sub("(?!dynamic_index=)dynamic_index",request.GET['dynamic_index'],queryset[0].html)            
+                    queryset.update(html = new_html)
+                except:
+                    print("Query url doesn't contain dynamic_index argument")
 
                 tmp_title = queryset[0].title
                 if 'show_title' in request.GET.keys():
