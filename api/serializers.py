@@ -224,7 +224,7 @@ class InteractionStatisticSerializer(serializers.HyperlinkedModelSerializer):
 
     def get_user(self, obj):
         # obj is model instance
-        return obj.user.user.username
+        return obj.user.user.UnicodeUsernameValidator
     
     def get_mechanic(self, obj):
         # obj is model instance
