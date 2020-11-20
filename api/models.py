@@ -506,7 +506,6 @@ class GiftOpenerWidget(GMechanic):
         self.mechanic_type = GMechanic.MechanicType.WReward
             # self.fields.pop('parent') # or remove the field
  
-
 class AdaptativeWidget(GMechanic):
 
     def __init__(self, *args, **kwargs):
