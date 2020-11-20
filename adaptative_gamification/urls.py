@@ -95,7 +95,7 @@ urlpatterns += [
     path('api/unlockables/retrieve_for_user/<str:username>', views.view_unlockable_set),
     path('api/challenges/retrieve_for_user/<str:username>', views.view_challenge_set),
     path('api/g_mechancis/preview_game/<int:id>/<str:username>', views.preview_game),
-    path('api/g_mechancis/retrieve_adaptative_id', views.retrieve_adaptative_mechanic_id),
+    path('api/g_mechancis/retrieve_adaptative_widget_id', views.retrieve_adaptative_widget_id),
     
    # path('api/badges/icons/<str:filename>', views.preview_badge_icon),
     #url(r'^tinymce/', include('tinymce.urls')),

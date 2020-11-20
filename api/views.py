@@ -30,7 +30,7 @@ interaction_files = [("include-onclick-tracking","onclick.js"),
 def js_test(request):
     return TemplateResponse(request, 'test/js_test.html',{})
 
-def retrieve_adaptative_mechanic_id(request):
+def retrieve_adaptative_widget_id(request):
 
     lock7.acquire()
     try:
