@@ -1,29 +1,12 @@
 
 
-  	<div id="incr-aw-dynamic_index"></div>
+  	<div id="incr-aw-dynamic_index">Adaptative Widget</div>
 
 
 <script>
 
 
-//include_interaction_testing_tools
-//var main_content_name = "main-content-adapt";
-//var interactable_elements = document.getElementById(main_content_name).querySelectorAll("*");
-//init_auto_interactions(interactable_elements);
-//startBot(main_content_name);
-fetch("https://agmodule.herokuapp.com/api/g_mechancis/retrieve_adaptative_id?user=dynamic_user")
-    .then(response => response.json())
-    .then(function (myJson) {
-        var mech_id = myJson.gmechanic_id;
-        fetch("https://agmodule.herokuapp.com/api/g_mechanics/" + mech_id + "/?user=dynamic_user")
-        .then(response => response.json())
-        .then(function (myJson2) {
-            document.querySelector("#incr-aw-dynamic_index").innerHTML = (myJson2.html);
-            $(myJson2.html).appendTo(document.body);
-        })
-        .catch((error) => console.log("Error: " + error));
-    })
-    .catch(error => console.log("Error: " + error));
+    document.querySelector("#incr-aw-dynamic_index").innerHTML = "HOW HOW";
 
     			
 </script>

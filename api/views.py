@@ -469,6 +469,10 @@ class GMechanicViewSet(viewsets.ModelViewSet):
                         queryset.update(title = "")
                     
                 self.logic(queryset,request)
+                try:             
+                    queryset.update(html = queryset[0].html.replace("dynamic_user",request.GET['user']))
+                except:
+                    print("Query url doesn't contain username argument")
                 try:  
                     new_html = re.sub("(?!dynamic_index=)dynamic_index",request.GET['dynamic_index'],queryset[0].html)            
                     queryset.update(html = new_html)
