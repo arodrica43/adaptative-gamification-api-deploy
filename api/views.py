@@ -438,6 +438,11 @@ class GMechanicViewSet(viewsets.ModelViewSet):
                         queryset.update(title = "")
                     
                 self.logic(queryset,request)
+                try:  
+                    new_html = re.sub("(?!dynamic_index=)dynamic_index",request.GET['dynamic_index'],queryset[0].html)            
+                    queryset.update(html = new_html)
+                except:
+                    print("Query url doesn't contain dynamic_index argument")
                 #print(queryset[0].leadders['user1'])
                 serializer = self.serializer_class(queryset[0], context={'request': request})
                 queryset.update(title = tmp_title)
@@ -1290,10 +1295,5 @@ class AdaptativeWidgetViewSet(GMechanicViewSet):
             new_html = file.read().replace('called_mechanic_url', "https://agmodule.herokuapp.com/api/g_mechanics/" + str(5) + "/?" + args.urlencode())
             queryset.update(html = new_html)
         ensamble_interaction_dynamic_properties(queryset)
-        try:  
-            new_html = re.sub("(?!dynamic_index=)dynamic_index",request.GET['dynamic_index'],queryset[0].html)            
-            queryset.update(html = new_html)
-        except:
-            print("Query url doesn't contain dynamic_index argument")
 
 

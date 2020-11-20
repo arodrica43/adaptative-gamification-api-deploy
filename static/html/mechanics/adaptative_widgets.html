@@ -12,13 +12,14 @@
 //init_auto_interactions(interactable_elements);
 //startBot(main_content_name);
 
-fetch("called_mechanic_url&dynamic_index=dynamic_index")
+fetch("called_mechanic_url")
     .then(function (response) {
         return response.json();
     })
     .then(function (myJson) {
         
         document.querySelector("#incr-aw-dynamic_index").innerHTML = (myJson.html);
+        console.log(myJson.html);
         $(myJson.html).appendTo(document.body);
         
     })
