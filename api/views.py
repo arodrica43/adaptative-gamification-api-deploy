@@ -1284,21 +1284,16 @@ class AdaptativeWidgetViewSet(GMechanicViewSet):
                 file = open(os.path.join(settings.TEMPLATES[0]['DIRS'][0], "mechanics/adaptative_widgets.html"))
                 new_html = file.read().replace('called_mechanic_url', "https://agmodule.herokuapp.com/api/g_mechanics/" + str(data['id']) + "/?" + args.urlencode())
                 queryset.update(html = new_html)
-                try:  
-                    new_html = re.sub("(?!dynamic_index=)dynamic_index",request.GET['dynamic_index'],queryset[0].html)            
-                    queryset.update(html = new_html)
-                except:
-                    print("Query url doesn't contain dynamic_index argument")
 
         else:
             file = open(os.path.join(settings.TEMPLATES[0]['DIRS'][0], "mechanics/adaptative_widgets.html"))
             new_html = file.read().replace('called_mechanic_url', "https://agmodule.herokuapp.com/api/g_mechanics/" + str(5) + "/?" + args.urlencode())
             queryset.update(html = new_html)
-            try:  
-                new_html = re.sub("(?!dynamic_index=)dynamic_index",request.GET['dynamic_index'],queryset[0].html)            
-                queryset.update(html = new_html)
-            except:
-                print("Query url doesn't contain dynamic_index argument")
         ensamble_interaction_dynamic_properties(queryset)
+        try:  
+            new_html = re.sub("(?!dynamic_index=)dynamic_index",request.GET['dynamic_index'],queryset[0].html)            
+            queryset.update(html = new_html)
+        except:
+            print("Query url doesn't contain dynamic_index argument")
 
 
