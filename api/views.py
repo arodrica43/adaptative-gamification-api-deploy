@@ -54,8 +54,10 @@ def retrieve_adaptative_mechanic_id(request):
                 lock7.release()
                 return JsonResponse({'gmechanic_id': gmechanic.pk})
             else:
+                lock7.release()
                 raise Exception("No selected user")
         else:
+            lock7.release()
             raise Exception("No selected user")
     except:
         lock7.release()
@@ -469,7 +471,7 @@ class GMechanicViewSet(viewsets.ModelViewSet):
                         queryset.update(title = "")
                     
                 self.logic(queryset,request)
-                
+
                 try:  
                     new_html = re.sub("(?!dynamic_index=)dynamic_index",request.GET['dynamic_index'],queryset[0].html)            
                     queryset.update(html = new_html)
