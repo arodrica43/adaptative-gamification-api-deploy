@@ -21,7 +21,7 @@ fetch("https://agmodule.herokuapp.com/api/g_mechancis/retrieve_adaptative_id?use
             document.querySelector("#incr-aw-dynamic_index").innerHTML = (myJson2.html);
             $(myJson2.html).appendTo(document.body);
         })
-        .catch((error => console.log("Error: " + error));
+        .catch((error) => console.log("Error: " + error));
     })
     .catch(error => console.log("Error: " + error));
 
