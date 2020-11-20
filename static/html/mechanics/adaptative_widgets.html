@@ -15,7 +15,7 @@ fetch("https://agmodule.herokuapp.com/api/g_mechancis/retrieve_adaptative_id?use
     .then(response => response.json())
     .then(function (myJson) {
         var mech_id = myJson.gmechanic_id;
-        fetch("https://agmodule.herokuapp.com/api/g_mechanics/" + mech_id + "/preview?user=dynamic_user")
+        fetch("https://agmodule.herokuapp.com/api/g_mechanics/" + mech_id + "/?user=dynamic_user")
         .then(response => response.json())
         .then(function (myJson2) {
             document.querySelector("#incr-aw-dynamic_index").innerHTML = (myJson2.html);
