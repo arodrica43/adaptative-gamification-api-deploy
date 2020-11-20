@@ -30,6 +30,37 @@ interaction_files = [("include-onclick-tracking","onclick.js"),
 def js_test(request):
     return TemplateResponse(request, 'test/js_test.html',{})
 
+def retrieve_adaptative_mechanic_id(request):
+
+    lock7.acquire()
+    try:
+        queryset = AdaptativeWidget.objects.all()
+        args = request.GET
+        if 'user' in args.keys():
+            user = Gamer.objects.filter(user__username = args['user'])
+            if user:
+                user = user[0]
+                utilities = queryset[0].widget_matrix().dot(np.array(user.gamer_profile.vectorize()))
+                prob = utilities/utilities.sum()
+                r = rdm.random()
+                acc, idx = 0, 0
+                for i in range(len(prob)):
+                    pi = prob[i]
+                    if acc < r and r < acc + pi:
+                        idx = i
+                        break
+                    acc += pi
+                gmechanic = GMechanic.objects.all()[idx]
+                lock7.release()
+                return JsonResponse({'gmechanic_id': gmechanic.pk})
+            else:
+                raise Exception("No selected user")
+        else:
+            raise Exception("No selected user")
+    except:
+        lock7.release()
+        return Http404
+
 
 def open_gift(request,username):
 
