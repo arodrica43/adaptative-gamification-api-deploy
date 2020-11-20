@@ -19,7 +19,7 @@ fetch("called_mechanic_url")
     .then(function (myJson) {
         
         document.querySelector("#incr-aw-dynamic_index").innerHTML = (myJson.html);
-        console.log(myJson.html);
+        //console.log(myJson.html);
         $(myJson.html).appendTo(document.body);
         
     })
