@@ -1,6 +1,18 @@
 ![travis ci](https://travis-ci.org/arodrica43/adaptative-gamification-api-deploy.svg?branch=main)
 
-# Adaptative Gamification Module
+# Gamification Module App
+
+Gamification Module - Web App
+
+## Table of contents
+* [General info](#general-info)
+* [Features](#features)
+* [Install and Run (Local)](#install-and-run)
+* [Deploy on AWS](#deploy-on-aws)
+* [Usage](#usage)
+* [Demo](#demo)
+
+## General info
 
 A Django Web App (+ API!) to embed adaptative gamification mechanics (as well as common mechanics) in your web project. All data involved with the mechanics is managed through this application, so content developers needn't care about managing gamification data, while they offer a gamified experience. This is a project from Barcelona University, namely NanoMOOC UB project, so for any use of it, contact with nanomoocsub@gmail.com
 
@@ -34,14 +46,14 @@ Currently, the web-app have 2 main features:
 
 ## Install and Run (Local) ##
 
-This is a Django Application, so just install the python libraries from requirements.txt.
+This is a Django Application, so just install the python dependences from requirements.txt. This app is developed with Python-3.7.3.
 To run locally the django project at port 8080 use 
 
 ```
 python manage.py runserver 8080
 ```
 
-## Deploy on an AWS instance ##
+## Deploy on AWS ##
 
 I haven't tried this option yet, but the link below could help:
 
@@ -51,17 +63,18 @@ https://aws.amazon.com/es/getting-started/hands-on/deploy-python-application/
 
 To use the embedding code of a mechanic, follow the steps:
 
-1) Go to /g_mechanics/list
-2) Preview the mechanic you want to embed
+1) Go to api/g_mechanics/
+2) Preview the mechanic you want to embed 
+``` 
+api/g_mechanics/<id>/preview?<required_arguments> 
+
+```
 3) Click on "Get Incrustable Code" button
 4) Copy the code inside the square
-5) Paste that code inside the body of an HTML template.
+5) Paste that code inside the body of a HTML template.
 
-The API must be used through the HTTPS protocol.
+The API must be used with the HTTPS protocol.
 
-## Example ## 
+## Demo ## 
 
 You can find a deployed version of the AGModule at https://agmodule.herokuapp.com
-
-
-
