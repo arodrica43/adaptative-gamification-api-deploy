@@ -1050,6 +1050,7 @@ class AdaptativeViewSet(GMechanicViewSet):
 class AdaptativeUtilitiesViewSet(AdaptativeViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
+    UNUSED !!!
     """
 
     def update_utilities(self,queryset,user): 
