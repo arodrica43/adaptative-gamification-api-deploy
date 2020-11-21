@@ -11,6 +11,7 @@ drf-enum-field==0.9.3
 jsonfield==3.1.0
 numpy==1.19.0
 Pillow==7.2.0
+psycopg2-binary==2.7.5
 pytz==2020.1
 sqlparse==0.3.1
 whitenoise==5.2.0
