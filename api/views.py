@@ -502,6 +502,13 @@ class GMechanicViewSet(viewsets.ModelViewSet):
             #print(data)
             if data['user'] != "dynamic_user":
                 statistic = InteractionStatistic.objects.filter(mechanic = instance, user = data['user'])
+                if not statistic:
+                    try:        
+                        statistic = InteractionStatistic.objects.create(mechanic = instance, user = data['user'], interaction_index = 1e-2)
+                        statistic = InteractionStatistic.objects.filter(mechanic = instance, user = data['user'])
+                    except:
+                        lock.release()
+                        raise Http404
                 for arg in ['history', 'main_time', 'focus_time', 'interaction_time','hidden_content_time', 'shown_content_time']:
                     uplog = statistic[0].log
                     if arg in statistic[0].log.keys():
@@ -578,6 +585,8 @@ class GComponentViewSet(viewsets.ModelViewSet):
     """
     queryset = GComponent.objects.all()
     serializer_class = GComponentSerializer
+    class Meta:
+        ordering = ['-id']
 
 class DevelopementToolViewSet(GMechanicViewSet):
     """

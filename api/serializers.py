@@ -126,15 +126,7 @@ class GamerSerializer(serializers.HyperlinkedModelSerializer):
                                     gamer_profile = gprofile,
                                     social_profile = sprofile
                                     ) 
-        lock.acquire()
-        try:        
-            for gm in GMechanic.objects.all():
-                InteractionStatistic.objects.create(mechanic = gm, user = user.username, interaction_index = 1e-2)
-            lock.release()
-            return gamer
-        except:
-            lock.release()
-            raise Http404
+        return gamer
         
         # except IntegrityError as error:
         #     print(error)
@@ -232,7 +224,8 @@ class InteractionStatisticSerializer(serializers.HyperlinkedModelSerializer):
         
     class Meta:
         model = InteractionStatistic
-        fields = ['url', 'mechanic','user', 'log','interaction_index']
+        fields = ['url', 'id','mechanic','user', 'log','interaction_index']
+        ordering = ['-id']
         #read_only_fields =
              
         
@@ -252,10 +245,6 @@ class GMechanicSerializer(EnumFieldSerializerMixin,serializers.HyperlinkedModelS
         try:
             instance = super().create(validated_data)
             # Create default statistics for all users 
-            users = Gamer.objects.all()
-            for u in users:
-                InteractionStatistic.objects.create(mechanic = instance, user = u.user.username, interaction_index = 1e-2)
-            lock.release()
             return instance
         except:
             lock.release()
