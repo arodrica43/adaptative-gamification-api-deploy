@@ -62,6 +62,7 @@ class SocialProfile(models.Model):
         science = "science"
         tech = "tech" 
         user = "user"
+        Unknown = "Unknown"
     
     image = EnumField(AvatarType,max_length=11,default = AvatarType.diamond)
     description = models.TextField(default="")
