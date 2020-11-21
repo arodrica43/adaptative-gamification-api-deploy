@@ -2,13 +2,13 @@
 
 # Gamification Module App
 
-Gamification Module - Web App
+#### Gamification Module - Web App ####
 
 ## Table of contents
 * [General info](#general-info)
 * [Features](#features)
 * [Install and Run (Local)](#install-and-run)
-* [Deploy on AWS](#deploy-on-aws)
+* [Deploy](#deploy)
 * [Usage](#usage)
 * [Demo](#demo)
 
@@ -53,7 +53,34 @@ To run locally the django project at port 8080 use
 python manage.py runserver 8080
 ```
 
-## Deploy on AWS ##
+## Deploy ##
+
+When this Django app is deployed, the default database (db.sqlite3) should be recreated. Its creation depends on the deploying platform, but basically, you should follow this steps:
+
+1) Create a database (tested with sqlite and postgresql).
+2) (Optional) Create database migrations with
+
+```
+python manage.py makemigrations
+```
+
+2) Migrate the database:
+
+```
+python manage.py migrate
+```
+
+3) Create an administrator user:
+
+```
+python manage.py createsuperuser
+```
+
+4) Add the domain url into ALOWED_HOSTS, in adaptative_gamification/settings.py
+5) Find and replace all project occurrences of the form "agmodule.herokuapp.com" by the domain url where the project is being deployed. 
+
+
+### Deploy on AWS ###
 
 I haven't tried this option yet, but the link below could help:
 
