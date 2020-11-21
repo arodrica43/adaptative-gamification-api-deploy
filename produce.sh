@@ -16,11 +16,7 @@ cd ~/Documentos/feina/dev/deploy/gamification-app/
 echo "+ Gamification-App local dir updated"
 git status
 git pull
-echo "lexws33\n"
-echo ".Qarc321\n"
 git add .
 git commit -m "Automatic Production Deploy"
 git push origin master
-echo "lexws33\n"
-echo ".Qarc321\n"
 echo "+ Gamification-App GitLab updated"
