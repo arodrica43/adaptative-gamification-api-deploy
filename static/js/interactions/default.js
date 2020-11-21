@@ -73,7 +73,7 @@ try {
     var tmp_interaction_t = 0;
 
     function increase_interaction_time(increment) {
-        tmp_interaction_t = Math.min(tmp_interaction_t + increment, tmp_focus_t);
+        tmp_interaction_t = Math.min(tmp_interaction_t + increment, tmp_focus_t/100);
     }
 
     function interaction_time() {
@@ -127,7 +127,7 @@ try {
         //console.log(main_time() / 100);
         log_data['main_time'] = main_time() / 100;
         log_data['focus_time'] = Math.min(focus_time(), main_time()) / 100;
-        log_data['interaction_time'] = interaction_time();
+        log_data['interaction_time'] = Math.min(interaction_time(), Math.min(focus_time(), main_time()) / 100);
         log_data['hidden_content_time'] = locked_time() / 100;
         log_data['shown_content_time'] = unlocked_time() / 100;
 
