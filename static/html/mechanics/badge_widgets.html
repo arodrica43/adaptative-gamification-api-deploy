@@ -1,4 +1,8 @@
 
-<div id = "hello-dynamic_index">Badge Widget</div>
+<div id = "bdg-widget-dynamic_index">Badge Widget</div>
+<param id = "bdg-widget-handshake-dynamic_index" value=0></param> 
 
-<script>document.querySelector("#hello-dynamic_index").innerHTML = "BADGE WIDGET (WIP)"</script>
+<script>
+document.querySelector("#bdg-widget-dynamic_index").innerHTML += " (WIP)";
+document.querySelector("#bdg-widget-handshake-dynamic_index").value = 1;
+</script>
