@@ -457,8 +457,9 @@ class GMechanicViewSet(viewsets.ModelViewSet):
                     queryset.update(html = queryset[0].html.replace("dynamic_user",request.GET['user']))
                 except:
                     print("Query url doesn't contain username argument")
-                try:  
-                    new_html = re.sub("(?!dynamic_index=)dynamic_index",request.GET['dynamic_index'],queryset[0].html)            
+                try:
+                    import random
+                    new_html = re.sub("(?!dynamic_index=)dynamic_index",request.GET['dynamic_index'],queryset[0].html + str(random.random())[2:])            
                     queryset.update(html = new_html)
                 except:
                     print("Query url doesn't contain dynamic_index argument")
@@ -473,7 +474,7 @@ class GMechanicViewSet(viewsets.ModelViewSet):
                 self.logic(queryset,request)
 
                 try:  
-                    new_html = re.sub("(?!dynamic_index=)dynamic_index",request.GET['dynamic_index'],queryset[0].html)            
+                    new_html = re.sub("(?!dynamic_index=)dynamic_index",request.GET['dynamic_index'],queryset[0].html + str(random.random())[2:])            
                     queryset.update(html = new_html)
                 except:
                     print("Query url doesn't contain dynamic_index argument")
