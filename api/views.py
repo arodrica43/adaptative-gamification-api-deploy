@@ -428,9 +428,9 @@ class GMechanicViewSet(viewsets.ModelViewSet):
         #print("There?",request.GET.urlencode())
         if pk:
             lock.acquire()
-            queryset.update(html = "")
             try:
                 queryset, name = g_mechanic_cast(pk)
+                queryset.update(html = "")
             except:
                 lock.release()
                 raise Http404
