@@ -430,7 +430,6 @@ class GMechanicViewSet(viewsets.ModelViewSet):
             lock.acquire()
             try:
                 queryset, name = g_mechanic_cast(pk)
-                queryset.update(html = "")
             except:
                 lock.release()
                 raise Http404
