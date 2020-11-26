@@ -432,37 +432,36 @@ class GMechanicViewSet(viewsets.ModelViewSet):
             except:
                 lock.release()
                 raise Http404
-            request_get = request.GET
-            queryset.update(html = "")
             try:
                 try:
                     file = open(os.path.join(settings.TEMPLATES[0]['DIRS'][0],  "mechanics/" + name + '.html'))
-                    print("https://agmodule.herokuapp.com/api/" + name + "/" + pk + "/?" + request_get.urlencode())
-                    queryset.update(html = file.read().replace("called_mechanic_url","https://agmodule.herokuapp.com/api/" + name + "/" + pk + "/?" + request_get.urlencode()))
+                    print("https://agmodule.herokuapp.com/api/" + name + "/" + pk + "/?" + request.GET.urlencode())
+                    queryset.update(html = file.read().replace("called_mechanic_url","https://agmodule.herokuapp.com/api/" + name + "/" + pk + "/?" + request.GET.urlencode()))
                     ensamble_interaction_dynamic_properties(queryset)
                 except:
+                    lock.release()
                     raise Http404
                 queryset.update(html = queryset[0].html.replace("dynamic_mechanic_index", pk))
                 queryset.update(html = queryset[0].html.replace("dynamic_mechanic_name", name))
                 ensamble_interaction_dynamic_properties(queryset)
                 import re
                 try:             
-                    queryset.update(html = queryset[0].html.replace("dynamic_user",request_get['user']))
+                    queryset.update(html = queryset[0].html.replace("dynamic_user",request.GET['user']))
                 except:
                     print("Query url doesn't contain username argument")
                 try:
-                    new_html = re.sub("(?!dynamic_index=)dynamic_index",request_get['dynamic_index'],queryset[0].html)    #+ str(random.random())[2:]        
+                    new_html = re.sub("(?!dynamic_index=)dynamic_index",request.GET['dynamic_index'],queryset[0].html)    #+ str(random.random())[2:]        
                     queryset.update(html = new_html)
                 except:
                     print("Query url doesn't contain dynamic_index argument")
                 tmp_title = queryset[0].title
-                if 'show_title' in request_get.keys():
-                    st = request_get['show_title']
+                if 'show_title' in request.GET.keys():
+                    st = request.GET['show_title']
                     if st == 'false':
                         queryset.update(title = "")
                 self.logic(queryset,request)
                 try:  
-                    new_html = re.sub("(?!dynamic_index=)dynamic_index",request_get['dynamic_index'],queryset[0].html)            
+                    new_html = re.sub("(?!dynamic_index=)dynamic_index",request.GET['dynamic_index'],queryset[0].html)            
                     queryset.update(html = new_html)
                 except:
                     print("Query url doesn't contain dynamic_index argument")
