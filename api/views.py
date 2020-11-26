@@ -32,7 +32,7 @@ def js_test(request):
 
 def retrieve_adaptative_widget_id(request):
 
-    lock7.acquire()
+    lock.acquire()
     try:
         queryset = AdaptativeWidget.objects.all()
         args = request.GET
@@ -51,16 +51,16 @@ def retrieve_adaptative_widget_id(request):
                         break
                     acc += pi
                 gmechanic = GMechanic.objects.all()[idx]
-                lock7.release()
+                lock.release()
                 return JsonResponse({'gmechanic_id': gmechanic.pk})
             else:
-                lock7.release()
+                lock.release()
                 raise Exception("No selected user")
         else:
-            lock7.release()
+            lock.release()
             raise Exception("No selected user")
     except:
-        lock7.release()
+        lock.release()
         return Http404
 
 
@@ -425,7 +425,6 @@ class GMechanicViewSet(viewsets.ModelViewSet):
         pass
 
     def abstract_retrieve(self, request, pk=None):
-        #print("There?",request.GET.urlencode())
         if pk:
             lock.acquire()
             try:
@@ -434,8 +433,6 @@ class GMechanicViewSet(viewsets.ModelViewSet):
                 lock.release()
                 raise Http404
             try:
-                #print(self.concrete_model)
-                #main_queryset = self.concrete_model.objects.filter(id=pk)
                 try:
                     file = open(os.path.join(settings.TEMPLATES[0]['DIRS'][0],  "mechanics/" + name + '.html'))
                     print("https://agmodule.herokuapp.com/api/" + name + "/" + pk + "/?" + request.GET.urlencode())
@@ -446,40 +443,28 @@ class GMechanicViewSet(viewsets.ModelViewSet):
                     raise Http404
                 queryset.update(html = queryset[0].html.replace("dynamic_mechanic_index", pk))
                 queryset.update(html = queryset[0].html.replace("dynamic_mechanic_name", name))
-                
-                # Dynamic properties of a g_mechanic :: dynamic_user
-                #                                       dynamic_index
                 ensamble_interaction_dynamic_properties(queryset)
-                #file = open(os.path.join(settings.TEMPLATES[0]['DIRS'][1],  "interactions/onclick.js"))
-                #queryset.update(html = queryset[0].html.replace("include-onclick-tracking",file.read())) 
                 import re
                 try:             
                     queryset.update(html = queryset[0].html.replace("dynamic_user",request.GET['user']))
                 except:
                     print("Query url doesn't contain username argument")
                 try:
-                    #randomizing dynamic_index don't work 100% ok
-                    #import random
                     new_html = re.sub("(?!dynamic_index=)dynamic_index",request.GET['dynamic_index'],queryset[0].html)    #+ str(random.random())[2:]        
                     queryset.update(html = new_html)
                 except:
                     print("Query url doesn't contain dynamic_index argument")
-
                 tmp_title = queryset[0].title
                 if 'show_title' in request.GET.keys():
-                    #print("Halooo", request.GET['show_title'])
                     st = request.GET['show_title']
                     if st == 'false':
                         queryset.update(title = "")
-                    
                 self.logic(queryset,request)
-
                 try:  
                     new_html = re.sub("(?!dynamic_index=)dynamic_index",request.GET['dynamic_index'],queryset[0].html)            
                     queryset.update(html = new_html)
                 except:
                     print("Query url doesn't contain dynamic_index argument")
-                #print(queryset[0].leadders['user1'])
                 serializer = self.serializer_class(queryset[0], context={'request': request})
                 queryset.update(title = tmp_title)
                 ensamble_interaction_dynamic_properties(queryset)
@@ -487,7 +472,7 @@ class GMechanicViewSet(viewsets.ModelViewSet):
                 return Response(serializer.data)
             except:
                 lock.release() 
-                print("Error :: Unknown Error detected")
+                print("Error :: Error loading GMechanic!")
                 ensamble_interaction_dynamic_properties(queryset)
                 raise Http404
         else: 
@@ -501,7 +486,6 @@ class GMechanicViewSet(viewsets.ModelViewSet):
         try:
             instance = self.queryset.get(id=pk)
             data = request.data
-            #print(data)
             if data['user'] != "dynamic_user":
                 statistic = InteractionStatistic.objects.filter(mechanic = instance, user = data['user'])
                 if not statistic:
