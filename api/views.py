@@ -32,7 +32,7 @@ def js_test(request):
 
 def retrieve_adaptative_widget_id(request):
 
-    lock.acquire()
+    lock7.acquire()
     try:
         queryset = AdaptativeWidget.objects.all()
         args = request.GET
@@ -51,16 +51,16 @@ def retrieve_adaptative_widget_id(request):
                         break
                     acc += pi
                 gmechanic = GMechanic.objects.all()[idx]
-                lock.release()
+                lock7.release()
                 return JsonResponse({'gmechanic_id': gmechanic.pk})
             else:
-                lock.release()
+                lock7.release()
                 raise Exception("No selected user")
         else:
-            lock.release()
+            lock7.release()
             raise Exception("No selected user")
     except:
-        lock.release()
+        lock7.release()
         return Http404
 
 
@@ -432,6 +432,7 @@ class GMechanicViewSet(viewsets.ModelViewSet):
             except:
                 lock.release()
                 raise Http404
+            queryset.update(html = "")
             try:
                 try:
                     file = open(os.path.join(settings.TEMPLATES[0]['DIRS'][0],  "mechanics/" + name + '.html'))
@@ -439,7 +440,6 @@ class GMechanicViewSet(viewsets.ModelViewSet):
                     queryset.update(html = file.read().replace("called_mechanic_url","https://agmodule.herokuapp.com/api/" + name + "/" + pk + "/?" + request.GET.urlencode()))
                     ensamble_interaction_dynamic_properties(queryset)
                 except:
-                    lock.release()
                     raise Http404
                 queryset.update(html = queryset[0].html.replace("dynamic_mechanic_index", pk))
                 queryset.update(html = queryset[0].html.replace("dynamic_mechanic_name", name))
