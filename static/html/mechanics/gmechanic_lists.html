@@ -1,8 +1,7 @@
 
 <div id="main-content-adapt">
 
-  	<div id="incr"></div>
-  	<div id="incr5"></div>
+  	<div id="gmechanic_body">olo</div>
 
 </div>
 
@@ -21,8 +20,8 @@ fetch("called_mechanic_url")
     })
     .then(function (myJson) {
         
-        document.querySelector("#incr").innerHTML = myJson.mechanic;
-        $(myJson.html).appendTo(document.body);
+        document.querySelector("#gmechanic_body").innerHTML = myJson.mechanic;
+        //$(myJson.html).appendTo(document.body);
         
     })
     .catch(function (error) {
