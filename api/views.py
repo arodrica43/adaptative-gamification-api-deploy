@@ -422,6 +422,7 @@ class GMechanicViewSet(viewsets.ModelViewSet):
     concrete_model = GMechanic
 
     def list(self, request, *args, **kwargs):
+        print("LIST :: ----------------------------------------------------------------------------------- :: LIST")
         queryset = self.filter_queryset(self.get_queryset())
 
         page = self.paginate_queryset(queryset)
