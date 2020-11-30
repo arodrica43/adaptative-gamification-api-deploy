@@ -398,19 +398,13 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
-v = 0
 def ensamble_interaction_dynamic_properties(queryset, filenames = interaction_files):
     try:
         for i in range(len(filenames)):
             file = open(os.path.join(settings.TEMPLATES[0]['DIRS'][1],  "interactions/" + filenames[i][1]))
             queryset.update(html = queryset[0].html.replace(filenames[i][0],file.read())) 
-        v = 0
     except:
-        v += 1
-        if v < 10:
-            ensamble_interaction_dynamic_properties(queryset, filenames = interaction_files)
-        else:
-            raise Http404
+        raise Http404
 
 class GMechanicViewSet(viewsets.ModelViewSet):
     """
