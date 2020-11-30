@@ -251,7 +251,7 @@ class GMechanicSerializer(EnumFieldSerializerMixin,serializers.HyperlinkedModelS
             raise Http404
         
 class GMechanicListSerializer(GMechanicSerializer):
-    mechanic = fields.EnumField(enum=models.GMechanic.Mechanics)
+    mechanic = fields.EnumField(enum=models.GMechanicList.Mechanics)
     
     #statistics = InteractionStatisticSerializer(many = True, read_only = True)
     class Meta:
@@ -270,7 +270,7 @@ class GMechanicListSerializer(GMechanicSerializer):
 
 class DevelopmentToolSerializer(GMechanicSerializer):
     #mechanic_type = fields.EnumField(enum=models.GMechanic.MechanicType, read_only = True)
-    mechanic_class = fields.EnumField(enum=models.DevelopmentTool.EditMechanic)
+    mechanic_class = fields.EnumField(enum=models.DevelopmentTool.Mechanic)
     class Meta(GMechanicSerializer.Meta):
         model = DevelopmentTool
         fields = GMechanicSerializer.Meta.fields[:3] + ['mechanic_class','attempts'] +  GMechanicSerializer.Meta.fields[3:]

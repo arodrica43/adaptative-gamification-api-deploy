@@ -114,23 +114,6 @@ class Gamer(models.Model):
 
 class GMechanic(models.Model):
 
-
-    class Mechanics(Enum):
-        development_tools = "development_tools"
-        challenges = "challenges"
-        easter_eggs = "easter_eggs"
-        unlockables = "unlockables"
-        badges = "badges"
-        levels = "levels"
-        points = "points"
-        leaderboards = "leaderboards"
-        lotteries = "lotteries"
-        gift_openers = "gift_openers"
-        social_networks = "social_networks"
-        social_statuses = "social_statuses"
-        gifts = "gifts"
-        knowledge_shares = "knowledge_shares"
-
     class MechanicType(Enum):   # A subclass of Enum
         Change = "Change"
         Autonomy = "Autonomy"
@@ -222,13 +205,29 @@ class InteractionStatistic(models.Model):
 
 class GMechanicList(GMechanic):
 
+    class Mechanics(Enum):
+        development_tools = "development_tools"
+        challenges = "challenges"
+        easter_eggs = "easter_eggs"
+        unlockables = "unlockables"
+        badges = "badges"
+        levels = "levels"
+        points = "points"
+        leaderboards = "leaderboards"
+        lotteries = "lotteries"
+        gift_openers = "gift_openers"
+        social_networks = "social_networks"
+        social_statuses = "social_statuses"
+        gifts = "gifts"
+        knowledge_shares = "knowledge_shares"
+
     def __init__(self, *args, **kwargs):
         """If object is being updated don't allow contact to be changed."""
         super().__init__(*args, **kwargs)
         self.mechanic_type = GMechanic.MechanicType.Unknown
             # self.fields.pop('parent') # or remove the field
 
-    mechanic = EnumField(GMechanic.Mechanics,max_length=17,default = GMechanic.Mechanics.badges)
+    mechanic = EnumField(Mechanics,max_length=17,default = Mechanics.badges)
 
 
 class DevelopmentTool(GMechanic):
@@ -239,12 +238,12 @@ class DevelopmentTool(GMechanic):
         self.mechanic_type = GMechanic.MechanicType.Change
             # self.fields.pop('parent') # or remove the field
 
-    class EditMechanic(Enum):   # A subclass of Enum
+    class Mechanic(Enum):   # A subclass of Enum
         Badge = "Badge"
         Unlockable = "Unlockable"
         Challenge = "Challenge"
 
-    mechanic_class = EnumField(EditMechanic,max_length=10,default = EditMechanic.Badge)
+    mechanic_class = EnumField(Mechanic,max_length=10,default = Mechanic.Badge)
     attempts =  models.IntegerField(validators=[MinValueValidator(1)],default = 1)
 
 class Challenge(GMechanic):
