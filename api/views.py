@@ -433,7 +433,6 @@ class GMechanicViewSet(viewsets.ModelViewSet):
                     queryset.update(html = file.read().replace("called_mechanic_url","https://agmodule.herokuapp.com/api/" + name + "/" + pk + "/?" + request.GET.urlencode()))
                     ensamble_interaction_dynamic_properties(queryset)
                 except:
-                    lock.release()
                     raise Http404
                 queryset.update(html = queryset[0].html.replace("dynamic_mechanic_index", pk))
                 queryset.update(html = queryset[0].html.replace("dynamic_mechanic_name", name))
