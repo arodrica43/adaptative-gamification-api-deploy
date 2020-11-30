@@ -428,7 +428,9 @@ class GMechanicViewSet(viewsets.ModelViewSet):
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = self.get_serializer(page, many=True)
-            return self.get_paginated_response(serializer.data)
+            data = serializer.data
+            data['new_key'] = "new_value"
+            return self.get_paginated_response(data)
 
         serializer = self.get_serializer(queryset, many=True)
         data = serializer.data
