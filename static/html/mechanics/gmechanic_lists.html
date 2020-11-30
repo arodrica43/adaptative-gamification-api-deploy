@@ -1,7 +1,7 @@
 
 <div id="main-content-adapt">
 
-  	<div id="gmechanic_body">olo</div>
+  	<div id="gmechanic_body"></div>
 
 </div>
 
@@ -20,7 +20,11 @@ fetch("called_mechanic_url")
     })
     .then(function (myJson) {
         
-        document.querySelector("#gmechanic_body").innerHTML = myJson.mechanic;
+        fetch("https://agmodule.herokuapp.com/api/" + myJson.mechanic)
+        .then(response => response.json())
+        .then(res_json => (res_json.results))
+        .then(list => list.forEach((item,index) => (document.querySelector("#gmechanic_body").innerHTML += "" + index + ", " + item + ", " + item.id)))
+        .catch(error => (console.log("Error: " + error)))
         //$(myJson.html).appendTo(document.body);
         
     })
