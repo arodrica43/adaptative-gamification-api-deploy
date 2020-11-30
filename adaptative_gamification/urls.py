@@ -76,7 +76,7 @@ router.register(r'gift_widgets', views.GiftWidgetViewSet)
 router.register(r'gift_opener_widgets', views.GiftOpenerWidgetViewSet)
 #Adaptative mechanics
 router.register(r'adaptative_widgets', views.AdaptativeWidgetViewSet)
-router.register(r'gmechanic_lists', views.GMechanicListView)
+router.register(r'gmechanic_lists', views.GMechanicListViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
