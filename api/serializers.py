@@ -254,7 +254,7 @@ class GMechanicListSerializer(GMechanicSerializer):
     mechanic = fields.EnumField(enum=models.GMechanicList.Mechanics)
     
     #statistics = InteractionStatisticSerializer(many = True, read_only = True)
-    class Meta:
+    class Meta(GMechanicSerializer.Meta):
         model = GMechanicList
         fields = GMechanicSerializer.Meta.fields[:3] + ['mechanic'] +  GMechanicSerializer.Meta.fields[3:]
 
@@ -262,7 +262,8 @@ class GMechanicListSerializer(GMechanicSerializer):
         # create default gmechanic instance
    
         instance = super().create(validated_data)
-        instance.update(mechanic_type = GMechanic.MechanicType.Change)
+        instance.mechanic_type = GMechanic.MechanicType.Change
+        instance.save()
         # Create default statistics for all users 
         return instance
   
