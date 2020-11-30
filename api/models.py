@@ -114,6 +114,23 @@ class Gamer(models.Model):
 
 class GMechanic(models.Model):
 
+
+    class Mechanics(Enum):
+        development_tools = "development_tools"
+        challenges = "challenges"
+        easter_eggs = "easter_eggs"
+        unlockables = "unlockables"
+        badges = "badges"
+        levels = "levels"
+        points = "points"
+        leaderboards = "leaderboards"
+        lotteries = "lotteries"
+        gift_openers = "gift_openers"
+        social_networks = "social_networks"
+        social_statuses = "social_statuses"
+        gifts = "gifts"
+        knowledge_shares = "knowledge_shares"
+
     class MechanicType(Enum):   # A subclass of Enum
         Change = "Change"
         Autonomy = "Autonomy"
@@ -187,8 +204,6 @@ class GMechanic(models.Model):
                 v += [stat_i] 
         #print(v, len(v))
         return v
-        
-
 
 # TO DO: Make class extensions to differentiate between GMechanics interaction statistics and GComponent statistics
 #   For now, it's enough to add the field <mechanic> here.
@@ -205,6 +220,17 @@ class InteractionStatistic(models.Model):
         unique_together = ("mechanic", "user")
 
 
+class GMechanicList(GMechanic):
+
+    def __init__(self, *args, **kwargs):
+        """If object is being updated don't allow contact to be changed."""
+        super().__init__(*args, **kwargs)
+        self.mechanic_type = GMechanic.MechanicType.Unknown
+            # self.fields.pop('parent') # or remove the field
+
+    mechanic = EnumField(GMechanic.Mechanics,max_length=17,default = GMechanic.Mechanics.badges)
+
+
 class DevelopmentTool(GMechanic):
 
     def __init__(self, *args, **kwargs):
@@ -213,12 +239,12 @@ class DevelopmentTool(GMechanic):
         self.mechanic_type = GMechanic.MechanicType.Change
             # self.fields.pop('parent') # or remove the field
 
-    class Mechanic(Enum):   # A subclass of Enum
+    class EditMechanic(Enum):   # A subclass of Enum
         Badge = "Badge"
         Unlockable = "Unlockable"
         Challenge = "Challenge"
 
-    mechanic_class = EnumField(Mechanic,max_length=10,default = Mechanic.Badge)
+    mechanic_class = EnumField(EditMechanic,max_length=10,default = EditMechanic.Badge)
     attempts =  models.IntegerField(validators=[MinValueValidator(1)],default = 1)
 
 class Challenge(GMechanic):

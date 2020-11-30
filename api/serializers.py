@@ -1,7 +1,7 @@
 from django.contrib.auth.models import Group, User
 from rest_framework import serializers
 from . import models, fields
-from api.models import unique_individual_group, InteractionStatistic, Adaptative, Badge, Challenge, DevelopmentTool, EasterEgg, Gift, GiftOpener, KnowledgeShare, Level, Lottery, Point, SocialNetwork, SocialStatus, Unlockable, Leaderboard, Gamer, GComponent, GMechanic, GamerProfile, EmotionProfile, SocialProfile
+from api.models import unique_individual_group, InteractionStatistic, Adaptative, Badge, Challenge, DevelopmentTool, EasterEgg, Gift, GiftOpener, KnowledgeShare, Level, Lottery, Point, SocialNetwork, SocialStatus, Unlockable, Leaderboard, Gamer, GComponent, GMechanic, GMechanicList,GamerProfile, EmotionProfile, SocialProfile
 from api.models import AdaptativeWidget, BadgeWidget, ChallengeWidget, DevelopmentToolWidget, EasterEggWidget, GiftWidget, GiftOpenerWidget, KnowledgeShareWidget, LevelWidget, LotteryWidget, PointWidget, SocialNetworkWidget, SocialStatusWidget, UnlockableWidget, LeaderboardWidget
 from rest_framework.response import Response
 from django.contrib.auth.validators import UnicodeUsernameValidator
@@ -250,6 +250,23 @@ class GMechanicSerializer(EnumFieldSerializerMixin,serializers.HyperlinkedModelS
             lock.release()
             raise Http404
         
+class GMechanicListSerializer(GMechanicSerializer):
+    mechanic = fields.EnumField(enum=models.GMechanic.Mechanics)
+    
+    #statistics = InteractionStatisticSerializer(many = True, read_only = True)
+    class Meta:
+        model = GMechanicList
+        fields = GMechanicSerializer.Meta.fields[:3] + ['mechanic'] +  GMechanicSerializer.Meta.fields[3:]
+
+    def create(self, validated_data):
+        # create default gmechanic instance
+   
+        instance = super().create(validated_data)
+        instance.update(mechanic_type = GMechanic.MechanicType.Change)
+        # Create default statistics for all users 
+        return instance
+  
+
 
 class DevelopmentToolSerializer(GMechanicSerializer):
     #mechanic_type = fields.EnumField(enum=models.GMechanic.MechanicType, read_only = True)

@@ -1,10 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
-from api.serializers import lock, AdaptativeSerializer, InteractionStatisticSerializer, BadgeSerializer, ChallengeSerializer, DevelopmentToolSerializer, EasterEggSerializer, GiftSerializer, GiftOpenerSerializer, KnowledgeShareSerializer, LevelSerializer, LotterySerializer, PointSerializer, SocialNetworkSerializer, SocialStatusSerializer, UnlockableSerializer, LeaderboardSerializer, UserSerializer, GroupSerializer, GamerSerializer, GMechanicSerializer, GComponentSerializer , GamerProfileSerializer, EmotionProfileSerializer, SocialProfileSerializer
+from api.serializers import lock, AdaptativeSerializer, InteractionStatisticSerializer, BadgeSerializer, ChallengeSerializer, DevelopmentToolSerializer, EasterEggSerializer, GiftSerializer, GiftOpenerSerializer, KnowledgeShareSerializer, LevelSerializer, LotterySerializer, PointSerializer, SocialNetworkSerializer, SocialStatusSerializer, UnlockableSerializer, LeaderboardSerializer, UserSerializer, GroupSerializer, GamerSerializer, GMechanicSerializer, GMechanicListSerializer, GComponentSerializer , GamerProfileSerializer, EmotionProfileSerializer, SocialProfileSerializer
 from api.serializers import AdaptativeWidgetSerializer, BadgeWidgetSerializer, ChallengeWidgetSerializer, DevelopmentToolWidgetSerializer, EasterEggWidgetSerializer, GiftWidgetSerializer, GiftOpenerWidgetSerializer, KnowledgeShareWidgetSerializer, LevelWidgetSerializer, LotteryWidgetSerializer, PointWidgetSerializer, SocialNetworkWidgetSerializer, SocialStatusWidgetSerializer, UnlockableWidgetSerializer, LeaderboardWidgetSerializer 
 from django.http import HttpResponseBadRequest, HttpResponse, JsonResponse, Http404
-from api.models import mechanics_list, mechanics_list_names,mechanic_list_total_interactions, InteractionStatistic, Adaptative, Badge, Challenge, DevelopmentTool, EasterEgg, Gift, GiftOpener, KnowledgeShare, Level, Lottery, Point, SocialNetwork, SocialStatus, Unlockable, Leaderboard, Gamer, GMechanic, GComponent, GamerProfile, EmotionProfile, SocialProfile
+from api.models import mechanics_list, mechanics_list_names,mechanic_list_total_interactions, InteractionStatistic, Adaptative, Badge, Challenge, DevelopmentTool, EasterEgg, Gift, GiftOpener, KnowledgeShare, Level, Lottery, Point, SocialNetwork, SocialStatus, Unlockable, Leaderboard, Gamer, GMechanic, GMechanicList, GComponent, GamerProfile, EmotionProfile, SocialProfile
 from api.models import AdaptativeWidget, BadgeWidget, ChallengeWidget, DevelopmentToolWidget, EasterEggWidget, GiftWidget, GiftOpenerWidget, KnowledgeShareWidget, LevelWidget, LotteryWidget, PointWidget, SocialNetworkWidget, SocialStatusWidget, UnlockableWidget, LeaderboardWidget
 from django.template.response import TemplateResponse
 from rest_framework.response import Response
@@ -421,23 +421,6 @@ class GMechanicViewSet(viewsets.ModelViewSet):
     concrete_class = 'g_mechanics'
     concrete_model = GMechanic
 
-    def list(self, request, *args, **kwargs):
-        print("LIST :: ----------------------------------------------------------------------------------- :: LIST")
-        queryset = self.filter_queryset(self.get_queryset())
-
-        page = self.paginate_queryset(queryset)
-        if page is not None:
-            serializer = self.get_serializer(page, many=True)
-            data = serializer.data
-            data['new_key'] = "new_value"
-            return self.get_paginated_response(data)
-
-        serializer = self.get_serializer(queryset, many=True)
-        data = serializer.data
-        data['new_key'] = "new_value"
-        print(data)
-        return Response(data)
-
     def logic(self,queryset,request):
         pass
 
@@ -590,6 +573,22 @@ class GComponentViewSet(viewsets.ModelViewSet):
     serializer_class = GComponentSerializer
     class Meta:
         ordering = ['-id']
+
+class GMechanicListViewSet(GMechanicViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = GMechanicList.objects.all()
+    serializer_class = GMechanicListSerializer
+    concrete_class = 'gmechanic_lists'
+    concrete_model = GMechanicList
+
+    def retrieve(self, request, pk=None):
+        #print("WTFFFs")
+        return super().abstract_retrieve(request,pk)
+
+    def logic(self,queryset,request):
+        pass
 
 class DevelopementToolViewSet(GMechanicViewSet):
     """
