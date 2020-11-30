@@ -270,7 +270,7 @@ class GMechanicListSerializer(GMechanicSerializer):
 
 class DevelopmentToolSerializer(GMechanicSerializer):
     #mechanic_type = fields.EnumField(enum=models.GMechanic.MechanicType, read_only = True)
-    mechanic_class = fields.EnumField(enum=models.DevelopmentTool.Mechanic)
+    mechanic_class = fields.EnumField(enum=models.DevelopmentTool.EditMechanic)
     class Meta(GMechanicSerializer.Meta):
         model = DevelopmentTool
         fields = GMechanicSerializer.Meta.fields[:3] + ['mechanic_class','attempts'] +  GMechanicSerializer.Meta.fields[3:]
