@@ -433,6 +433,7 @@ class GMechanicViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(queryset, many=True)
         data = serializer.data
         data['new_key'] = "new_value"
+        print(data)
         return Response(data)
 
     def logic(self,queryset,request):
