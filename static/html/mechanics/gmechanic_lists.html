@@ -43,8 +43,8 @@
 <script>
 
 function populateGrid(item,index){
-    document.querySelector("#grid").innerHTML += '<div><img name="' + item.id + '" src="' + item.icon + '" onclick="showDetails(this);"></div>';
-    document.querySelector("#grid").innerHTML += '<div><img name="' + item.id + '" src="' + item.icon + '" onclick="alert(1);"></div>';
+    console.log("Unlocked :: " + item[1]);
+    document.querySelector("#grid").innerHTML += '<div><img name="' + item[0].id + '" src="' + item[0].icon + '" onclick="showDetails(this);"></div>';
 }
 
 fetch("called_mechanic_url")
@@ -52,20 +52,13 @@ fetch("called_mechanic_url")
         return response.json();
     })
     .then(function (myJson) {
-        
-        fetch("https://agmodule.herokuapp.com/api/" + myJson.mechanic + "/")
-        .then(response => response.json())
-        .then(res_json => (res_json.results))
-        .then(function(list){
-            switch(myJson.mechanic){
-                case "badges":
-                    list.forEach(populateGrid);
-                    break;
-            }
-        })
-        .catch(error => (console.log("Error: " + error)))
-        //$(myJson.html).appendTo(document.body);
-        
+        if(myJson.mechanic == "badges"){
+            fetch("https://agmodule.herokuapp.com/api/badges/retrieve_for_user/dynamic_user")
+            .then(response => response.json())
+            .then(res_json => (res_json.results))
+            .then((list) => (list.forEach(populateGrid)))
+            .catch(error => (console.log("Error: " + error)))
+        }
     })
     .catch(function (error) {
         console.log("Error: " + error);
