@@ -52,11 +52,16 @@
 
 function populateGrid(item,index){
     console.log("Unlocked :: " + item[1]);
-    if(item[1]){
-        document.querySelector("#grid").innerHTML += '<div><img src="' + item[0].icon + '" onclick="showDetails(this);" data-gid=35 data-unlocked=' + item + ' ></div>';
-    }else{
-        document.querySelector("#grid").innerHTML += '<div><img style="-webkit-filter: brightness(1%);filter: brightness(1%);" src="' + item[0].icon + '" onclick="showDetails(this);" data-gid=35 data-unlocked=' + item + '></div>';   
+    var locked_style = "";
+    if(!item[1]){
+        locked_style = 'style="-webkit-filter: brightness(1%);filter: brightness(1%);"';
     }
+    document.querySelector("#grid").innerHTML += '<div><img ' + locked_style + ' src="' + item[0].icon + 
+                                                        '" onclick="showDetails(this);" data-unlocked=' + item[1] +
+                                                            ' data-id=' + item[0].id +
+                                                            ' data-by=' + item[0].by +
+                                                            ' data-threshold=' + item[0].threshold +
+                                                        ' ></div>';
 }
 
 fetch("called_mechanic_url")
