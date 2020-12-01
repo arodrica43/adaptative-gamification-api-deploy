@@ -253,7 +253,10 @@ def view_unlockable_set(request, username):
 
     unlocks_set = []
     for unlk in all_unlocks:
-         unlocks_set += [[UnlockableSerializer(unlk, context={'request': request}).data, unlk.id in unlock_ids]]
+        if user.gamer_profile.data[unlk.by] >= unlk.threshold:
+            user.gamer_profile.data['unlockables'] += [unlk.id]
+            user.gamer_profile.save()
+        unlocks_set += [[UnlockableSerializer(unlk, context={'request': request}).data, unlk.id in unlock_ids]]
     
     return JsonResponse({'results':unlocks_set})
 
@@ -273,7 +276,10 @@ def view_challenge_set(request, username):
 
     unlocks_set = []
     for unlk in all_unlocks:
-         unlocks_set += [[ChallengeSerializer(unlk, context={'request': request}).data, unlk.id in unlock_ids]]
+        if user.gamer_profile.data[unlk.by] >= unlk.threshold:
+            user.gamer_profile.data['unlockables'] += [unlk.id]
+            user.gamer_profile.save()
+        unlocks_set += [[ChallengeSerializer(unlk, context={'request': request}).data, unlk.id in unlock_ids]]
     
     return JsonResponse({'results':unlocks_set})
 
