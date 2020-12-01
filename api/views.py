@@ -229,7 +229,10 @@ def view_badge_set(request, username):
 
     badge_set = []
     for badge in all_badges:
-         badge_set += [[BadgeSerializer(badge, context={'request': request}).data, badge.id in badge_ids]]
+        if user.gamer_profile.data[badge.by] >= badge.threshold:
+            user.gamer_profile.data['badges'] += [badge.id]
+            user.gamer_profile.save()
+        badge_set += [[BadgeSerializer(badge, context={'request': request}).data, badge.id in badge_ids]]
     
     return JsonResponse({'results':badge_set})
 
