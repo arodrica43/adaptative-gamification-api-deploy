@@ -15,9 +15,11 @@
       }
       
       #grid > div > img{
-         width: 100%;
-         height: 100%;
-         cursor: pointer;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        -webkit-transition: .15s;
+        transition: .15s; 
       }
 
       #grid > div > img:hover{
@@ -51,9 +53,9 @@
 function populateGrid(item,index){
     console.log("Unlocked :: " + item[1]);
     if(item[1]){
-        document.querySelector("#grid").innerHTML += '<div><img src="' + item[0].icon + '" onclick="showDetails(this);" data-gid=35 data-unlocked=' + item[1] + ' ></div>';
+        document.querySelector("#grid").innerHTML += '<div><img src="' + item[0].icon + '" onclick="showDetails(this);" data-gid=35 data-unlocked=' + item + ' ></div>';
     }else{
-        document.querySelector("#grid").innerHTML += '<div><img style="-webkit-filter: brightness(1%);filter: brightness(1%);" src="' + item[0].icon + '" onclick="showDetails(this);" data-gid=35 data-unlocked=' + item[1] + '></div>';   
+        document.querySelector("#grid").innerHTML += '<div><img style="-webkit-filter: brightness(1%);filter: brightness(1%);" src="' + item[0].icon + '" onclick="showDetails(this);" data-gid=35 data-unlocked=' + item + '></div>';   
     }
 }
 
