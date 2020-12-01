@@ -34,21 +34,17 @@
 
 </div>
 
+<script type="text/javascript">
+    function showDetails(object){
+        alert(object.name);
+    }
+</script>
+
 <script>
-
-
-//include_interaction_testing_tools
-//var main_content_name = "main-content-adapt";
-//var interactable_elements = document.getElementById(main_content_name).querySelectorAll("*");
-//init_auto_interactions(interactable_elements);
-//startBot(main_content_name);
-
-function showDetails(object){
-    alert(object.name);
-}
 
 function populateGrid(item,index){
     document.querySelector("#grid").innerHTML += '<div><img name="' + item.id + '" src="' + item.icon + '" onclick="showDetails(this);"></div>';
+    document.querySelector("#grid").innerHTML += '<div><img name="' + item.id + '" src="' + item.icon + '" onclick="alert(1);"></div>';
 }
 
 fetch("called_mechanic_url")
