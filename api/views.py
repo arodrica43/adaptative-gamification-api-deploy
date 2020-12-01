@@ -229,7 +229,7 @@ def view_badge_set(request, username):
 
     badge_set = []
     for badge in all_badges:
-        if user.gamer_profile.data[badge.by] >= badge.threshold:
+        if user.gamer_profile.data[badge.by] >= badge.threshold and (badge.id not in user.gamer_profile.data['badges']):
             user.gamer_profile.data['badges'] += [badge.id]
             user.gamer_profile.save()
         badge_set += [[BadgeSerializer(badge, context={'request': request}).data, badge.id in badge_ids]]
@@ -253,7 +253,7 @@ def view_unlockable_set(request, username):
 
     unlocks_set = []
     for unlk in all_unlocks:
-        if user.gamer_profile.data[unlk.by] >= unlk.threshold:
+        if user.gamer_profile.data[unlk.by] >= unlk.threshold and (unlk.id not in user.gamer_profile.data['unlockables']):
             user.gamer_profile.data['unlockables'] += [unlk.id]
             user.gamer_profile.save()
         unlocks_set += [[UnlockableSerializer(unlk, context={'request': request}).data, unlk.id in unlock_ids]]
@@ -276,8 +276,8 @@ def view_challenge_set(request, username):
 
     unlocks_set = []
     for unlk in all_unlocks:
-        if user.gamer_profile.data[unlk.by] >= unlk.threshold:
-            user.gamer_profile.data['unlockables'] += [unlk.id]
+        if user.gamer_profile.data[unlk.by] >= unlk.threshold and (unlk.id not in user.gamer_profile.data['challenges']) :
+            user.gamer_profile.data['challenges'] += [unlk.id]
             user.gamer_profile.save()
         unlocks_set += [[ChallengeSerializer(unlk, context={'request': request}).data, unlk.id in unlock_ids]]
     
