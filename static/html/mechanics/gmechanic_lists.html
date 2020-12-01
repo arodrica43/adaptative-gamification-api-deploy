@@ -36,7 +36,8 @@
 
 <script type="text/javascript">
     function showDetails(object){
-        alert(object.name);
+        console.log(object[1]);
+        console.log(object[0].id);
     }
 </script>
 
@@ -44,7 +45,11 @@
 
 function populateGrid(item,index){
     console.log("Unlocked :: " + item[1]);
-    document.querySelector("#grid").innerHTML += '<div><img name="' + item[0].id + '" src="' + item[0].icon + '" onclick="showDetails(this);"></div>';
+    if(item[1]){
+        document.querySelector("#grid").innerHTML += '<div><img src="' + item[0].icon + '" onclick="showDetails(' + item + ');"></div>';
+    }else{
+        document.querySelector("#grid").innerHTML += '<div><img style="-webkit-filter: brightness(1%);filter: brightness(1%);" src="' + item[0].icon + '" onclick="showDetails(' + item + ');"></div>';   
+    }
 }
 
 fetch("called_mechanic_url")
