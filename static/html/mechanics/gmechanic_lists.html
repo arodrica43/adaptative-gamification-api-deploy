@@ -69,6 +69,7 @@
     }
 
     .modal-content > div > div > img{
+        margin:20px;
         width: 200px;
         height: :200px;
     }
@@ -107,7 +108,7 @@
         }
         document.querySelector("#modal-content-body-dynamic_index").innerHTML = '<div style="text-align:center;">' + 
                                                                                      '<img ' + locked_style + ' src="' + object.src + '">' +
-                                                                                     '<div>' + object.dataset.name + '</div>';
+                                                                                     '<div>' + object.dataset.name + '</div>' +
                                                                                      '<div>Increase ' + object.dataset.by + ' over ' + object.dataset.threshold + '</div>' +
                                                                                     '</div>';
         modal.style.display = "block";
@@ -122,12 +123,13 @@ function populateGrid(item,index){
     if(!item[1]){
         locked_style = 'style="-webkit-filter: brightness(1%);filter: brightness(1%);"';
     }
+    console.log(item[0].name);
     document.querySelector("#grid-dynamic_index").innerHTML += '<div><img ' + locked_style + ' src="' + item[0].icon + 
                                                                 '" onclick="showDetails(this);" data-unlocked=' + item[1] +
                                                                     ' data-id=' + item[0].id +
                                                                     ' data-by=' + item[0].by +
                                                                     ' data-threshold=' + item[0].threshold +
-                                                                    ' data-name=' + item[0].name +
+                                                                    ' data-name="' + item[0].name + '"' +
                                                                 ' ></div>';
 }
 
