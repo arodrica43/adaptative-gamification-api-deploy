@@ -17,6 +17,7 @@
       #grid > div > img{
          width: 100%;
          height: 100%;
+         cursor: pointer;
       }
     </style>
 
@@ -42,8 +43,12 @@
 //init_auto_interactions(interactable_elements);
 //startBot(main_content_name);
 
+function showDetails(object){
+    alert(object.name);
+}
+
 function populateGrid(item,index){
-    document.querySelector("#grid").innerHTML += '<div><img src="' + item.icon + '"></div>';
+    document.querySelector("#grid").innerHTML += '<div><img name="' + item.id + '" src="' + item.icon + '" onclick="showDetails(this);"></div>';
 }
 
 fetch("called_mechanic_url")
@@ -54,9 +59,8 @@ fetch("called_mechanic_url")
         
         fetch("https://agmodule.herokuapp.com/api/" + myJson.mechanic + "/")
         .then(response => response.json())
-        .then(res_json => (console.log(res_json.results),res_json.results))
+        .then(res_json => (res_json.results))
         .then(function(list){
-            console.log(list);
             switch(myJson.mechanic){
                 case "badges":
                     list.forEach(populateGrid);
