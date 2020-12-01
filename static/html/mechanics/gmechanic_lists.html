@@ -36,8 +36,7 @@
 
 <script type="text/javascript">
     function showDetails(object){
-        console.log(object[1]);
-        console.log(object[0].id);
+        console.log(object.dataset);
     }
 </script>
 
@@ -46,7 +45,7 @@
 function populateGrid(item,index){
     console.log("Unlocked :: " + item[1]);
     if(item[1]){
-        document.querySelector("#grid").innerHTML += '<div><img src="' + item[0].icon + '" onclick="showDetails(' + item + ');"></div>';
+        document.querySelector("#grid").innerHTML += '<div><img src="' + item[0].icon + '" onclick="showDetails(this);" data-gid=35 data-unlocked=' + item[1] + ' ></div>';
     }else{
         document.querySelector("#grid").innerHTML += '<div><img style="-webkit-filter: brightness(1%);filter: brightness(1%);" src="' + item[0].icon + '" onclick="showDetails(' + item + ');"></div>';   
     }
