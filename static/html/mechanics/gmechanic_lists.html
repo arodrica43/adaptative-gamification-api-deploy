@@ -59,7 +59,7 @@ fetch("called_mechanic_url")
             console.log(list);
             switch(myJson.mechanic){
                 case "badges":
-                    list.forEach(populateGrid(item,index));
+                    list.forEach(populateGrid);
                     break;
             }
         })
