@@ -19,6 +19,12 @@
          height: 100%;
          cursor: pointer;
       }
+
+      #grid > div > img:hover{
+         -webkit-filter: brightness(10%);
+          filter: brightness(10%);
+          transform: scale(1.3); 
+      }
     </style>
 
 
@@ -47,7 +53,7 @@ function populateGrid(item,index){
     if(item[1]){
         document.querySelector("#grid").innerHTML += '<div><img src="' + item[0].icon + '" onclick="showDetails(this);" data-gid=35 data-unlocked=' + item[1] + ' ></div>';
     }else{
-        document.querySelector("#grid").innerHTML += '<div><img style="-webkit-filter: brightness(1%);filter: brightness(1%);" src="' + item[0].icon + '" onclick="showDetails(' + item + ');"></div>';   
+        document.querySelector("#grid").innerHTML += '<div><img style="-webkit-filter: brightness(1%);filter: brightness(1%);" src="' + item[0].icon + '" onclick="showDetails(this);" data-gid=35 data-unlocked=' + item[1] + '></div>';   
     }
 }
 
