@@ -102,13 +102,13 @@
     function showDetails(object){
         console.log(object.dataset);
         var locked_style = "";
-        if(!object.dataset.unlocked){
+        if(object.dataset.unlocked == "false"){
             locked_style = 'style="-webkit-filter: brightness(1%);filter: brightness(1%);"';
         }
         document.querySelector("#modal-content-body-dynamic_index").innerHTML = '<div style="text-align:center;">' + 
                                                                                      '<img ' + locked_style + ' src="' + object.src + '">' +
                                                                                      '<div><h2>' + object.dataset.name + '</h2></div>' +
-                                                                                     '<div><h3>Increase ' + object.dataset.by + ' over ' + object.dataset.threshold + '</h3></div>' +
+                                                                                     '<div style="margin:20px;"><h3>Increase ' + object.dataset.by + ' over ' + object.dataset.threshold + '</h3></div>' +
                                                                                     '</div>';
         modal.style.display = "block";
     }
