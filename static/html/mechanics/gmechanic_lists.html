@@ -52,7 +52,7 @@ fetch("called_mechanic_url")
     })
     .then(function (myJson) {
         
-        fetch("https://agmodule.herokuapp.com/api/" + myJson.mechanic)
+        fetch("https://agmodule.herokuapp.com/api/" + myJson.mechanic + "/")
         .then(response => response.json())
         .then(res_json => (console.log(res_json.results),res_json.results))
         .then(function(list){
