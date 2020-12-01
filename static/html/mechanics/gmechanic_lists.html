@@ -22,15 +22,7 @@
 
 
     <div id="grid">
-      <div><img src="https://agmodule.herokuapp.com/media/badge_icons/locked.png"></div>
-      <div><img src="https://agmodule.herokuapp.com/media/badge_icons/locked.png"></div>
-      <div><img src="https://agmodule.herokuapp.com/media/badge_icons/locked.png"></div>
-      <div><img src="https://agmodule.herokuapp.com/media/badge_icons/locked.png"></div>
-      <div><img src="https://agmodule.herokuapp.com/media/badge_icons/locked.png"></div>
-      <div><img src="https://agmodule.herokuapp.com/media/badge_icons/locked.png"></div>
-      <div><img src="https://agmodule.herokuapp.com/media/badge_icons/locked.png"></div>
-      <div><img src="https://agmodule.herokuapp.com/media/badge_icons/locked.png"></div>
-      <div><img src="https://agmodule.herokuapp.com/media/badge_icons/locked.png"></div>
+
     </div>
     
 
@@ -62,8 +54,9 @@ fetch("called_mechanic_url")
         
         fetch("https://agmodule.herokuapp.com/api/" + myJson.mechanic)
         .then(response => response.json())
-        .then(res_json => (res_json.results))
+        .then(res_json => (console.log(res_json.results),res_json.results))
         .then(function(list){
+            console.log(list);
             switch(myJson.mechanic){
                 case "badges":
                     list.forEach(populateGrid(item,index));
