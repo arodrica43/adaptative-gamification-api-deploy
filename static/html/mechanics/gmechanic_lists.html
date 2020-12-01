@@ -49,7 +49,7 @@
         padding: 20px;
         border: 1px solid #888;
         width: 30%;
-        min-width: 300px;
+        min-width: 340px;
     }
 
     /* The Close Button */
@@ -68,7 +68,7 @@
     }
 
     .modal-content > div > div > img{
-        margin:30px;
+        margin:20px;
         width: 200px;
         height: :200px;
     }
@@ -137,13 +137,15 @@ fetch("called_mechanic_url")
         return response.json();
     })
     .then(function (myJson) {
-        if(myJson.mechanic == "badges"){
-            fetch("https://agmodule.herokuapp.com/api/badges/retrieve_for_user/dynamic_user")
+        var url = "";
+        if(myJson.mechanic == "badges" || myJson.mechanic == "unlockables" || myJson.mechanic == "challenges"){
+            url = "https://agmodule.herokuapp.com/api/" + myJson.mechanic + "/retrieve_for_user/dynamic_user";
+        }
+        fetch(url)
             .then(response => response.json())
             .then(res_json => (res_json.results))
             .then((list) => (list.forEach(populateGrid)))
             .catch(error => (console.log("Error: " + error)))
-        }
     })
     .catch(function (error) {
         console.log("Error: " + error);
