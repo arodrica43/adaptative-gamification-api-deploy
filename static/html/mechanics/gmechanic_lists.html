@@ -189,7 +189,7 @@ fetch("called_mechanic_url")
     })
     .then(function (myJson) {
         var url = "";
-        var populate_grid = () => ();
+        var populate_grid = "";
         if(myJson.mechanic == "badges" || myJson.mechanic == "unlockables" || myJson.mechanic == "challenges"){
             url = "https://agmodule.herokuapp.com/api/" + myJson.mechanic + "/retrieve_for_user/dynamic_user";
             if(myJson.mechanic == "badges") {
