@@ -1,8 +1,4 @@
-
-
 <style>
-
-
       #v-grid-dynamic_index {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(500px, 10fr));
@@ -193,21 +189,21 @@ fetch("called_mechanic_url")
     })
     .then(function (myJson) {
         var url = "";
-        var populate_h-grid = () => ();
+        var populate_grid = () => ();
         if(myJson.mechanic == "badges" || myJson.mechanic == "unlockables" || myJson.mechanic == "challenges"){
             url = "https://agmodule.herokuapp.com/api/" + myJson.mechanic + "/retrieve_for_user/dynamic_user";
             if(myJson.mechanic == "badges") {
-                populate_h-grid = populateBadgesGrid;
+                populate_grid = populateBadgesGrid;
             }else if(myJson.mechanic == "unlockables") {
-                populate_h-grid = populateUnlockablesGrid;
+                populate_grid = populateUnlockablesGrid;
             }else if(myJson.mechanic == "challenges") {
-                populate_h-grid = populateChallengesGrid;
+                populate_grid = populateChallengesGrid;
             }
         }
         fetch(url)
             .then(response => response.json())
             .then(res_json => (res_json.results))
-            .then((list) => (list.forEach(populate_h-grid)))
+            .then((list) => (list.forEach(populate_grid)))
             .catch(error => (console.log("Error: " + error)))
     })
     .catch(function (error) {
