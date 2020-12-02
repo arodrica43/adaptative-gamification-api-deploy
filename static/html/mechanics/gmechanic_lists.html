@@ -178,7 +178,8 @@ function populateChallengesGrid(item,index){
     var locked_style = "";
     console.log(item[0].name);
     document.querySelector("#v-grid-dynamic_index").innerHTML += '<div style="text-align:center;"><img style="float:left; margin:20px;height:100%" src="' + item[0].icon +  
-                                                                '" ><progress style="margin:20px;" value="19" max="90"> X/Y </progress>' +
+                                                                '" ><progress style="margin:20px; width:100%;" value="19" max="90"> X/Y </progress>' +
+                                                                'X / Y ' +
                                                                 ' </div>';
 }
 
