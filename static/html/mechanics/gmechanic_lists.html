@@ -7,8 +7,7 @@
         font-size: 30px;
         padding: .5em;
         margin: .5em;
-        color: #ffffff;
-        background: #1c87c9;
+        background: whitesmoke;
         text-align: center;
         height:130px;
       }
@@ -177,8 +176,8 @@ function populateChallengesGrid(item,index){
     console.log("Unlocked :: " + item[1]);
     var locked_style = "";
     console.log(item[0].name);
-    document.querySelector("#v-grid-dynamic_index").innerHTML += '<div style="text-align:center;"><img style="float:left; margin:20px;height:100%" src="' + item[0].icon +  
-                                                                '" ><progress style="margin:20px; width:100%;" value="19" max="90"> X/Y </progress>' +
+    document.querySelector("#v-grid-dynamic_index").innerHTML += '<div style="text-align:center;"><img style="float:left; height:100%" src="' + item[0].icon +  
+                                                                '" ><progress style="float:right;margin:20px; width:50%;" value="19" max="90"> X/Y </progress>' +
                                                                 'X / Y ' +
                                                                 ' </div>';
 }
