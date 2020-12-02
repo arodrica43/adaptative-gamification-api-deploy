@@ -279,7 +279,7 @@ def view_challenge_set(request, username):
         if user.gamer_profile.data[unlk.by] >= unlk.threshold and (unlk.id not in user.gamer_profile.data['challenges']) :
             user.gamer_profile.data['challenges'] += [unlk.id]
             user.gamer_profile.save()
-        unlocks_set += [[ChallengeSerializer(unlk, context={'request': request}).data, unlk.id in unlock_ids]]
+        unlocks_set += [[ChallengeSerializer(unlk, context={'request': request}).data, unlk.id in unlock_ids, user.gamer_profile.data[unlk.by]]]
     
     return JsonResponse({'results':unlocks_set})
 

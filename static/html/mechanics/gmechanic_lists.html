@@ -1,11 +1,27 @@
 
 
 <style>
-    #grid-dynamic_index {
+
+
+      #v-grid-dynamic_index {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(500px, 10fr));
+      }
+      #v-grid-dynamic_index > div {
+        font-size: 30px;
+        padding: .5em;
+        margin: .5em;
+        color: #ffffff;
+        background: #1c87c9;
+        text-align: center;
+        height:130px;
+      }
+
+    #h-grid-dynamic_index {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     }
-    #grid-dynamic_index > div {
+    #h-grid-dynamic_index > div {
         font-size: 30px;
         padding: .5em;
         margin: .5em;
@@ -14,7 +30,7 @@
         height:100px;
     }
 
-    #grid-dynamic_index > div > img{
+    #h-grid-dynamic_index > div > img{
         width: 100%;
         height: 100%;
         cursor: pointer;
@@ -22,7 +38,7 @@
         transition: .15s; 
     }
 
-    #grid-dynamic_index > div > img:hover{
+    #h-grid-dynamic_index > div > img:hover{
          -webkit-transform: scale(1.3); 
           transform: scale(1.3); 
     }
@@ -75,7 +91,9 @@
 </style>
 
 
-    <div id="grid-dynamic_index"></div>
+    <div id="h-grid-dynamic_index"></div>
+    <div id="v-grid-dynamic_index"></div>
+
     
 <!-- The Modal -->
 <div id="details-modal-dynamic_index" class="modal">
@@ -99,7 +117,7 @@
         modal.style.display = "none";
       }
     }
-    function showDetails(object){
+    function showBadgeDetails(object){
         console.log(object.dataset);
         var locked_style = "";
         if(object.dataset.unlocked == "false"){
@@ -112,24 +130,61 @@
                                                                                     '</div>';
         modal.style.display = "block";
     }
+
+    function showUnlockableDetails(object){
+        console.log(object.dataset);
+        if(object.dataset.unlocked == "true"){
+            document.querySelector("#modal-content-body-dynamic_index").innerHTML = object.dataset.locked_content;
+            $(object.dataset.locked_content).appendTo(document.body);
+            modal.style.display = "block";
+        }  
+    }
+
 </script>
 
 <script>
 
-function populateGrid(item,index){
-    console.log("Unlocked :: " + item[1]);
+function populateBadgesGrid(item,index){
     var locked_style = "";
     if(!item[1]){
         locked_style = 'style="-webkit-filter: brightness(1%);filter: brightness(1%);"';
     }
-    console.log(item[0].name);
-    document.querySelector("#grid-dynamic_index").innerHTML += '<div><img ' + locked_style + ' src="' + item[0].icon + 
-                                                                '" onclick="showDetails(this);" data-unlocked=' + item[1] +
+    document.querySelector("#h-grid-dynamic_index").innerHTML += '<div><img ' + locked_style + ' src="' + item[0].icon + 
+                                                                '" onclick="showBadgeDetails(this);" data-unlocked=' + item[1] +
                                                                     ' data-id=' + item[0].id +
                                                                     ' data-by=' + item[0].by +
                                                                     ' data-threshold=' + item[0].threshold +
                                                                     ' data-name="' + item[0].name + '"' +
                                                                 ' ></div>';
+}
+
+function populateUnlockablesGrid(item,index){
+    console.log("Unlocked :: " + item[1]);
+    var icon = "";
+    if(item[1]){
+        icon = item[0].icon;
+    }else{
+        icon = "https://agmodule.herokuapp.com/media/badge_icons/locked.png";
+    }
+    console.log(item[0].name);
+    document.querySelector("#h-grid-dynamic_index").innerHTML += '<div><img src="' + icon + 
+                                                                '" onclick="showUnlockableDetails(this);" data-unlocked=' + item[1] +
+                                                                    ' data-id=' + item[0].id +
+                                                                    ' data-by=' + item[0].by +
+                                                                    ' data-threshold=' + item[0].threshold +
+                                                                    ' data-name="' + item[0].name + '"' +
+                                                                    ' data-locked_content=' + item[0].locked_html
+                                                                ' ></div>';
+}
+
+function populateChallengesGrid(item,index){
+    console.log("Unlocked :: " + item[1]);
+    var locked_style = "";
+    console.log(item[0].name);
+    document.querySelector("#v-grid-dynamic_index").innerHTML += '<div style="text-align:center;"><img style="float:left; margin:20px;" src="' + item[0].icon +  
+                                                                '" ><progress style="float:left; margin:20px;" value="19" max="90"></progress>' +
+                                                                'X / Y ' +
+                                                                ' </div>';
 }
 
 fetch("called_mechanic_url")
@@ -138,13 +193,21 @@ fetch("called_mechanic_url")
     })
     .then(function (myJson) {
         var url = "";
+        var populate_h-grid = () => ();
         if(myJson.mechanic == "badges" || myJson.mechanic == "unlockables" || myJson.mechanic == "challenges"){
             url = "https://agmodule.herokuapp.com/api/" + myJson.mechanic + "/retrieve_for_user/dynamic_user";
+            if(myJson.mechanic == "badges") {
+                populate_h-grid = populateBadgesGrid;
+            }else if(myJson.mechanic == "unlockables") {
+                populate_h-grid = populateUnlockablesGrid;
+            }else if(myJson.mechanic == "challenges") {
+                populate_h-grid = populateChallengesGrid;
+            }
         }
         fetch(url)
             .then(response => response.json())
             .then(res_json => (res_json.results))
-            .then((list) => (list.forEach(populateGrid)))
+            .then((list) => (list.forEach(populate_h-grid)))
             .catch(error => (console.log("Error: " + error)))
     })
     .catch(function (error) {
