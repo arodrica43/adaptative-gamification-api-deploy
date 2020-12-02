@@ -169,7 +169,7 @@ function populateUnlockablesGrid(item,index){
                                                                     ' data-by=' + item[0].by +
                                                                     ' data-threshold=' + item[0].threshold +
                                                                     ' data-name="' + item[0].name + '"' +
-                                                                    ' data-locked_content=\'' + item[0].locked_html + '\'' +
+                                                                    ' data-locked_content=\'' + item[0].locked_html.replace(/\'/g," ") + '\'' +
                                                                 ' ></div>';
 }
 
