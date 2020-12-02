@@ -131,7 +131,7 @@
         console.log(object.dataset);
         if(object.dataset.unlocked == "true"){
             document.querySelector("#modal-content-body-dynamic_index").innerHTML = object.dataset.locked_content;
-            $(object.dataset.locked_content).appendTo(document.body);
+            //$(object.dataset.locked_content).appendTo(document.body);
             modal.style.display = "block";
         }  
     }
@@ -169,7 +169,7 @@ function populateUnlockablesGrid(item,index){
                                                                     ' data-by=' + item[0].by +
                                                                     ' data-threshold=' + item[0].threshold +
                                                                     ' data-name="' + item[0].name + '"' +
-                                                                    ' data-locked_content=' + item[0].locked_html
+                                                                    ' data-locked_content="' + item[0].locked_html + '"' +
                                                                 ' ></div>';
 }
 
