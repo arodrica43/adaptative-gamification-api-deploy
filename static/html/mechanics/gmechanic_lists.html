@@ -176,7 +176,7 @@ function populateChallengesGrid(item,index){
     console.log("Unlocked :: " + item[1]);
     var locked_style = "";
     console.log(item[0].name);
-    document.querySelector("#v-grid-dynamic_index").innerHTML += '<div style="text-align:center; position:relative;"><h3 style="position:absolute;top:0;">Title</h3><img style="float:left; height:100%; padding-left:20px;" src="' + item[0].icon +  
+    document.querySelector("#v-grid-dynamic_index").innerHTML += '<div style="text-align:center; position:relative;"><h3 style="position:absolute;top:0;margin:10px;text-align:center;">Title</h3><img style="float:left; height:100%; padding-left:20px;" src="' + item[0].icon +  
                                                                 '" ><progress style="float:right;margin:20px; width:50%;" value="19" max="90"> X/Y </progress>' +
                                                                 '<h4 style="position:absolute;bottom: 0; right: 20px;"> Score : X / Y </h4> ' +
                                                                 ' </div>';
