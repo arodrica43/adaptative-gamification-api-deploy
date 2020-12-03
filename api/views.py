@@ -270,7 +270,9 @@ def claim_challenge_reward(request, username, challenge_id):
             print("User not found")
             raise Http404
 
-        chal = Challenge.filter(id = challenge_id)[0]
+        chal = Challenge.filter(id = challenge_id)
+        print(chal)
+        chal = chal[0]
         user.gamer_profile.data[chal.reward_by] += chal.reward_value
         user.gamer_profile.data['challenges'] += ["C" + str(challenge_id)]
         user.gamer_profile.save()
