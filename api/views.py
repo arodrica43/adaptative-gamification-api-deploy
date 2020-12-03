@@ -303,7 +303,7 @@ def view_challenge_set(request, username):
             unlocks_set += [[ChallengeSerializer(unlk, context={'request': request}).data, unlk.id in unlock_ids, user.gamer_profile.data[unlk.by], "C" + str(unlk.id) in unlock_ids]]
         lock8.release()
         return JsonResponse({'results':unlocks_set})
-     except:
+    except:
         lock8.release()
         raise Http404
 
