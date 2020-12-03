@@ -266,8 +266,7 @@ def claim_challenge_reward(request, challenge_id, username):
     lock8.acquire()
     try:
         try:
-
-             print("------------------------------------------------------------------------------- 11111")
+            print("------------------------------------------------------------------------------- 11111")
             user = Gamer.objects.filter(user__username = username)[0]
         except:
             print("User not found")
