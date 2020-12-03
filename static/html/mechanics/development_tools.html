@@ -1,5 +1,5 @@
 
-<div id="main-content-development_tools"></div> 
+<div id="main-content-development_tools-dynamic_index"></div> 
 
 <script>
 
@@ -12,31 +12,31 @@
     start_logs(log,"dynamic_user", "dynamic_mechanic_index",15)
     // ---------------------------------------------------------------------------------------
 
-    document.querySelector("#main-content-development_tools").innerHTML = '<div style="text-align:center">'+
-                                                            '<h2 id = "header-dev"></h2>'+ 
-                                                            '<div id="dev-content"></div>'+
+    document.querySelector("#main-content-development_tools-dynamic_index").innerHTML = '<div style="text-align:center">'+
+                                                            '<h2 id = "header-dev-dynamic_index"></h2>'+ 
+                                                            '<div id="dev-content-dynamic_index"></div>'+
                                                             '<br>'+
                                                             '</div>'+
                                                                 '<div class="container-fluid">'+
                                                                     '<div class="row">'+
                                                                         '<div class="col-sm-6" style="background-color:white;">'+
-                                                                            '<div class="container-fluid" id="form-container">'+
+                                                                            '<div class="container-fluid" id="form-container-dynamic_index">'+
                                                                             '</div>'+
                                                                         '</div>'+
                                                                         '<div class="col-sm-6" >'+
-                                                                            '<div id ="preview-container"></div>'+
+                                                                            '<div id ="preview-container-dynamic_index"></div>'+
                                                                         '</div>'+
                                                                     '</div>'+
                                                                 '</div> '+
-                                                            '<param id = "gtype" value="">';
+                                                            '<param id = "gtype-dynamic_index" value="">';
 
-    document.querySelector("#form-container").innerHTML =   '<form action="#" method="POST" name="myForm" id="formid" enctype="application/json">'+
+    document.querySelector("#form-container-dynamic_index").innerHTML =   '<form action="#" method="POST" name="myForm" id="formid-dynamic_index" enctype="application/json">'+
                                                             '<div class="row">'+
                                                                 '<div class="col-sm-7" style="background-color:white;">'+
                                                                     '<label for="title">Title:</label>'+
                                                                 '</div>'+
                                                                 '<div class="col-sm-3" style="background-color:white;">'+
-                                                                    '<input type="text" name="title" id="fname"  size="10"></p>'+
+                                                                    '<input type="text" name="title" id="fname-dynamic_index"  size="10"></p>'+
                                                                 '</div>'+
                                                             '</div>'+
                                                             '<div class="row">'+
@@ -44,7 +44,7 @@
                                                                     '<p><label for="name">Description:</label>'+
                                                                 '</div>'+
                                                                 '<div class="col-sm-3" style="background-color:white;">'+
-                                                                    '<input type="text" name="name" id="lname"  size="10" value=""></p>'+
+                                                                    '<input type="text" name="name" id="lname-dynamic_index"  size="10" value=""></p>'+
                                                                 '</div>'+
                                                             '</div>'+
                                                             '<div class="row">'+
@@ -52,7 +52,7 @@
                                                                     '<p><label for="by">Unlock by:</label>'+
                                                                 '</div>'+
                                                                 '<div class="col-sm-3" style="background-color:white;">'+
-                                                                        '<select id="cars" name="by">'+
+                                                                        '<select id="values-dynamic_index" name="by">'+
                                                                             '<option value="score">score</option>'+
                                                                             '<option value="level">level</option>'+
                                                                             '<option value="$">$</option>'+
@@ -61,35 +61,35 @@
                                                             '</div>'+
                                                             '<div class="row">'+
                                                                 '<div class="col-sm-7" style="background-color:white;">'+
-                                                                    '<p><label for="threshold">Unlock when greater than:</label>'+
+                                                                    '<p><label for="threshold-dynamic_index">Unlock when greater than:</label>'+
                                                                 '</div>'+
                                                                 '<div class="col-sm-3" style="background-color:white;">'+
-                                                                        '<input type="text" name="threshold" id="threshold" size="10"></p>'+
+                                                                        '<input type="text" name="threshold-dynamic_index" id="threshold-dynamic_index" size="10"></p>'+
                                                                 '</div>'+
-                                                            '</div><div id="unlock-elem"></div>'+
+                                                            '</div><div id="unlock-elem-dynamic_index"></div>'+
                                                             '<div class="row">'+
                                                                 '<div class="col-sm-7" style="background-color:white;"></div>'+
                                                                 '<div class="col-sm-3" style="background-color:white;">'+
-                                                                    '<input class="submit" value="Create" type="submit" target="hiddenFrame" id="submit-btn">'+
+                                                                    '<input class="submit" value="Create" type="submit" target="hiddenFrame" id="submit-btn-dynamic_index">'+
                                                                 '</div>'+
                                                             '</div>'+ 
                                                             '<br>'+
                                                             '</form>';
 
-    document.querySelector("#preview-container").innerHTML =    '<div class="container-fluid" style="border-style: groove; min-height:170px;" >'+
+    document.querySelector("#preview-container-dynamic_index").innerHTML =    '<div class="container-fluid" style="border-style: groove; min-height:170px;" >'+
                                                                     '<div class="row">'+
-                                                                        '<div class="col-sm-12" style="background-color:white; text-align:center;" id="creation-area-title">'+ 
+                                                                        '<div class="col-sm-12" style="background-color:white; text-align:center;" id="creation-area-title-dynamic_index">'+ 
                                                                             '<h2 style="text-align:center;">Preview of your Mechanic</h2><hr>'+
                                                                         '</div>'+
                                                                     '</div>' + 
                                                                     '<div class="row">'+
                                                                         '<div class="col-sm-12" style="background-color:white; text-align:center;">'+ 
-                                                                            '<div id="incr-creation"><img src="https://i.pinimg.com/originals/23/35/32/23353292cc60b2bcb3f015ee362eeb74.gif"  width=250/></div>'+
+                                                                            '<div id="incr-creation-dynamic_index"><img src="https://i.pinimg.com/originals/23/35/32/23353292cc60b2bcb3f015ee362eeb74.gif"  width=250/></div>'+
                                                                         '</div>'+
                                                                     '</div>' + 
                                                                 '</div>';
 
-    var input1 = document.getElementById("fname");
+    var input1 = document.getElementById("fname-dynamic_index");
     input1.onfocus = function(){
         // INTERACTION OCCURRENCE REGISTRATION --------------------------------------
         //Logging :: input-in interaction
@@ -103,7 +103,7 @@
         // --------------------------------------------------------------------------
         }
 
-    var input2 = document.getElementById("lname");
+    var input2 = document.getElementById("lname-dynamic_index");
     input2.onfocus = function(){
         // INTERACTION OCCURRENCE REGISTRATION --------------------------------------
         //Logging :: input-in interaction
@@ -116,7 +116,7 @@
         log_input({itime: 2,message:"Input field 'Description' focused out", register : log, level:1,type:"InputOut"});
         // --------------------------------------------------------------------------
         }
-    var input3 = document.getElementById("cars");
+    var input3 = document.getElementById("values-dynamic_index");
     input3.onfocus = function(){
         // INTERACTION OCCURRENCE REGISTRATION --------------------------------------
         //Logging :: input-in interaction
@@ -130,7 +130,7 @@
         // --------------------------------------------------------------------------
         }
 
-    var input4 = document.getElementById("threshold");
+    var input4 = document.getElementById("threshold-dynamic_index");
     input4.onfocus = function(){
         // INTERACTION OCCURRENCE REGISTRATION --------------------------------------
         //Logging :: input-in interaction
@@ -143,14 +143,14 @@
         log_input({itime: 2,message:"Input field 'Threshold' focused out", register : log, level:1,type:"InputOut"});
         // --------------------------------------------------------------------------
         }
-    var input_submit = document.getElementById('submit-btn');
+    var input_submit = document.getElementById('submit-btn-dynamic_index');
     input_submit.onclick = function() {
         // INTERACTION OCCURRENCE REGISTRATION --------------------------------------
               //Logging :: button-click interaction
               log_click({itime: 2,message:"Create element button clicked", register : log, level:1,type:"ButtonClick"});
               // --------------------------------------------------------------------------
     }
-    var creation_area = document.getElementById('incr-creation');
+    var creation_area = document.getElementById('incr-creation-dynamic_index');
     var created = false;
     creation_area.onclick = function() {
         // INTERACTION OCCURRENCE REGISTRATION --------------------------------------
@@ -158,7 +158,7 @@
               if(!created){log_click({itime: 2,message:"Creation area clicked (before creation)", register : log, level:1,type:"ImageClick"});}
               // --------------------------------------------------------------------------
     }
-    var creation_area = document.getElementById('creation-area-title');
+    var creation_area = document.getElementById('creation-area-title-dynamic_index');
     creation_area.onclick = function() {
         // INTERACTION OCCURRENCE REGISTRATION --------------------------------------
         //Logging :: button-click interaction
@@ -167,10 +167,10 @@
     }
     //document.querySelector('#submit-btn').disabled = true;
 
-    $('#formid').submit(function(e){
+    $('#formid-dynamic_index').submit(function(e){
         e.preventDefault();
         //alert(decodeURI($('#formid').serialize()));
-        var json0 = JSON.parse('{"' + decodeURI($('#formid').serialize()).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"').replace(/\+/g,' ') + '"}');
+        var json0 = JSON.parse('{"' + decodeURI($('#formid-dynamic_index').serialize()).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"').replace(/\+/g,' ') + '"}');
         //alert(document.querySelector('#gtype').value);
         //alert(json0.title);
 
@@ -178,7 +178,7 @@
             alert("You should give a Description");
             return 0;
         }
-        fetch('https://agmodule.herokuapp.com/api/' + document.querySelector('#gtype').value + "/", { 
+        fetch('https://agmodule.herokuapp.com/api/' + document.querySelector('#gtype-dynamic_index').value + "/", { 
             
             // Adding method type 
             method: "POST", 
@@ -208,7 +208,7 @@
                 return response1.json();
             })
             .then(function (myJson) {
-                document.querySelector("#incr-creation").innerHTML = myJson.html;
+                document.querySelector("#incr-creation-dynamic_index").innerHTML = myJson.html;
                 $(myJson.html).appendTo(document.body);   
                 created=true; 
             })
@@ -224,25 +224,25 @@
         })
         .then(function (myJson) {
             //alert(myJson.mechanic_class);
-            document.querySelector("#header-dev").innerHTML = myJson.title;
+            document.querySelector("#header-dev-dynamic_index").innerHTML = myJson.title;
             //document.querySelector("#dev-content").innerHTML = myJson.mechanic_class;
             if(myJson.mechanic_class == "Badge"){
-                document.querySelector('#gtype').value = "badges";
+                document.querySelector('#gtype-dynamic_index').value = "badges";
             }else if(myJson.mechanic_class == "Unlockable"){   
-                document.querySelector('#gtype').value = "unlockables";
+                document.querySelector('#gtype-dynamic_index').value = "unlockables";
             }else if(myJson.mechanic_class == "Challenge"){
-                document.querySelector('#gtype').value = "challenges";
+                document.querySelector('#gtype-dynamic_index').value = "challenges";
             }
-            if(document.querySelector('#gtype').value == "unlockables"){
-                document.querySelector("#unlock-elem").innerHTML =   '<div class="row">'+
+            if(document.querySelector('#gtype-dynamic_index').value == "unlockables"){
+                document.querySelector("#unlock-elem-dynamic_index").innerHTML =   '<div class="row">'+
                                     '<div class="col-sm-7" style="background-color:white;">'+
                                         '<label for="locked_html">Locked Content:</label>'+
                                     '</div>'+
                                     '<div class="col-sm-3" style="background-color:white;">'+
-                                        '<input type="text" name="locked_html" id="lck-html" size="10"></p>'+
+                                        '<input type="text" name="locked_html" id="lck-html-dynamic_index" size="10"></p>'+
                                     '</div>'+
                                 '</div>';
-                var input5 = document.getElementById("lck-html");
+                var input5 = document.getElementById("lck-html-dynamic_index");
                 input5.onfocus = function(){
                     // INTERACTION OCCURRENCE REGISTRATION --------------------------------------
                     //Logging :: input-in interaction
@@ -255,7 +255,50 @@
                     log_input({itime: 2,message:"Input field 'Locked HTML' focused out", register : log, level:1,type:"InputOut"});
                     // --------------------------------------------------------------------------
                     }
-            }             
+            }else if(document.querySelector('#gtype-dynamic_index').value == "challenges"){
+
+                document.querySelector("#unlock-elem-dynamic_index").innerHTML =   '<div class="row">'+
+                                    '<div class="col-sm-7" style="background-color:white;">'+
+                                        '<label for="reward_by">Reward By:</label>'+
+                                    '</div>'+
+                                    '<div class="col-sm-3" style="background-color:white;">'+
+                                        '<input type="text" name="reward_by" id="reward-by-dynamic_index" size="10"></p>'+
+                                    '</div>'+
+                                    '<div class="col-sm-7" style="background-color:white;">'+
+                                        '<label for="reward_value">Reward Value:</label>'+
+                                    '</div>'+
+                                    '<div class="col-sm-3" style="background-color:white;">'+
+                                        '<input type="number" name="reward_value" id="reward-value-dynamic_index" size="10"></p>'+
+                                    '</div>'+
+                                '</div>';
+                var input5 = document.getElementById("reward-by-dynamic_index");
+                input5.onfocus = function(){
+                    // INTERACTION OCCURRENCE REGISTRATION --------------------------------------
+                    //Logging :: input-in interaction
+                    log_input({itime: 2,message:"Input field 'Reward By' focused in", register : log, level:1,type:"InputIn"});
+                    // --------------------------------------------------------------------------
+                }
+                input5.onblur = function(){
+                    // INTERACTION OCCURRENCE REGISTRATION --------------------------------------
+                    //Logging :: input-in interaction
+                    log_input({itime: 2,message:"Input field 'Reward By' focused out", register : log, level:1,type:"InputOut"});
+                    // --------------------------------------------------------------------------
+                }
+                var input6 = document.getElementById("reward-value-dynamic_index");
+                input5.onfocus = function(){
+                    // INTERACTION OCCURRENCE REGISTRATION --------------------------------------
+                    //Logging :: input-in interaction
+                    log_input({itime: 2,message:"Input field 'Reward Value' focused in", register : log, level:1,type:"InputIn"});
+                    // --------------------------------------------------------------------------
+                }
+                input5.onblur = function(){
+                    // INTERACTION OCCURRENCE REGISTRATION --------------------------------------
+                    //Logging :: input-in interaction
+                    log_input({itime: 2,message:"Input field 'Reward Value' focused out", register : log, level:1,type:"InputOut"});
+                    // --------------------------------------------------------------------------
+                }
+
+            }           
         })
         .catch(function (error) {
             console.log("Error: " + error);
