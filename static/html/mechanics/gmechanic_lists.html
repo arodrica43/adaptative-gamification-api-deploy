@@ -135,7 +135,7 @@
     }
 
     function claimReward(object){
-        fetch("https://agmodule.herokuapp.com/api/challenges/claim_reward/dynamic_user/" + object.dataset.id + "/")
+        fetch("https://agmodule.herokuapp.com/api/challenges/claim_reward/" + object.dataset.id + "/dynamic_user")
         .then(response => response.json())
         .then(res_json => (res_json.results))
         .then(function(ok){
