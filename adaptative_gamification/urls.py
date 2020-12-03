@@ -97,7 +97,7 @@ urlpatterns += [
     path('api/challenges/retrieve_for_user/<str:username>', views.view_challenge_set),
     path('api/g_mechancis/preview_game/<int:id>/<str:username>', views.preview_game),
     path('api/g_mechancis/retrieve_adaptative_widget_id', views.retrieve_adaptative_widget_id),
-    path('api/challenges/claim_reward/<int:challenge_id>/<str:username>/', views.claim_challenge_reward),
+    path('api/challenges/claim_reward/<int:challenge_id>/<str:username>', views.claim_challenge_reward),
 
     
    # path('api/badges/icons/<str:filename>', views.preview_badge_icon),
