@@ -258,6 +258,8 @@ class Challenge(GMechanic):
     state = models.BooleanField(default = False)
     by = models.CharField(max_length=100,default = 'score')
     threshold = models.FloatField(default = 99999999)
+    reward_by = models.CharField(max_length=100,default = 'score')
+    reward_value = models.FloatField(default = 10)
 
     class Meta:
          unique_together = (('by', "threshold"))

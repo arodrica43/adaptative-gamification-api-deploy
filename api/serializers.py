@@ -280,7 +280,7 @@ class ChallengeSerializer(GMechanicSerializer):
     #mechanic_type = fields.EnumField(enum=models.GMechanic.MechanicType, read_only = True)
     class Meta(GMechanicSerializer.Meta):
         model = Challenge
-        fields = GMechanicSerializer.Meta.fields[:3] + ['icon','name','state','by', 'threshold'] +  GMechanicSerializer.Meta.fields[3:]
+        fields = GMechanicSerializer.Meta.fields[:3] + ['icon','name','state','by', 'threshold', 'reward_by', 'reward_value'] +  GMechanicSerializer.Meta.fields[3:]
         read_only_fields = ('state','html','statistics')
         
 class EasterEggSerializer(GMechanicSerializer):
