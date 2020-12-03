@@ -261,21 +261,26 @@ def view_unlockable_set(request, username):
     return JsonResponse({'results':unlocks_set})
 
 
-def claim_challenge_reward(request, username, challenge_id):
+def claim_challenge_reward(request, challenge_id, username):
+    print("------------------------------------------------------------------------------- 11111")
     lock8.acquire()
     try:
         try:
+
+             print("------------------------------------------------------------------------------- 11111")
             user = Gamer.objects.filter(user__username = username)[0]
         except:
             print("User not found")
             raise Http404
 
-        chal = Challenge.filter(id = challenge_id)
+        chal = Challenge.objects.filter(id = challenge_id)
         print(chal)
         chal = chal[0]
         user.gamer_profile.data[chal.reward_by] += chal.reward_value
         user.gamer_profile.data['challenges'] += ["C" + str(challenge_id)]
         user.gamer_profile.save()
+
+        print("------------------------------------------------------------------------------- 2222222222")
         lock8.release()
         return JsonResponse({'results': 'OK'})
     except:
