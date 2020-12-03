@@ -134,6 +134,19 @@
         }  
     }
 
+    function claimReward(object){
+        fetch("https://agmodule.herokuapp.com/api/challenges/claim_reward/dynamic_user/" + object.dataset.id + "/")
+        .then(response => response.json())
+        .then(res_json => (res_json.results))
+        .then(function(ok){
+            if(ok == "OK"){
+                object.innerHTML = "Claimed!";
+                object.disabled = true;
+            }
+        }
+        .catch(error => (console.log("Error: " + error)))
+
+    }
 </script>
 
 <script>
@@ -173,10 +186,16 @@ function populateUnlockablesGrid(item,index){
 
 function populateChallengesGrid(item,index){
     console.log("Unlocked :: " + item[1]);
-    var locked_style = "";
+    var locked_style = '<button  style="float:right;margin:15px; width:50%;" onclick="claimReward(this)" data-id=' + item[0].id + '>Claim</button>';
+    if(!item[1]){
+        locked_style = '<progress style="float:right;margin:15px; width:50%;" value="' + item[2] + '" max="' + item[0].threshold + '"></progress>';
+    }else if(item[3]){
+        locked_style = '<button  style="float:right;margin:15px; width:50%;" onclick="claimReward(this)" data-id=' + item[0].id + ' disabled>Claimed!</button>';
+    }
     console.log(item[0].name);
-    document.querySelector("#v-grid-dynamic_index").innerHTML += '<div style="text-align:center; position:relative;"><h3 style="position:relative;top:0;">Title</h3><img style="float:left; width:30%; padding-left:20px;margin-top:-20px" src="' + item[0].icon +  
-                                                                    '" ><progress style="float:right;margin:15px; width:50%;" value="19" max="90"> X/Y </progress>' +
+    document.querySelector("#v-grid-dynamic_index").innerHTML += '<div style="text-align:center; position:relative;"><h3 style="position:relative;top:0;">Title</h3>' +
+                                                                    '<img style="float:left; width:30%; padding-left:20px;margin-top:-20px" src="' + item[0].icon +  
+                                                                    '" >' + locked_style +
                                                                     '<h4 style="position:absolute;bottom: 25px; right: 20px;"> Score : X / Y </h4> ' +
                                                                     '<h4 style="position:absolute;bottom: 0; right: 20px;"> Reward : XXXX </h4> ' +
                                                                 ' </div>';

@@ -260,29 +260,52 @@ def view_unlockable_set(request, username):
     
     return JsonResponse({'results':unlocks_set})
 
-def view_challenge_set(request, username):
-   
+
+def claim_challenge_reward(request, username, challenge_id):
+    lock8.acquire()
     try:
-        user = Gamer.objects.filter(user__username = username)[0]
+        try:
+            user = Gamer.objects.filter(user__username = username)[0]
+        except:
+            print("User not found")
+            raise Http404
+
+        user.gamer_profile.data['challenges'] += ["C" + str(challenge_id)]
+        user.gamer_profile.save()
+        lock8.release()
+        return JsonResponse({'results': 'OK'})
     except:
-        print("User found")
+        lock8.release()
         raise Http404
 
-    unlock_ids = []
-    if 'challenges' in user.gamer_profile.data.keys():
-        unlock_ids = user.gamer_profile.data['challenges']
-  
-    all_unlocks = Challenge.objects.all()
 
-    unlocks_set = []
-    for unlk in all_unlocks:
-        if user.gamer_profile.data[unlk.by] >= unlk.threshold and (unlk.id not in user.gamer_profile.data['challenges']) :
-            user.gamer_profile.data['challenges'] += [unlk.id]
-            user.gamer_profile.save()
-        unlocks_set += [[ChallengeSerializer(unlk, context={'request': request}).data, unlk.id in unlock_ids, user.gamer_profile.data[unlk.by]]]
-    
-    return JsonResponse({'results':unlocks_set})
+def view_challenge_set(request, username):
+   
+    lock8.acquire()
+    try:
+        try:
+            user = Gamer.objects.filter(user__username = username)[0]
+        except:
+            print("User not found")
+            raise Http404
 
+        unlock_ids = []
+        if 'challenges' in user.gamer_profile.data.keys():
+            unlock_ids = user.gamer_profile.data['challenges']
+      
+        all_unlocks = Challenge.objects.all()
+
+        unlocks_set = []
+        for unlk in all_unlocks:
+            if user.gamer_profile.data[unlk.by] >= unlk.threshold and (unlk.id not in user.gamer_profile.data['challenges']) :
+                user.gamer_profile.data['challenges'] += [unlk.id]
+                user.gamer_profile.save()
+            unlocks_set += [[ChallengeSerializer(unlk, context={'request': request}).data, unlk.id in unlock_ids, user.gamer_profile.data[unlk.by], "C" + str(unlk.id) in unlock_ids]]
+        lock8.release()
+        return JsonResponse({'results':unlocks_set})
+     except:
+        lock8.release()
+        raise Http404
 
 def preview_game(request, id,username):
     
