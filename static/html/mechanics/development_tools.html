@@ -170,7 +170,7 @@
     $('#formid-dynamic_index').submit(function(e){
         e.preventDefault();
         //alert(decodeURI($('#formid').serialize()));
-        var json0 = JSON.parse('{"' + decodeURI($('#formid-dynamic_index').serialize()).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"').replace(/\+/g,' ') + '"}');
+        var json0 = JSON.parse('{"' + decodeURI($('#formid-dynamic_index').serialize()).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"').replace(/\+/g,' ').replace(/%24/g,'\$') + '"}');
         //alert(document.querySelector('#gtype').value);
         //alert(json0.title);
 
