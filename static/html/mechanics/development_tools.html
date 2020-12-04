@@ -61,10 +61,10 @@
                                                             '</div>'+
                                                             '<div class="row">'+
                                                                 '<div class="col-sm-7" style="background-color:white;">'+
-                                                                    '<p><label for="threshold-dynamic_index">Unlock when greater than:</label>'+
+                                                                    '<p><label for="threshold">Unlock when greater than:</label>'+
                                                                 '</div>'+
                                                                 '<div class="col-sm-3" style="background-color:white;">'+
-                                                                        '<input type="text" name="threshold-dynamic_index" id="threshold-dynamic_index" size="10"></p>'+
+                                                                        '<input type="text" name="threshold" id="threshold-dynamic_index" size="10"></p>'+
                                                                 '</div>'+
                                                             '</div><div id="unlock-elem-dynamic_index"></div>'+
                                                             '<div class="row">'+
@@ -198,11 +198,12 @@
         // Displaying results to console 
         .then(function(json1){
             console.log(json1);
-            alert("Element created successfully! \n Now all users can unlock it");
+            alert("Element created successfully!");
             //document.querySelector('#submit-btn').disabled = true;
             
             //alert(json1.url + window.location.search);
-
+            fetch(json1.url + "?user=dynamic_user&import_trackers=false")
+            .catch(error => console.log("Error: " + error));
             fetch(json1.url + "?user=dynamic_user&import_trackers=false")
             .then(function (response1) {
                 return response1.json();
