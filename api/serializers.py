@@ -244,6 +244,7 @@ class GMechanicSerializer(EnumFieldSerializerMixin,serializers.HyperlinkedModelS
         lock.acquire()
         try:
             instance = super().create(validated_data)
+            lock.release()
             # Create default statistics for all users 
             return instance
         except:
