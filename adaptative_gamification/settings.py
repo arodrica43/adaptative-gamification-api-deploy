@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='!c19@b=qkey^k*m2&y@b$mk*8+%h&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True#int(os.environ.get('DEBUG', default=0))
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.herokuapp.com', '34.242.113.209']
 
 
 # Restful framework settings
