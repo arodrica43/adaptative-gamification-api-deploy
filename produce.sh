@@ -12,6 +12,7 @@ cp manage.py $to
 cp README.md $to
 cp -r static $to
 cp -r .gitignore $to
+cp -r Procfile $to
 cd ~/Documentos/feina/dev/deploy/gamification-app/
 echo "+ Gamification-App local dir updated"
 git status
