@@ -305,7 +305,7 @@
     function openMechanic(mechanic){
       console.log(mechanic.dataset.title);
       document.getElementById("main-modal-title").innerHTML = "List of " + mechanic.dataset.title;
-      var url = "http://agmodule.herokuapp.com/api/" + mechanic.dataset.name + "/retrieve_dashboard_mechanic/";
+      var url = "https://agmodule.herokuapp.com/api/" + mechanic.dataset.name + "/retrieve_dashboard_mechanic/";
       fetch(url)
             .then(response => response.json())
             .then(res_json => (res_json.data))
