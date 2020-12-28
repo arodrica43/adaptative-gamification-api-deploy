@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <style>
 .circle-container {
   position: relative;
@@ -154,6 +155,7 @@
   -webkit-transform: rotate(300deg) translate(35em) rotate(-300deg);
           transform: rotate(300deg) translate(35em) rotate(-300deg);
 }
+
 .circle-container img {
   position:relative;
   display: block;
@@ -164,6 +166,7 @@
   border: solid 5px none;
   -webkit-transition: .15s;
   transition: .15s;  
+  cursor: pointer;
 }
   
 .circle-container img:hover {
@@ -173,8 +176,44 @@
 }
   
 
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
 
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
 
+/* The Close Button */
+.main-close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.main-close:hover,
+.main-close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
 </style>
 
 <div class="container-fluid" style="width:100%; text-align:center;">
@@ -182,39 +221,96 @@
    
 <div class='circle-container'>
   <li></li>
-  <li><img class="base" src='http://lorempixel.com/100/100/city'></li>
-  <li><img class="base" src='http://lorempixel.com/100/100/nature'></li>
-  <li><img class="base" src='http://lorempixel.com/100/100/abstract'></li>
-  <li><img class="base" src='http://lorempixel.com/100/100/cats'></li>
-  <li><img class="base" src='http://lorempixel.com/100/100/food'></li>
-  <li><img class="base" src='http://lorempixel.com/100/100/animals'></li> 
-  <li><img class="mechanic" src='http://agmodule.herokuapp.com/media/dashboard_icons/dev_tools.png'></li>
-  <li><img class="mechanic" src='http://lorempixel.com/100/100/cats'></li>
-  <li><img class="mechanic" src='http://lorempixel.com/100/100/animals'></li>
-  <li><img class="mechanic" src='http://lorempixel.com/100/100/food'></li>
-  <li><img class="mechanic" src='http://lorempixel.com/100/100/animals'></li> 
-  <li><img class="mechanic" src='http://lorempixel.com/100/100/animals'></li> 
-  <li><img class="mechanic" src='http://lorempixel.com/100/100/animals'></li>
-  <li><img class="mechanic" src='http://lorempixel.com/100/100/cats'></li>
-  <li><img class="mechanic" src='http://lorempixel.com/100/100/animals'></li>
-  <li><img class="mechanic" src='http://lorempixel.com/100/100/food'></li>
-  <li><img class="mechanic" src='http://lorempixel.com/100/100/animals'></li> 
-  <li><img class="mechanic" src='http://lorempixel.com/100/100/animals'></li> 
-  <li><img class="mechanic" src='http://lorempixel.com/100/100/animals'></li>
-  <li><img class="mechanic" src='http://lorempixel.com/100/100/cats'></li>
-  <li><img class="mechanic" src='http://lorempixel.com/100/100/animals'></li>
-  <li><img class="mechanic" src='http://lorempixel.com/100/100/food'></li>
-  <li><img class="mechanic" src='http://lorempixel.com/100/100/animals'></li> 
-  <li><img class="mechanic" src='http://lorempixel.com/100/100/animals'></li> 
-  
+  <li><img data-name="challenges" data-title="Challenges" src='http://agmodule.herokuapp.com/media/dashboard_icons/challenges.png' onclick="openMechanic(this);"></li>
+  <li><img name="easter_eggs" src='http://agmodule.herokuapp.com/media/dashboard_icons/easter_eggs.png' onclick="openMechanic(this);"></li>
+  <li><img name="levels" src='http://agmodule.herokuapp.com/media/dashboard_icons/levels.png' onclick="openMechanic(this);"></li>
+  <li><img name="points" src='http://agmodule.herokuapp.com/media/dashboard_icons/points.png' onclick="openMechanic(this);"></li>
+  <li><img name="social_stats" src='http://agmodule.herokuapp.com/media/dashboard_icons/social_stats.png' onclick="openMechanic(this);"></li>
+  <li><img name="knowledge_shares" src='http://agmodule.herokuapp.com/media/dashboard_icons/knowledge_share.png' onclick="openMechanic(this);"></li> 
+  <li><img name="development_tools" src='http://agmodule.herokuapp.com/media/dashboard_icons/dev_tools.png' onclick="openMechanic(this);"></li>
+  <li><img name="unlockables" src='http://agmodule.herokuapp.com/media/dashboard_icons/unlockables.png' onclick="openMechanic(this);"></li>
+  <li><img name="badges" src='http://agmodule.herokuapp.com/media/dashboard_icons/badges.png' onclick="openMechanic(this);"></li>
+  <li><img name="leaderboards" src='http://agmodule.herokuapp.com/media/dashboard_icons/leaderboards.png' onclick="openMechanic(this);"></li>
+  <li><img name="blocked" src='http://agmodule.herokuapp.com/media/dashboard_icons/blocked.png' onclick="openMechanic(this);"></li>
+  <li><img name="gifts" src='http://agmodule.herokuapp.com/media/dashboard_icons/gifts.png' onclick="openMechanic(this);"></li>
+  <li><img name="blocked" src='http://agmodule.herokuapp.com/media/dashboard_icons/blocked.png' onclick="openMechanic(this);"></li> 
+  <li><img name="blocked" src='http://agmodule.herokuapp.com/media/dashboard_icons/blocked.png' onclick="openMechanic(this);"></li>
+  <li><img name="blocked" src='http://agmodule.herokuapp.com/media/dashboard_icons/blocked.png' onclick="openMechanic(this);"></li>
+  <li><img name="gift_openers" src='http://agmodule.herokuapp.com/media/dashboard_icons/gift_openers.png' onclick="openMechanic(this);"></li>
+  <li><img name="social_networks" src='http://agmodule.herokuapp.com/media/dashboard_icons/social_networks.png' onclick="openMechanic(this);"></li>
+  <li><img name="blocked" src='http://agmodule.herokuapp.com/media/dashboard_icons/blocked.png' onclick="openMechanic(this);"></li>
+  <li><img name="blocked" src='http://agmodule.herokuapp.com/media/dashboard_icons/blocked.png' onclick="openMechanic(this);"></li> 
+  <li><img name="blocked" src='http://agmodule.herokuapp.com/media/dashboard_icons/blocked.png' onclick="openMechanic(this);"></li>
+  <li><img name="blocked" src='http://agmodule.herokuapp.com/media/dashboard_icons/blocked.png' onclick="openMechanic(this);"></li>
+  <li><img name="lotteries" src='http://agmodule.herokuapp.com/media/dashboard_icons/lotteries.png' onclick="openMechanic(this);"></li>
+  <li><img name="blocked" src='http://agmodule.herokuapp.com/media/dashboard_icons/blocked.png' onclick="openMechanic(this);"></li>
+  <li><img name="blocked" src='http://agmodule.herokuapp.com/media/dashboard_icons/blocked.png' onclick="openMechanic(this);"></li>
+ 
   <li><h2>Disruptor</h2></li>
   <li><h2>Free Spirit</h2></li>
   <li><h2>Achiever</h2></li>
   <li><h2>Player</h2></li>
   <li><h2>Socializer</h2></li> 
   <li><h2>Philantropist</h2></li> 
-
 </div>
   </div>
-  
+
+<!-- The Modal -->
+<div id="main-modal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content" style = " width: 60%;">
  
+    <div class="modal-header">
+        <div class="container-fluid">
+          <!-- Control the column width, and how they should appear on different devices -->
+            <div><span class="main-close">&times;</span></div>
+            <br>
+            <div><h2 id="main-modal-title"></h2></div> 
+        </div>     
+    </div>
+    <div class="modal-body">
+        <div class="container-fluid" id="main-modal-content">
+          sadasd
+        </div>     
+    </div>
+    
+
+  </div>
+</div>
+
+<script>
+
+</script>
+
+  <script>
+    // Get the modal
+    var modal = document.getElementById("main-modal");
+
+    // Get the <span> element that main-closes the modal
+    var span = document.getElementsByClassName("main-close")[0];
+
+
+    // When the user clicks on <span> (x), main-close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, main-close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+    function openMechanic(mechanic){
+      console.log(mechanic.dataset.title);
+      document.getElementById("main-modal-title").innerHTML = "List of " + mechanic.dataset.title;
+      var url = "http://agmodule.herokuapp.com/api/" + mechanic.dataset.name + "/retrieve_dashboard_mechanic/";
+      fetch(url)
+            .then(response => response.json())
+            .then(res_json => (res_json.data))
+            .then((data) => (console.log(data.html)))
+            .catch(error => (console.log("Error: " + error)))
+  
+    }
+  </script>

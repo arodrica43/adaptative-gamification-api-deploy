@@ -30,6 +30,15 @@ interaction_files = [("include-onclick-tracking","onclick.js"),
 def js_test(request):
     return TemplateResponse(request, 'test/js_test.html',{})
 
+def retrieve_dashboard_mechanic(request,mechanic_class):
+
+    result = GMechanicList.objects.filter(mechanic = mechanic_class) 
+    if result:
+        result = GMechanicListSerializer(result[0], context={'request': request}).data
+    return JsonResponse({'data': result})
+
+
+
 def retrieve_adaptative_widget_id(request):
 
     lock7.acquire()
@@ -148,10 +157,10 @@ def edit_social_profile(request,username):
 
 def g_mechanic_cast(gmechanic_id):
 
-    for mech_id in range(len(mechanics_list)):
-        queryset = mechanics_list[mech_id].objects.filter(id = gmechanic_id)
+    for mech_idx in range(len(mechanics_list)):
+        queryset = mechanics_list[mech_idx].objects.filter(id = gmechanic_id)
         if queryset: 
-            return queryset, mechanics_list_names[mech_id]
+            return queryset, mechanics_list_names[mech_idx]
     
     return queryset, 'g_mechanics'
 
@@ -262,11 +271,9 @@ def view_unlockable_set(request, username):
 
 
 def claim_challenge_reward(request, challenge_id, username):
-    print("------------------------------------------------------------------------------- 11111")
     lock8.acquire()
     try:
         try:
-            print("------------------------------------------------------------------------------- 11111")
             user = Gamer.objects.filter(user__username = username)[0]
         except:
             print("User not found")
@@ -278,8 +285,6 @@ def claim_challenge_reward(request, challenge_id, username):
         user.gamer_profile.data[chal.reward_by] += chal.reward_value
         user.gamer_profile.data['challenges'] += ["C" + str(challenge_id)]
         user.gamer_profile.save()
-
-        print("------------------------------------------------------------------------------- 2222222222")
         lock8.release()
         return JsonResponse({'results': 'OK'})
     except:
