@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 <style>
 .circle-container {
   position: relative;
@@ -177,7 +181,7 @@
   
 
 /* The Modal (background) */
-.modal {
+.main-modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
@@ -221,7 +225,7 @@
    
 <div class='circle-container'>
   <li></li>
-  <li><img data-name="challenges" data-title="Challenges" src='http://agmodule.herokuapp.com/media/dashboard_icons/challenges.png' onclick="openMechanic(this);"></li>
+  <li><img name="challenges" data-title="Challenges" src='http://agmodule.herokuapp.com/media/dashboard_icons/challenges.png' onclick="openMechanic(this);"></li>
   <li><img name="easter_eggs" src='http://agmodule.herokuapp.com/media/dashboard_icons/easter_eggs.png' onclick="openMechanic(this);"></li>
   <li><img name="levels" src='http://agmodule.herokuapp.com/media/dashboard_icons/levels.png' onclick="openMechanic(this);"></li>
   <li><img name="points" src='http://agmodule.herokuapp.com/media/dashboard_icons/points.png' onclick="openMechanic(this);"></li>
@@ -256,35 +260,45 @@
   </div>
 
 <!-- The Modal -->
-<div id="main-modal" class="modal">
+<div id="main-modal" class="main-modal">
 
   <!-- Modal content -->
   <div class="modal-content" style = " width: 60%;">
  
-    <div class="modal-header">
-        <div class="container-fluid">
-          <!-- Control the column width, and how they should appear on different devices -->
-            <div><span class="main-close">&times;</span></div>
-            <br>
-            <div><h2 id="main-modal-title"></h2></div> 
-        </div>     
-    </div>
-    <div class="modal-body">
+    
+        <!-- Control the column width, and how they should appear on different devices -->
+          <div><span class="main-close">&times;</span></div>
+          <br>
+          <div><h2 id="main-modal-title"></h2></div> 
+         
+
         <div class="container-fluid" id="main-modal-content">
         </div>     
-    </div>
+ 
     
 
   </div>
 </div>
 
-<script>
-
-</script>
 
   <script>
+
+    var url = "https://agmodule.herokuapp.com/api/gmechanic_lists/?user=user1";
+    var list_data = {};
+    fetch(url)
+          .then(response => response.json())
+          .then(res_json => (console.log(res_json), res_json))
+          .then(res_json => (res_json.results))
+          .then(list => list.forEach((item,index) => (list_data[item.mechanic] = item.url, console.log(item.url))))
+          // .then(funtion(data){
+          //   document.getElementById("main-modal-content").innerHTML = data.html;
+          //   $(data.html).appendTo(document.body);
+          //   modal.style.display = "block";
+          // })
+          .catch(error => (console.log("Error: " + error)))
     // Get the modal
     var modal = document.getElementById("main-modal");
+    var container = $("#main-modal");
 
     // Get the <span> element that main-closes the modal
     var span = document.getElementsByClassName("main-close")[0];
@@ -292,24 +306,24 @@
 
     // When the user clicks on <span> (x), main-close the modal
     span.onclick = function() {
-      modal.style.display = "none";
+      console.log(modal);
+      container.hide();
     }
 
-    // When the user clicks anywhere outside of the modal, main-close it
-    window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
+
     function openMechanic(mechanic){
-      console.log(mechanic.dataset.title);
+      console.log(list_data[mechanic.name]);
       document.getElementById("main-modal-title").innerHTML = "List of " + mechanic.dataset.title;
-      var url = "https://agmodule.herokuapp.com/api/" + mechanic.dataset.name + "/retrieve_dashboard_mechanic";
-      fetch(url)
-            .then(response => response.json())
-            .then(res_json => (res_json.data))
-            .then((data) => (document.body.innerHTML = data.html, console.log(document.getElementById("main-modal-content").innerHTML), $(data.html).appendTo(document.body)))
-            .catch(error => (console.log("Error: " + error)))
-      modal.style.display = "block";
+      fetch(list_data[mechanic.name] + "?user=user1&dynamic_index=" + mechanic.name)
+      .then(response => response.json())
+      .then(function(res_json){
+        document.querySelector("#main-modal-content").innerHTML = (res_json.html); 
+        $(res_json.html).appendTo(document.body);
+       
+        console.log("loaded");
+        return 1;
+      })
+      .catch(error => (console.log("Error: " + error)))
+       container.show();
     }
   </script>
