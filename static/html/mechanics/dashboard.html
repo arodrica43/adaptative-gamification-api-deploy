@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <head>
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <style>
@@ -16,7 +15,6 @@
   background:white url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.DIuMKi9bVVnRYJto4NMeKwHaHa%26pid%3DApi&f=1") no-repeat center;
   background-size: 900px 900px;
 }
- 
 .circle-container > * {
   display: block;
   position: absolute;
@@ -27,7 +25,6 @@
   width: 5em;
   height: 5em;
 }
-  
 .circle-container > *:nth-of-type(1) {
   -webkit-transform: rotate(240deg) translate(14em) rotate(-240deg);
           transform: rotate(240deg) translate(14em) rotate(-240deg);
@@ -159,7 +156,6 @@
   -webkit-transform: rotate(300deg) translate(35em) rotate(-300deg);
           transform: rotate(300deg) translate(35em) rotate(-300deg);
 }
-
 .circle-container img {
   position:relative;
   display: block;
@@ -172,15 +168,13 @@
   transition: .15s;  
   cursor: pointer;
 }
-  
 .circle-container img:hover {
   -webkit-filter: grayscale(0);
           filter: grayscale(0);
           transform: scale(1.3);    
 }
   
-
-/* The Modal (background) */
+/* Modal (background) */
 .main-modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
@@ -202,6 +196,7 @@
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
+  text-align: center;
 }
 
 /* The Close Button */
@@ -220,110 +215,86 @@
 }
 </style>
 
+<!-- Chart -->
 <div class="container-fluid" style="width:100%; text-align:center;">
-
+  <div class='circle-container'>
+    <li></li>
+    <li><img name="challenges" data-title="Challenges" src='http://agmodule.herokuapp.com/media/dashboard_icons/challenges.png' onclick="openMechanic(this);"></li>
+    <li><img name="easter_eggs" data-title="Easter Eggs" src='http://agmodule.herokuapp.com/media/dashboard_icons/easter_eggs.png' onclick="openMechanic(this);"></li>
+    <li><img name="levels" data-title="Levels" src='http://agmodule.herokuapp.com/media/dashboard_icons/levels.png' onclick="openMechanic(this);"></li>
+    <li><img name="points" data-title="Points" src='http://agmodule.herokuapp.com/media/dashboard_icons/points.png' onclick="openMechanic(this);"></li>
+    <li><img name="social_stats" data-title="Social Statuses" src='http://agmodule.herokuapp.com/media/dashboard_icons/social_stats.png' onclick="openMechanic(this);"></li>
+    <li><img name="knowledge_shares" data-title="Knowledge Sharing Tools" src='http://agmodule.herokuapp.com/media/dashboard_icons/knowledge_share.png' onclick="openMechanic(this);"></li> 
+    <li><img name="development_tools" data-title="Development Tools" src='http://agmodule.herokuapp.com/media/dashboard_icons/dev_tools.png' onclick="openMechanic(this);"></li>
+    <li><img name="unlockables" data-title="Unlockables" src='http://agmodule.herokuapp.com/media/dashboard_icons/unlockables.png' onclick="openMechanic(this);"></li>
+    <li><img name="badges" data-title="Badges" src='http://agmodule.herokuapp.com/media/dashboard_icons/badges.png' onclick="openMechanic(this);"></li>
+    <li><img name="leaderboards" data-title="Leaderboards" src='http://agmodule.herokuapp.com/media/dashboard_icons/leaderboards.png' onclick="openMechanic(this);"></li>
+    <li><img name="blocked" data-title="Publish Tools" src='http://agmodule.herokuapp.com/media/dashboard_icons/blocked.png' onclick="openMechanic(this);"></li>
+    <li><img name="gifts" data-title="Gifting Tools" src='http://agmodule.herokuapp.com/media/dashboard_icons/gifts.png' onclick="openMechanic(this);"></li>
+    <li><img name="blocked" data-title="Advanced Challenges" src='http://agmodule.herokuapp.com/media/dashboard_icons/blocked.png' onclick="openMechanic(this);"></li> 
+    <li><img name="blocked" data-title="Advanced Easter Eggs" src='http://agmodule.herokuapp.com/media/dashboard_icons/blocked.png' onclick="openMechanic(this);"></li>
+    <li><img name="blocked" data-title="Expertise Statuses" src='http://agmodule.herokuapp.com/media/dashboard_icons/blocked.png' onclick="openMechanic(this);"></li>
+    <li><img name="gift_openers" data-title="Gift Openeing Tools" src='http://agmodule.herokuapp.com/media/dashboard_icons/gift_openers.png' onclick="openMechanic(this);"></li>
+    <li><img name="social_networks" data-title="Social Networks" src='http://agmodule.herokuapp.com/media/dashboard_icons/social_networks.png' onclick="openMechanic(this);"></li>
+    <li><img name="blocked" data-title="Advanced Gifting Tools" src='http://agmodule.herokuapp.com/media/dashboard_icons/blocked.png' onclick="openMechanic(this);"></li>
+    <li><img name="blocked" data-title="Advanced Development Tools" src='http://agmodule.herokuapp.com/media/dashboard_icons/blocked.png' onclick="openMechanic(this);"></li> 
+    <li><img name="blocked" data-title="Advanced Challenges" src='http://agmodule.herokuapp.com/media/dashboard_icons/blocked.png' onclick="openMechanic(this);"></li>
+    <li><img name="blocked" data-title="Advanced Badges" src='http://agmodule.herokuapp.com/media/dashboard_icons/blocked.png' onclick="openMechanic(this);"></li>
+    <li><img name="lotteries" data-title="Lotteries" src='http://agmodule.herokuapp.com/media/dashboard_icons/lotteries.png' onclick="openMechanic(this);"></li>
+    <li><img name="blocked" data-title="Team Tools" src='http://agmodule.herokuapp.com/media/dashboard_icons/blocked.png' onclick="openMechanic(this);"></li>
+    <li><img name="blocked" data-title="Platform Valoration Tools" src='http://agmodule.herokuapp.com/media/dashboard_icons/blocked.png' onclick="openMechanic(this);"></li>
    
-<div class='circle-container'>
-  <li></li>
-  <li><img name="challenges" data-title="Challenges" src='http://agmodule.herokuapp.com/media/dashboard_icons/challenges.png' onclick="openMechanic(this);"></li>
-  <li><img name="easter_eggs" src='http://agmodule.herokuapp.com/media/dashboard_icons/easter_eggs.png' onclick="openMechanic(this);"></li>
-  <li><img name="levels" src='http://agmodule.herokuapp.com/media/dashboard_icons/levels.png' onclick="openMechanic(this);"></li>
-  <li><img name="points" src='http://agmodule.herokuapp.com/media/dashboard_icons/points.png' onclick="openMechanic(this);"></li>
-  <li><img name="social_stats" src='http://agmodule.herokuapp.com/media/dashboard_icons/social_stats.png' onclick="openMechanic(this);"></li>
-  <li><img name="knowledge_shares" src='http://agmodule.herokuapp.com/media/dashboard_icons/knowledge_share.png' onclick="openMechanic(this);"></li> 
-  <li><img name="development_tools" src='http://agmodule.herokuapp.com/media/dashboard_icons/dev_tools.png' onclick="openMechanic(this);"></li>
-  <li><img name="unlockables" src='http://agmodule.herokuapp.com/media/dashboard_icons/unlockables.png' onclick="openMechanic(this);"></li>
-  <li><img name="badges" src='http://agmodule.herokuapp.com/media/dashboard_icons/badges.png' onclick="openMechanic(this);"></li>
-  <li><img name="leaderboards" src='http://agmodule.herokuapp.com/media/dashboard_icons/leaderboards.png' onclick="openMechanic(this);"></li>
-  <li><img name="blocked" src='http://agmodule.herokuapp.com/media/dashboard_icons/blocked.png' onclick="openMechanic(this);"></li>
-  <li><img name="gifts" src='http://agmodule.herokuapp.com/media/dashboard_icons/gifts.png' onclick="openMechanic(this);"></li>
-  <li><img name="blocked" src='http://agmodule.herokuapp.com/media/dashboard_icons/blocked.png' onclick="openMechanic(this);"></li> 
-  <li><img name="blocked" src='http://agmodule.herokuapp.com/media/dashboard_icons/blocked.png' onclick="openMechanic(this);"></li>
-  <li><img name="blocked" src='http://agmodule.herokuapp.com/media/dashboard_icons/blocked.png' onclick="openMechanic(this);"></li>
-  <li><img name="gift_openers" src='http://agmodule.herokuapp.com/media/dashboard_icons/gift_openers.png' onclick="openMechanic(this);"></li>
-  <li><img name="social_networks" src='http://agmodule.herokuapp.com/media/dashboard_icons/social_networks.png' onclick="openMechanic(this);"></li>
-  <li><img name="blocked" src='http://agmodule.herokuapp.com/media/dashboard_icons/blocked.png' onclick="openMechanic(this);"></li>
-  <li><img name="blocked" src='http://agmodule.herokuapp.com/media/dashboard_icons/blocked.png' onclick="openMechanic(this);"></li> 
-  <li><img name="blocked" src='http://agmodule.herokuapp.com/media/dashboard_icons/blocked.png' onclick="openMechanic(this);"></li>
-  <li><img name="blocked" src='http://agmodule.herokuapp.com/media/dashboard_icons/blocked.png' onclick="openMechanic(this);"></li>
-  <li><img name="lotteries" src='http://agmodule.herokuapp.com/media/dashboard_icons/lotteries.png' onclick="openMechanic(this);"></li>
-  <li><img name="blocked" src='http://agmodule.herokuapp.com/media/dashboard_icons/blocked.png' onclick="openMechanic(this);"></li>
-  <li><img name="blocked" src='http://agmodule.herokuapp.com/media/dashboard_icons/blocked.png' onclick="openMechanic(this);"></li>
- 
-  <li><h2>Disruptor</h2></li>
-  <li><h2>Free Spirit</h2></li>
-  <li><h2>Achiever</h2></li>
-  <li><h2>Player</h2></li>
-  <li><h2>Socializer</h2></li> 
-  <li><h2>Philantropist</h2></li> 
-</div>
+    <li><h2>Disruptor</h2></li>
+    <li><h2>Free Spirit</h2></li>
+    <li><h2>Achiever</h2></li>
+    <li><h2>Player</h2></li>
+    <li><h2>Socializer</h2></li> 
+    <li><h2>Philantropist</h2></li> 
   </div>
+</div>
 
-<!-- The Modal -->
+<!-- Modal -->
 <div id="main-modal" class="main-modal">
-
-  <!-- Modal content -->
   <div class="modal-content" style = " width: 60%;">
- 
-    
         <!-- Control the column width, and how they should appear on different devices -->
           <div><span class="main-close">&times;</span></div>
           <br>
           <div><h2 id="main-modal-title"></h2></div> 
-         
-
         <div class="container-fluid" id="main-modal-content">
-        </div>     
- 
-    
-
+        </div>
   </div>
 </div>
 
-
-  <script>
-
-    var url = "https://agmodule.herokuapp.com/api/gmechanic_lists/?user=user1";
-    var list_data = {};
-    fetch(url)
-          .then(response => response.json())
-          .then(res_json => (console.log(res_json), res_json))
-          .then(res_json => (res_json.results))
-          .then(list => list.forEach((item,index) => (list_data[item.mechanic] = item.url, console.log(item.url))))
-          // .then(funtion(data){
-          //   document.getElementById("main-modal-content").innerHTML = data.html;
-          //   $(data.html).appendTo(document.body);
-          //   modal.style.display = "block";
-          // })
-          .catch(error => (console.log("Error: " + error)))
-    // Get the modal
-    var modal = document.getElementById("main-modal");
-    var container = $("#main-modal");
-
-    // Get the <span> element that main-closes the modal
-    var span = document.getElementsByClassName("main-close")[0];
-
-
-    // When the user clicks on <span> (x), main-close the modal
-    span.onclick = function() {
-      console.log(modal);
-      container.hide();
-    }
-
-
-    function openMechanic(mechanic){
-      console.log(list_data[mechanic.name]);
-      document.getElementById("main-modal-title").innerHTML = "List of " + mechanic.dataset.title;
-      fetch(list_data[mechanic.name] + "?user=user1&dynamic_index=" + mechanic.name)
-      .then(response => response.json())
-      .then(function(res_json){
-        document.querySelector("#main-modal-content").innerHTML = (res_json.html); 
-        $(res_json.html).appendTo(document.body);
-       
-        console.log("loaded");
-        return 1;
-      })
-      .catch(error => (console.log("Error: " + error)))
-       container.show();
-    }
-  </script>
+<script>
+  var url = "https://agmodule.herokuapp.com/api/gmechanic_lists/?user=user1";
+  var list_data = {};
+  fetch(url)
+        .then(response => response.json())
+        .then(res_json => (console.log(res_json), res_json))
+        .then(res_json => (res_json.results))
+        .then(list => list.forEach((item,index) => (list_data[item.mechanic] = item.url, console.log(item.url))))
+        .catch(error => (console.log("Error: " + error)))
+  var modal = document.getElementById("main-modal");
+  var container = $("#main-modal");
+  var span = document.getElementsByClassName("main-close")[0];
+  span.onclick = function() {
+    console.log(modal);
+    container.hide();
+  }
+  function openMechanic(mechanic){
+    document.querySelector("#main-modal-content").innerHTML = '<img src="https://i.pinimg.com/originals/23/35/32/23353292cc60b2bcb3f015ee362eeb74.gif"  width=250/>';
+    console.log(list_data[mechanic.name]);
+    document.getElementById("main-modal-title").innerHTML = "List of " + mechanic.dataset.title;
+    fetch(list_data[mechanic.name] + "?user=user1&dynamic_index=" + mechanic.name)
+    .then(response => response.json())
+    .then(function(res_json){
+      document.querySelector("#main-modal-content").innerHTML = (res_json.html); 
+      $(res_json.html).appendTo(document.body);
+     
+      console.log("loaded");
+      return 1;
+    })
+    .catch(error => (console.log("Error: " + error)))
+     container.show();
+  }
+</script>
