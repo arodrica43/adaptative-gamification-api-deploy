@@ -35,6 +35,8 @@ def retrieve_dashboard_mechanic(request,mechanic_class):
     result = GMechanicList.objects.filter(mechanic = mechanic_class) 
     if result:
         result = GMechanicListSerializer(result[0], context={'request': request}).data
+    else:
+        result = {'html' : "Work in progress..."}
     return JsonResponse({'data': result})
 
 

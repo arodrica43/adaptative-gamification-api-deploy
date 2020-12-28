@@ -309,8 +309,7 @@
       fetch(url)
             .then(response => response.json())
             .then(res_json => (res_json.data))
-            .then((data) => (console.log(data.html)))
+            .then((data) => (document.getElementById("main-modal-content").innerHTML = data.html))
             .catch(error => (console.log("Error: " + error)))
-  
     }
   </script>
