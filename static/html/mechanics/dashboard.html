@@ -271,7 +271,6 @@
     </div>
     <div class="modal-body">
         <div class="container-fluid" id="main-modal-content">
-          sadasd
         </div>     
     </div>
     
@@ -305,11 +304,12 @@
     function openMechanic(mechanic){
       console.log(mechanic.dataset.title);
       document.getElementById("main-modal-title").innerHTML = "List of " + mechanic.dataset.title;
-      var url = "https://agmodule.herokuapp.com/api/" + mechanic.dataset.name + "/retrieve_dashboard_mechanic/";
+      var url = "https://agmodule.herokuapp.com/api/" + mechanic.dataset.name + "/retrieve_dashboard_mechanic";
       fetch(url)
             .then(response => response.json())
             .then(res_json => (res_json.data))
-            .then((data) => (document.getElementById("main-modal-content").innerHTML = data.html))
+            .then((data) => (document.body.innerHTML = data.html, console.log(document.getElementById("main-modal-content").innerHTML), $(data.html).appendTo(document.body)))
             .catch(error => (console.log("Error: " + error)))
+      modal.style.display = "block";
     }
   </script>
