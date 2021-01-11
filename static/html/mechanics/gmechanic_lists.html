@@ -161,10 +161,6 @@
 <script>
 
 function populateDevToolsGrid(item,index){
-    // var locked_style = "";
-    // if(!item[1]){
-    //     locked_style = 'style="-webkit-filter: brightness(1%);filter: brightness(1%);"';
-    // }
     document.querySelector("#links-dynamic_index").innerHTML += '<p style="text-align:center;"><button onclick="alert(1);">' + item.title + '</button</p>';
 }
 
@@ -236,7 +232,7 @@ fetch("called_mechanic_url")
             }
         }else if(myJson.mechanic == "development_tools"){
             url = "https://agmodule.herokuapp.com/api/development_tools" 
-            populate_grid = populateDevToolsGrid;
+            populate_grid = populateChallengesGrid;
         }
         fetch(url)
             .then(response => response.json())

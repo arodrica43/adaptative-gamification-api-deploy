@@ -283,7 +283,7 @@
   }
   function openMechanic(mechanic){
     document.querySelector("#main-modal-content").innerHTML = '<img src="https://i.pinimg.com/originals/23/35/32/23353292cc60b2bcb3f015ee362eeb74.gif"  width=250/>';
-    console.log(list_data[mechanic.name]);
+    console.log(list_data[mechanic.name] + "?user=user1&dynamic_index=" + mechanic.name);
     document.getElementById("main-modal-title").innerHTML = "List of " + mechanic.dataset.title;
     fetch(list_data[mechanic.name] + "?user=user1&dynamic_index=" + mechanic.name)
     .then(response => response.json())
