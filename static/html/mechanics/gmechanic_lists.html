@@ -168,6 +168,10 @@ function populateEEggGrid(item,index){
     document.querySelector("#links-dynamic_index").innerHTML += '<p style="text-align:center;"><button onclick="alert(1);">' + item.title + '</button</p>';
 }
 
+function populateLevelsGrid(item,index){
+    document.querySelector("#links-dynamic_index").innerHTML += '<p style="text-align:center;"><button onclick="alert(1);">' + item.title + '</button</p>';
+}
+
 
 function populateBadgesGrid(item,index){
     var locked_style = "";
@@ -241,6 +245,10 @@ fetch("called_mechanic_url")
         else if(myJson.mechanic == "easter_eggs"){
             url = "https://agmodule.herokuapp.com/api/easter_eggs/" 
             populate_grid = populateEEggGrid;
+        }
+        else if(myJson.mechanic == "levels"){
+            url = "https://agmodule.herokuapp.com/api/levels/" 
+            populate_grid = populateLevelsGrid;
         }
         console.log(url);
         fetch(url)
