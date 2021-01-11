@@ -164,6 +164,10 @@ function populateDevToolsGrid(item,index){
     document.querySelector("#links-dynamic_index").innerHTML += '<p style="text-align:center;"><button onclick="alert(1);">' + item.title + '</button</p>';
 }
 
+function populateEEggGrid(item,index){
+    document.querySelector("#links-dynamic_index").innerHTML += '<p style="text-align:center;"><button onclick="alert(1);">' + item.title + '</button</p>';
+}
+
 
 function populateBadgesGrid(item,index){
     var locked_style = "";
@@ -234,6 +238,11 @@ fetch("called_mechanic_url")
             url = "https://agmodule.herokuapp.com/api/development_tools/" 
             populate_grid = populateDevToolsGrid;
         }
+        else if(myJson.mechanic == "easter_eggs"){
+            url = "https://agmodule.herokuapp.com/api/easter_eggs/" 
+            populate_grid = populateEEggGrid;
+        }
+        console.log(url);
         fetch(url)
             .then(response => response.json())
             .then(res_json => (res_json.results))
