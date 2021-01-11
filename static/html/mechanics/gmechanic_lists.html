@@ -231,8 +231,8 @@ fetch("called_mechanic_url")
                 populate_grid = populateChallengesGrid;
             }
         }else if(myJson.mechanic == "development_tools"){
-            url = "https://agmodule.herokuapp.com/api/development_tools" 
-            populate_grid = populateChallengesGrid;
+            url = "https://agmodule.herokuapp.com/api/development_tools/" 
+            populate_grid = populateDevToolsGrid;
         }
         fetch(url)
             .then(response => response.json())
