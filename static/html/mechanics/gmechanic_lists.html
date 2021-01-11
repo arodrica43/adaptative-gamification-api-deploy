@@ -160,6 +160,10 @@
 
 <script>
 
+function populateNaiveGrid(item,index){
+    document.querySelector("#links-dynamic_index").innerHTML += '<p style="text-align:center;"><button onclick="alert(1);">' + item.title + '</button</p>';
+}
+
 function populateDevToolsGrid(item,index){
     document.querySelector("#links-dynamic_index").innerHTML += '<p style="text-align:center;"><button onclick="alert(1);">' + item.title + '</button</p>';
 }
@@ -238,17 +242,9 @@ fetch("called_mechanic_url")
             }else if(myJson.mechanic == "challenges") {
                 populate_grid = populateChallengesGrid;
             }
-        }else if(myJson.mechanic == "development_tools"){
-            url = "https://agmodule.herokuapp.com/api/development_tools/" 
-            populate_grid = populateDevToolsGrid;
-        }
-        else if(myJson.mechanic == "easter_eggs"){
-            url = "https://agmodule.herokuapp.com/api/easter_eggs/" 
-            populate_grid = populateEEggGrid;
-        }
-        else if(myJson.mechanic == "levels"){
-            url = "https://agmodule.herokuapp.com/api/levels/" 
-            populate_grid = populateLevelsGrid;
+        }else{
+            url = "https://agmodule.herokuapp.com/api/" + myJson.mechanic + "/" 
+            populate_grid = populateNaiveGrid;
         }
         console.log(url);
         fetch(url)
