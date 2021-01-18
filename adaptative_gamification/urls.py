@@ -99,7 +99,7 @@ urlpatterns += [
     path('api/g_mechancis/retrieve_adaptative_widget_id', views.retrieve_adaptative_widget_id),
     path('api/challenges/claim_reward/<int:challenge_id>/<str:username>', views.claim_challenge_reward),
     path('api/<str:mechanic_class>/retrieve_dashboard_mechanic', views.retrieve_dashboard_mechanic),
-
+    path('admin/doc/', include('django.contrib.admindocs.urls'))
     
    # path('api/badges/icons/<str:filename>', views.preview_badge_icon),
     #url(r'^tinymce/', include('tinymce.urls')),

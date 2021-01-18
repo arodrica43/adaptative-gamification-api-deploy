@@ -1155,6 +1155,7 @@ class ChallengeWidgetViewSet(GMechanicViewSet):
         return super().abstract_retrieve(request,pk)
 
     def logic(self,queryset,request):
+        #queryset.update(html = new_html)
         pass   
 
 class EasterEggWidgetViewSet(GMechanicViewSet):
@@ -1181,6 +1182,9 @@ class UnlockableWidgetViewSet(GMechanicViewSet):
         return super().abstract_retrieve(request,pk)
 
     def logic(self,queryset,request):
+        if 'user' in request.GET.keys():
+            if request.GET['user']:
+                user = Gamer.objects.filter(user__username = request.GET['user'])
         pass     
 
 

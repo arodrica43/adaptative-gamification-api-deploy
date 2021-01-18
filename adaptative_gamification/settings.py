@@ -49,6 +49,7 @@ REST_FRAMEWORK = {
 INSTALLED_APPS = [
     'whitenoise.runserver_nostatic', # new
     'django.contrib.admin',
+    'django.contrib.admindocs',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
