@@ -40,6 +40,25 @@ def retrieve_dashboard_mechanic(request,mechanic_class):
     return JsonResponse({'data': result})
 
 
+activities_dict = {"easy" : [
+                                "challenge_widgets",
+                                "easter_egg_widgets",
+                                "level_widgets",
+                                "point_widgets",
+                                "social_status_widgets",
+                                "knowledge_share_widgets"
+                            ],  
+                    "hard" : [
+                                "development_tool_widgets",
+                                "unlockable_widgets",
+                                "badge_widgets",
+                                "leaderboard_widgets",
+                                "gift_opener_widgets",
+                                "lottery_widgets",
+                                "social_network_widgets",
+                                "gift_widgets"
+                            ]
+                    }
 
 def retrieve_adaptative_widget_id(request):
 
@@ -52,6 +71,12 @@ def retrieve_adaptative_widget_id(request):
             if user:
                 user = user[0]
                 utilities = queryset[0].widget_matrix().dot(np.array(user.gamer_profile.vectorize()))
+                if 'difficulty' in args.keys():
+                    if args['difficulty'] in ['easy', 'hard']:
+                        for i in range(len(utilities)):
+                            if utilities[i] > 0:
+                                if not g_mechanic_cast(GMechanic.objects.all()[i].pk) in activities_dict[args['difficulty']]
+                                    utilities[i] = 0
                 prob = utilities/utilities.sum()
                 r = rdm.random()
                 acc, idx = 0, 0
