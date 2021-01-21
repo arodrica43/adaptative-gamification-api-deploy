@@ -40,7 +40,11 @@ def retrieve_dashboard_mechanic(request,mechanic_class):
     return JsonResponse({'data': result})
 
 
-activities_dict = {"easy" : [
+def retrieve_adaptative_widget_id(request):
+
+    lock7.acquire()
+    try:
+        activities_dict = {"easy" : [
                                 "challenge_widgets",
                                 "easter_egg_widgets",
                                 "level_widgets",
@@ -59,11 +63,6 @@ activities_dict = {"easy" : [
                                 "gift_widgets"
                             ]
                     }
-
-def retrieve_adaptative_widget_id(request):
-
-    lock7.acquire()
-    try:
         queryset = AdaptativeWidget.objects.all()
         args = request.GET
         if 'user' in args.keys():
@@ -75,7 +74,7 @@ def retrieve_adaptative_widget_id(request):
                     if args['difficulty'] in ['easy', 'hard']:
                         for i in range(len(utilities)):
                             if utilities[i] > 0:
-                                _ , val = g_mechanic_cast(GMechanic.objects.all()[i].pk)
+                                x , val = g_mechanic_cast((GMechanic.objects.all()[i]).pk)
                                 if not (val in activities_dict[args['difficulty']])
                                     utilities[i] = 0
                 prob = utilities/utilities.sum()
