@@ -40,7 +40,7 @@ def retrieve_dashboard_mechanic(request,mechanic_class):
     return JsonResponse({'data': result})
 
 
-activities_dict = {"easy" : [
+allowed_mechanics = {"easy" : [
                                 "challenge_widgets",
                                 "easter_egg_widgets",
                                 "level_widgets",
@@ -76,7 +76,7 @@ def retrieve_adaptative_widget_id(request):
                         for i in range(len(utilities)):
                             if utilities[i] > 0:
                                 _ , val = g_mechanic_cast(GMechanic.objects.all()[i].pk)
-                                if val not in activities_dict[args['difficulty']]:
+                                if val not in allowed_mechanics[args['difficulty']]:
                                     utilities[i] = 0
                 prob = utilities/utilities.sum()
                 r = rdm.random()
