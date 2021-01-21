@@ -95,8 +95,8 @@ urlpatterns += [
     path('api/badges/retrieve_for_user/<str:username>', views.view_badge_set),
     path('api/unlockables/retrieve_for_user/<str:username>', views.view_unlockable_set),
     path('api/challenges/retrieve_for_user/<str:username>', views.view_challenge_set),
-    path('api/g_mechancis/preview_game/<int:id>/<str:username>', views.preview_game),
-    path('api/g_mechancis/retrieve_adaptative_widget_id', views.retrieve_adaptative_widget_id),
+    path('api/g_mechanics/preview_game/<int:id>/<str:username>', views.preview_game),
+    path('api/g_mechanics/retrieve_adaptative_widget_id', views.retrieve_adaptative_widget_id),
     path('api/challenges/claim_reward/<int:challenge_id>/<str:username>', views.claim_challenge_reward),
     path('api/<str:mechanic_class>/retrieve_dashboard_mechanic', views.retrieve_dashboard_mechanic),
     path('admin/doc/', include('django.contrib.admindocs.urls'))
