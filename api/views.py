@@ -63,7 +63,7 @@ def retrieve_adaptative_widget_id(request):
                     acc += pi
                 gmechanic = GMechanic.objects.all()[idx]
                 lock7.release()
-                return JsonResponse({'gmechanic_id': gmechanic.pk, 'gmechanic_class': gmechanic})
+                return JsonResponse({'gmechanic_id': gmechanic.pk, 'gmechanic_class': str(gmechanic)})
             else:
                 lock7.release()
                 raise Exception("No selected user")
