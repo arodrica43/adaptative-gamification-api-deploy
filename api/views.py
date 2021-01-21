@@ -75,7 +75,8 @@ def retrieve_adaptative_widget_id(request):
                     if args['difficulty'] in ['easy', 'hard']:
                         for i in range(len(utilities)):
                             if utilities[i] > 0:
-                                if not g_mechanic_cast(GMechanic.objects.all()[i].pk) in activities_dict[args['difficulty']]
+                                _ , val = g_mechanic_cast(GMechanic.objects.all()[i].pk)
+                                if val not in activities_dict[args['difficulty']]
                                     utilities[i] = 0
                 prob = utilities/utilities.sum()
                 r = rdm.random()
