@@ -94,8 +94,8 @@ class GamerSerializer(serializers.HyperlinkedModelSerializer):
         if 'data' in gamer_profile_data.keys(): 
             if gamer_profile_data['data']:
                 data_data = gamer_profile_data['data']
-            else: data_data = {"level":0,"score":0,"$":0,"badges":[],"unlockables":[],"challenges":[], "gifts" : []}
-        else: data_data = {"level":0,"score":0,"$":0,"badges":[],"unlockables":[],"challenges":[], "gifts" : []}
+            else: data_data = {"level":0,"score":0,"$":0,"badges":[],"unlockables":[],"challenges":[], "gifts" : [], "accessible_mechanics" : []}
+        else: data_data = {"level":0,"score":0,"$":0,"badges":[],"unlockables":[],"challenges":[], "gifts" : [], "accessible_mechanics" : []}
         
         gprofile = GamerProfile.objects.create(disruptor = disruptor_data,
                                                 free_spirit =  free_spirit_data,
