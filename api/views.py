@@ -89,6 +89,9 @@ def retrieve_adaptative_widget_id(request):
                     acc += pi
                 gmechanic = GMechanic.objects.all()[idx]
                 _ , val = g_mechanic_cast(gmechanic.pk)
+                if 'accessible_mechanics' not in user.gamer_profile.data.keys():
+                     user.gamer_profile.data["accessible_mechanics"] = []
+                     user.gamer_profile.save()
                 acc_mechs = user.gamer_profile.data["accessible_mechanics"]
                 if val not in acc_mechs :
                     user.gamer_profile.data["accessible_mechanics"] += [val]
