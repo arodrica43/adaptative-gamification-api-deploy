@@ -19,7 +19,7 @@
 
 <script>
 document.querySelector("#bdg-widget-handshake-dynamic_index").value = 1;
-function choose(badge){
+function choose_bdg(badge){
 	var locked_style = "";
     if(badge[1]){
         locked_style = 'The last badge you won: ';
@@ -34,6 +34,6 @@ fetch(url)
 .then(response => response.json())
 .then(res_json => (res_json.results))
 .then((list) => (list[0]))
-.then((badge) => (choose(badge)))
+.then((badge) => (choose(badge_bdg)))
 .catch(error => (console.log("Error: " + error)))
 </script>

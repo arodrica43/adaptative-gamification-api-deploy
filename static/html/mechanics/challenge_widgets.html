@@ -24,7 +24,7 @@
     .catch(error => (console.log("Error: " + error)))
 }
 document.querySelector("#chl-widget-handshake-dynamic_index").value = 1;
-function choose(challenge){
+function choose_chl(challenge){
 	var locked_style = '<button  style="float:right;margin:15px; width:50%;" onclick="claimReward(this)" data-id=' + challenge[0].id + '>Claim</button>';
 	if(!challenge[1]){
 	    locked_style = '<progress style="float:right;margin:15px; width:50%;" value="' + challenge[2] + '" max="' + challenge[0].threshold + '"></progress>';
@@ -43,6 +43,6 @@ fetch(url)
 .then(response => response.json())
 .then(res_json => (res_json.results))
 .then((list) => (list[Math.floor(Math.random() * list.length)]))
-.then((random_element) => (choose(random_element)))
+.then((random_element) => (choose_chl(random_element)))
 .catch(error => (console.log("Error: " + error)))
 </script>
