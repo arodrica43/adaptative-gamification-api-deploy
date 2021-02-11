@@ -24,18 +24,18 @@
     .catch(error => (console.log("Error: " + error)))
 }
 document.querySelector("#chl-widget-handshake-dynamic_index").value = 1;
-function choose(item){
-	var locked_style = '<button  style="float:right;margin:15px; width:50%;" onclick="claimReward(this)" data-id=' + item[0].id + '>Claim</button>';
-	if(!item[1]){
-	    locked_style = '<progress style="float:right;margin:15px; width:50%;" value="' + item[2] + '" max="' + item[0].threshold + '"></progress>';
-	}else if(item[3]){
-	    locked_style = '<button  style="float:right;margin:15px; width:50%;" onclick="claimReward(this)" data-id=' + item[0].id + ' disabled>Claimed!</button>';
+function choose(challenge){
+	var locked_style = '<button  style="float:right;margin:15px; width:50%;" onclick="claimReward(this)" data-id=' + challenge[0].id + '>Claim</button>';
+	if(!challenge[1]){
+	    locked_style = '<progress style="float:right;margin:15px; width:50%;" value="' + challenge[2] + '" max="' + challenge[0].threshold + '"></progress>';
+	}else if(challenge[3]){
+	    locked_style = '<button  style="float:right;margin:15px; width:50%;" onclick="claimReward(this)" data-id=' + challenge[0].id + ' disabled>Claimed!</button>';
 	}
-	document.querySelector("#chl-widget-dynamic_index").innerHTML = '<div style="text-align:center; position:relative;"><h3 style="position:relative;top:0;">' + item[0].title + '</h3>' +
-                                                                    '<img style="float:left; width:25%; padding-left:20px;margin-top:-20px" src="' + item[0].icon +  
+	document.querySelector("#chl-widget-dynamic_index").innerHTML = '<div style="text-align:center; position:relative;"><h3 style="position:relative;top:0;">' + challenge[0].title + '</h3>' +
+                                                                    '<img style="float:left; width:25%; padding-left:20px;margin-top:-20px" src="' + challenge[0].icon +  
                                                                     '" >' + locked_style +
-                                                                    '<h4 style="position:absolute;bottom: 25px; right: 20px;"> ' + item[0].by + ' : ' + item[2] + ' / ' + item[0].threshold + ' </h4> ' +
-                                                                    '<h4 style="position:absolute;bottom: 0; right: 20px;"> Reward : +' + item[0].reward_value + ' ' + item[0].reward_by + ' </h4> ' +
+                                                                    '<h4 style="position:absolute;bottom: 25px; right: 20px;"> ' + challenge[0].by + ' : ' + challenge[2] + ' / ' + challenge[0].threshold + ' </h4> ' +
+                                                                    '<h4 style="position:absolute;bottom: 0; right: 20px;"> Reward : +' + challenge[0].reward_value + ' ' + challenge[0].reward_by + ' </h4> ' +
                                                                 ' </div>';
 }
 url = "https://agmodule.herokuapp.com/api/challenges/retrieve_for_user/dynamic_user";

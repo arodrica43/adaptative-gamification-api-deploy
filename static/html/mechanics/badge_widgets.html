@@ -19,14 +19,14 @@
 
 <script>
 document.querySelector("#bdg-widget-handshake-dynamic_index").value = 1;
-function choose(item){
+function choose(badge){
 	var locked_style = "";
-    if(item[1]){
+    if(badge[1]){
         locked_style = 'The last badge you won: ';
     }else{
     	  locked_style = 'You won a new badge: ';
     }
-    document.querySelector("#bdg-widget-dynamic_index").innerHTML += '<div><h3>' + locked_style + item[0].title + '</h3><img ' + locked_style + ' src="' + item[0].icon + 
+    document.querySelector("#bdg-widget-dynamic_index").innerHTML = '<div><h3>' + locked_style + badge[0].title + '</h3><img ' + locked_style + ' src="' + badge[0].icon + 
                                                                 '"></div>';
 }
 url = "https://agmodule.herokuapp.com/api/badges/retrieve_for_user/dynamic_user?unlock=true&widget_id=dynamic_index";
@@ -34,6 +34,6 @@ fetch(url)
 .then(response => response.json())
 .then(res_json => (res_json.results))
 .then((list) => (list[0]))
-.then((element) => (choose(element)))
+.then((badge) => (choose(badge)))
 .catch(error => (console.log("Error: " + error)))
 </script>
