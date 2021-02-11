@@ -275,7 +275,7 @@ def view_badge_set(request, username):
 
     badge_set = []
     for badge in all_badges:
-        if 'unlock' in request.GET.keys():
+        if 'unlock' in request.GET.keys(): # Procedural badge unlocking
             badge_set = [[BadgeSerializer(badge, context={'request': request}).data,badge.id in badge_ids]]
             if request.GET['unlock'] == 'true': # TO DO - Unlock badge by name. Queryset q -> searchBadge(q.(unlock&badge_name))
                 if 'widget_id' in request.GET.keys():
