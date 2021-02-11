@@ -300,7 +300,7 @@ def view_badge_set(request, username):
                             break
                     else:
                         print(8)
-                        badge_set = [[BadgeSerializer(Badge.objects.filter(pk = badge_ids[-1]), context={'request': request}).data, True]]
+                        badge_set = [[BadgeSerializer(Badge.objects.filter(pk = badge_ids[-1])[0], context={'request': request}).data, True]]
                         print(9)
                         break
         else:
