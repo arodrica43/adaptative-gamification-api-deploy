@@ -295,7 +295,7 @@ def view_badge_set(request, username):
                             user.gamer_profile.data['badges'] += [badge.id]
                             user.gamer_profile.data['badge_widgets_executed'] += [request.GET['widget_id']]
                             user.gamer_profile.save()
-                            badge_set = [[BadgeSerializer(badge, context={'request': request}).data,badge.id in badge_ids]]
+                            badge_set = [[BadgeSerializer(badge, context={'request': request}).data,False]]
                             print(7)
                             break
                     else:

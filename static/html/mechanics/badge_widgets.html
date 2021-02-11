@@ -1,10 +1,11 @@
 <style>
 .bdg-container > div{
         font-size: 30px;
+        padding: .5em;
         margin: .5em;
-        background: white;
         text-align: center;
-        height:190px;
+        width:100px;
+        height:100px;
 </style>
 
 <div id = "bdg-widget-dynamic_index" class="bdg-container"></div>
@@ -14,10 +15,12 @@
 document.querySelector("#bdg-widget-handshake-dynamic_index").value = 1;
 function choose(item){
 	var locked_style = "";
-    if(!item[1]){
-        locked_style = 'style="-webkit-filter: brightness(1%);filter: brightness(1%);"';
+    if(item[1]){
+        locked_style = 'The last badge you won: ';
+    }else{
+    	  locked_style = 'You won a new badge: ';
     }
-    document.querySelector("#bdg-widget-dynamic_index").innerHTML += item[0].id + '<div><img ' + locked_style + ' src="' + item[0].icon + 
+    document.querySelector("#bdg-widget-dynamic_index").innerHTML += '<h3>' + locked_style + item[0].tilte + '</h3><div><img ' + locked_style + ' src="' + item[0].icon + 
                                                                 '"></div>' + item[0].title;
 }
 url = "https://agmodule.herokuapp.com/api/badges/retrieve_for_user/dynamic_user?unlock=true&widget_id=dynamic_index";
