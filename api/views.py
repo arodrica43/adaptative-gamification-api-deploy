@@ -283,9 +283,10 @@ def view_badge_set(request, username):
             if request.GET['unlock'] == 'true': # TO DO - Unlock badge by name. Queryset q -> searchBadge(q.(unlock&badge_name))
                 if 'widget_id' in request.GET.keys():
                     if 'badge_widgets_executed' not in user.gamer_profile.data.keys():
+                        print(4)
                         user.gamer_profile.data['badge_widgets_executed'] = []
                         user.gamer_profile.save()
-                        print(4)
+                    
                     if request.GET['widget_id'] not in user.gamer_profile.data['badge_widgets_executed']:
                         print(5)
                         if badge.id not in user.gamer_profile.data['badges']:
