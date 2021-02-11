@@ -1,9 +1,9 @@
-<div id = "chl-widget-dynamic_index" class="container-fluid">Challenge Widget</div>
+<div id = "chl-widget-dynamic_index">Challenge Widget</div>
 <param id = "chl-widget-handshake-dynamic_index" value=0></param> 
 
 <script>
 document.querySelector("#chl-widget-handshake-dynamic_index").value = 1;
-function choose(item,index){
+function choose(item){
 	var locked_style = '<button  style="float:right;margin:15px; width:50%;" onclick="claimReward(this)" data-id=' + item[0].id + '>Claim</button>';
 	if(!item[1]){
 	    locked_style = '<progress style="float:right;margin:15px; width:50%;" value="' + item[2] + '" max="' + item[0].threshold + '"></progress>';
@@ -20,7 +20,8 @@ url = "https://agmodule.herokuapp.com/api/challenges/retrieve_for_user/dynamic_u
 fetch(url)
 .then(response => response.json())
 .then(res_json => (res_json.results))
-.then((list) => (list.forEach(choose)))
+.then((list) => (list[Math.floor(Math.random() * list.length)])
+.then((random_element) => (choose(random_element)))
 .catch(error => (console.log("Error: " + error)))
 
 </script>
