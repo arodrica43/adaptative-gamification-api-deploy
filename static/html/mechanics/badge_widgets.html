@@ -6,6 +6,14 @@
         text-align: center;
         width:100px;
         height:100px;
+}
+.bdg-container > div > img{
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        -webkit-transition: .15s;
+        transition: .15s; 
+    }
 </style>
 
 <div id = "bdg-widget-dynamic_index" class="bdg-container"></div>
@@ -20,7 +28,7 @@ function choose(item){
     }else{
     	  locked_style = 'You won a new badge: ';
     }
-    document.querySelector("#bdg-widget-dynamic_index").innerHTML += '<h3>' + locked_style + item[0].tilte + '</h3><div><img ' + locked_style + ' src="' + item[0].icon + 
+    document.querySelector("#bdg-widget-dynamic_index").innerHTML += '<div><h3>' + locked_style + item[0].title + '</h3><img ' + locked_style + ' src="' + item[0].icon + 
                                                                 '"></div>' + item[0].title;
 }
 url = "https://agmodule.herokuapp.com/api/badges/retrieve_for_user/dynamic_user?unlock=true&widget_id=dynamic_index";
