@@ -285,7 +285,6 @@ def view_badge_set(request, username):
                 if 'widget_id' in request.GET.keys():
                     print(5)
                     if 'badge_widgets_executed' not in user.gamer_profile.data.keys():
-                        
                         user.gamer_profile.data['badge_widgets_executed'] = []
                         user.gamer_profile.save()
                     
@@ -300,8 +299,9 @@ def view_badge_set(request, username):
                             print(7)
                             break
                     else:
-                        badge_set = [[BadgeSerializer(Badge.objects.filter(id = badge_ids[-1]), context={'request': request}).data, True]]
                         print(8)
+                        badge_set = [[BadgeSerializer(Badge.objects.filter(pk = badge_ids[-1]), context={'request': request}).data, True]]
+                        print(9)
                         break
         else:
             if user.gamer_profile.data[badge.by] >= badge.threshold and (badge.id not in user.gamer_profile.data['badges']):
