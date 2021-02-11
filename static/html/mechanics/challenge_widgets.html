@@ -20,7 +20,7 @@ url = "https://agmodule.herokuapp.com/api/challenges/retrieve_for_user/dynamic_u
 fetch(url)
 .then(response => response.json())
 .then(res_json => (res_json.results))
-.then((list) => (list[Math.floor(Math.random() * list.length)])
+.then((list) => (list[Math.floor(Math.random() * list.length)]))
 .then((random_element) => (choose(random_element)))
 .catch(error => (console.log("Error: " + error)))
 
