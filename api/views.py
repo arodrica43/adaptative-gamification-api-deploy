@@ -275,17 +275,23 @@ def view_badge_set(request, username):
 
     badge_set = []
     for badge in all_badges:
-        if 'badge_name' in request.GET.keys():
-            if request.GET['badge_name'] == badge.name:
-                if 'unlock' in request.GET.keys():
-                    if request.GET['unlock'] == 'true': # TO DO - Unlock badge by name. Queryset q -> searchBadge(q.(unlock&badge_name))
+        if 'unlock' in request.GET.keys():
+            badge_set = [[BadgeSerializer(badge, context={'request': request}).data,badge.id in badge_ids]]
+            if request.GET['unlock'] == 'true': # TO DO - Unlock badge by name. Queryset q -> searchBadge(q.(unlock&badge_name))
+                if 'widget_id' in request.GET.keys():
+                    if request.GET['widget_id'] not in user.gamer_profile.data['badge_widgets_executed']:
                         if badge.id not in user.gamer_profile.data['badges']:
                             user.gamer_profile.data['badges'] += [badge.id]
+                            if 'badge_widgets_executed' not in user.gamer_profile.data.keys():
+                                user.gamer_profile.data['badge_widgets_executed'] = [request.GET['widget_id']]
+                            else:
+                                 user.gamer_profile.data['badge_widgets_executed'] += [request.GET['widget_id']]
                             user.gamer_profile.save()
-                badge_set = [[BadgeSerializer(badge, context={'request': request}).data,badge.id in badge_ids]]
-                break
-            else:
-                continue
+                            badge_set = [[BadgeSerializer(badge, context={'request': request}).data,badge.id in badge_ids]]
+                            break
+                    else:
+                        badge_set = [[BadgeSerializer(Badge.objects.filter(id = badge_ids[-1]), context={'request': request}).data, True]]
+                        break
         else:
             if user.gamer_profile.data[badge.by] >= badge.threshold and (badge.id not in user.gamer_profile.data['badges']):
                 user.gamer_profile.data['badges'] += [badge.id]
