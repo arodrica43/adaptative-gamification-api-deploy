@@ -21,6 +21,8 @@ lock5 = threading.Lock()
 lock6 = threading.Lock()
 lock7 = threading.Lock()
 lock8 = threading.Lock()
+lock9 = threading.Lock()
+
 
 interaction_files = [("include-onclick-tracking","onclick.js"), 
                      ("include-base-tracking","default.js"), 
@@ -260,56 +262,61 @@ def preview_gmechanic(request, gmechanic_id):
 
 def view_badge_set(request, username):
   
-    print(1)
+    lock9.acquire()
     try:
-        user = Gamer.objects.filter(user__username = username)[0]
-    except:
-        print("User found")
-        raise Http404
+        try:
+            user = Gamer.objects.filter(user__username = username)[0]
+        except:
+            print("User found")
+            raise Http404
 
-    badge_ids = []
-    if 'badges' in user.gamer_profile.data.keys():
-        badge_ids = user.gamer_profile.data['badges']
-  
-    all_badges = Badge.objects.all()
+        badge_ids = []
+        if 'badges' in user.gamer_profile.data.keys():
+            badge_ids = user.gamer_profile.data['badges']
+      
+        all_badges = Badge.objects.all()
 
-    badge_set = []
-    for badge in all_badges:
+        badge_set = []
+        for badge in all_badges:
 
-        print(2)
-        if 'unlock' in request.GET.keys(): # Procedural badge unlocking
-            badge_set = [[BadgeSerializer(badge, context={'request': request}).data,badge.id in badge_ids]]
-            print(3)
-            if request.GET['unlock'] == 'true': # TO DO - Unlock badge by name. Queryset q -> searchBadge(q.(unlock&badge_name))
-                print(4, request.GET['unlock'])
-                if 'widget_id' in request.GET.keys():
-                    print(5)
-                    if 'badge_widgets_executed' not in user.gamer_profile.data.keys():
-                        user.gamer_profile.data['badge_widgets_executed'] = []
-                        user.gamer_profile.save()
-                    
-                    if request.GET['widget_id'] not in user.gamer_profile.data['badge_widgets_executed']:
-                     
-                        if badge.id not in user.gamer_profile.data['badges']:
-                            print(6)
-                            user.gamer_profile.data['badges'] += [badge.id]
-                            user.gamer_profile.data['badge_widgets_executed'] += [request.GET['widget_id']]
+            print(2)
+            if 'unlock' in request.GET.keys(): # Procedural badge unlocking
+                badge_set = [[BadgeSerializer(badge, context={'request': request}).data,badge.id in badge_ids]]
+                print(3)
+                if request.GET['unlock'] == 'true': # TO DO - Unlock badge by name. Queryset q -> searchBadge(q.(unlock&badge_name))
+                    print(4, request.GET['unlock'])
+                    if 'widget_id' in request.GET.keys():
+                        print(5)
+                        if 'badge_widgets_executed' not in user.gamer_profile.data.keys():
+                            user.gamer_profile.data['badge_widgets_executed'] = []
                             user.gamer_profile.save()
-                            badge_set = [[BadgeSerializer(badge, context={'request': request}).data,False]]
-                            print(7)
+                        
+                        if request.GET['widget_id'] not in user.gamer_profile.data['badge_widgets_executed']:
+                         
+                            if badge.id not in user.gamer_profile.data['badges']:
+                                print(6)
+                                user.gamer_profile.data['badges'] += [badge.id]
+                                user.gamer_profile.data['badge_widgets_executed'] += [request.GET['widget_id']]
+                                user.gamer_profile.save()
+                                badge_set = [[BadgeSerializer(badge, context={'request': request}).data,False]]
+                                print(7)
+                                break
+                        else:
+                            print(8)
+                            badge_set = [[BadgeSerializer(Badge.objects.filter(pk = badge_ids[-1])[0], context={'request': request}).data, True]]
+                            print(9)
                             break
-                    else:
-                        print(8)
-                        badge_set = [[BadgeSerializer(Badge.objects.filter(pk = badge_ids[-1])[0], context={'request': request}).data, True]]
-                        print(9)
-                        break
-        else:
-            if user.gamer_profile.data[badge.by] >= badge.threshold and (badge.id not in user.gamer_profile.data['badges']):
-                user.gamer_profile.data['badges'] += [badge.id]
-                user.gamer_profile.save()
-            badge_set += [[BadgeSerializer(badge, context={'request': request}).data, badge.id in badge_ids]]
-            
-    return JsonResponse({'results':badge_set})
+            else:
+                if user.gamer_profile.data[badge.by] >= badge.threshold and (badge.id not in user.gamer_profile.data['badges']):
+                    user.gamer_profile.data['badges'] += [badge.id]
+                    user.gamer_profile.save()
+                badge_set += [[BadgeSerializer(badge, context={'request': request}).data, badge.id in badge_ids]]
+        lock9.release()        
+        return JsonResponse({'results':badge_set})
+    except:
+        lock9.release()
+        return JsonResponse({'results':[]})
+
 
 def view_unlockable_set(request, username):
    
