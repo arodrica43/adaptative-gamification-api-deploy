@@ -11,6 +11,18 @@
 <param id = "chl-widget-handshake-dynamic_index" value=0></param> 
 
 <script>
+ function claimReward(object){
+    fetch("https://agmodule.herokuapp.com/api/challenges/claim_reward/" + object.dataset.id + "/dynamic_user")
+    .then(response => response.json())
+    .then(res_json => (res_json.results))
+    .then(function(ok){
+        if(ok == "OK"){
+            object.innerHTML = "Claimed!";
+            object.disabled = true;
+        }
+    })
+    .catch(error => (console.log("Error: " + error)))
+}
 document.querySelector("#chl-widget-handshake-dynamic_index").value = 1;
 function choose(item){
 	var locked_style = '<button  style="float:right;margin:15px; width:50%;" onclick="claimReward(this)" data-id=' + item[0].id + '>Claim</button>';
@@ -19,7 +31,7 @@ function choose(item){
 	}else if(item[3]){
 	    locked_style = '<button  style="float:right;margin:15px; width:50%;" onclick="claimReward(this)" data-id=' + item[0].id + ' disabled>Claimed!</button>';
 	}
-	document.querySelector("#chl-widget-dynamic_index").innerHTML = '<div style="text-align:center; position:relative;"><h3 style="position:relative;top:0;">Title</h3>' +
+	document.querySelector("#chl-widget-dynamic_index").innerHTML = '<div style="text-align:center; position:relative;"><h3 style="position:relative;top:0;"></h3>' +
                                                                     '<img style="float:left; width:25%; padding-left:20px;margin-top:-20px" src="' + item[0].icon +  
                                                                     '" >' + locked_style +
                                                                     '<h4 style="position:absolute;bottom: 25px; right: 20px;"> ' + item[0].by + ' : ' + item[2] + ' / ' + item[0].threshold + ' </h4> ' +

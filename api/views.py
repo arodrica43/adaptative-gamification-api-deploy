@@ -260,6 +260,7 @@ def preview_gmechanic(request, gmechanic_id):
 
 def view_badge_set(request, username):
   
+    
     try:
         user = Gamer.objects.filter(user__username = username)[0]
     except:
@@ -274,13 +275,24 @@ def view_badge_set(request, username):
 
     badge_set = []
     for badge in all_badges:
-        if user.gamer_profile.data[badge.by] >= badge.threshold and (badge.id not in user.gamer_profile.data['badges']):
-            user.gamer_profile.data['badges'] += [badge.id]
-            user.gamer_profile.save()
-        badge_set += [[BadgeSerializer(badge, context={'request': request}).data, badge.id in badge_ids]]
-    
+        if 'badge_name' in request.GET.keys():
+            if request.GET['badge_name'] == badge.name:
+                if 'unlock' in request.GET.keys():
+                    if request.GET['unlock'] == 'true': # TO DO - Unlock badge by name. Queryset q -> searchBadge(q.(unlock&badge_name))
+                        if badge.id not in user.gamer_profile.data['badges']:
+                            user.gamer_profile.data['badges'] += [badge.id]
+                            user.gamer_profile.save()
+                badge_set = [[BadgeSerializer(badge, context={'request': request}).data,badge.id in badge_ids]]
+                break
+            else:
+                continue
+        else:
+            if user.gamer_profile.data[badge.by] >= badge.threshold and (badge.id not in user.gamer_profile.data['badges']):
+                user.gamer_profile.data['badges'] += [badge.id]
+                user.gamer_profile.save()
+            badge_set += [[BadgeSerializer(badge, context={'request': request}).data, badge.id in badge_ids]]
+            
     return JsonResponse({'results':badge_set})
-
 
 def view_unlockable_set(request, username):
    
