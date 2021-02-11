@@ -13,13 +13,12 @@
 <script>
 document.querySelector("#bdg-widget-handshake-dynamic_index").value = 1;
 function choose(item){
-	console.log("enteriing");
 	var locked_style = "";
     if(!item[1]){
         locked_style = 'style="-webkit-filter: brightness(1%);filter: brightness(1%);"';
     }
-    document.querySelector("#bdg-widget-dynamic_index").innerHTML += '<div><img ' + locked_style + ' src="' + item[0].icon + 
-                                                                '"></div>';
+    document.querySelector("#bdg-widget-dynamic_index").innerHTML += item[0].id + '<div><img ' + locked_style + ' src="' + item[0].icon + 
+                                                                '"></div>' + item[0].title;
 }
 url = "https://agmodule.herokuapp.com/api/badges/retrieve_for_user/dynamic_user?unlock=true&widget_id=dynamic_index";
 fetch(url)
