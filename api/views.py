@@ -281,14 +281,16 @@ def view_badge_set(request, username):
             badge_set = [[BadgeSerializer(badge, context={'request': request}).data,badge.id in badge_ids]]
             print(3)
             if request.GET['unlock'] == 'true': # TO DO - Unlock badge by name. Queryset q -> searchBadge(q.(unlock&badge_name))
+                 print(4, request.GET['unlock'])
                 if 'widget_id' in request.GET.keys():
+                    print(5)
                     if 'badge_widgets_executed' not in user.gamer_profile.data.keys():
-                        print(4)
+                        
                         user.gamer_profile.data['badge_widgets_executed'] = []
                         user.gamer_profile.save()
                     
                     if request.GET['widget_id'] not in user.gamer_profile.data['badge_widgets_executed']:
-                        print(5)
+                     
                         if badge.id not in user.gamer_profile.data['badges']:
                             print(6)
                             user.gamer_profile.data['badges'] += [badge.id]
