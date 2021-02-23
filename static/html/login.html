@@ -1,0 +1,104 @@
+<style>
+    .likert {
+  text-align:center;
+      width:100%;
+}
+  .likert li {
+    float:left;
+  list-style-type: none;
+   margin:3.5%;
+}
+</style>
+
+<div id="poll"></div>
+ 
+<script>
+questions = ["Interactuar con los demás es importante para mí.", 
+             "Me hace feliz ser capaz de ayudar a los demás.",
+             "Seguir mi propio camino es importante para mí.",
+             "Me gusta formar parte de un equipo.",
+             "Me gusta provocar.",
+             "Me gustan las competiciones donde se pueda ganar un premio.",
+             "Sentir que formo parte de una comunidad es importante para mí.",
+             "A menudo me dejo guiar por la curiosidad.",
+             "Me gusta cuestionar el estado de las cosas.",
+             "Los premios son una buena manera de motivarme.",
+             "Me gusta probar nuevas cosas.",
+             "Me gusta superar obstáculos.",
+             "Me gusta guiar a los demás en las nuevas situaciones.",
+             "Me describo a mí mismo como un rebelde.",
+             "Disfruto con las actividades grupales.",
+             "Realizar siempre por completo mis tareas es importante para mí.",
+             "No me gusta seguir las reglas.",
+             "Me gusta compartir mi conocimiento con los demás.",
+             "Me resulta difícil abandonar un problema antes de que haya encontrado una solución.",
+             "El retorno de inversión es importante para mí.",
+             "Ser independiente es importante para mí.",
+             "Me gusta dominar tareas difíciles.",
+             "El bienestar de los demás es importante para mí.",
+             "Si el premio es adecuado, voy a hacer un esfuerzo.",
+            ];
+//Disruptor = 0, Free spirit = 1, Achiever = 2, Player = 3, Socializer = 4, Philantropist = 5, No Player = 6
+questions_PT = [4,5,1,4,0,3,4,1,0,3,1,2,5,0,4,2,0,5,2,3,1,2,5,3]
+profile = [0,0,0,0,0,0,0]
+
+questions.forEach((item,index) => (document.getElementById("poll").innerHTML += '<h2>Question ' + (index + 1) + '</h2>'+ item +
+                                              '<div><ul class="likert">'+
+                                                                                  '<li> Disagree </li>'+
+                                                                                  '<li><input id="chk-1-' + index + '" type="radio" name="chk-' + index + '" value="1" /></li>'+
+                                                                                  '<li><input id="chk-2-' + index + '" type="radio" name="chk-' + index + '" value="2" /></li>'+
+                                                                                  '<li><input id="chk-3-' + index + '" type="radio" name="chk-' + index + '" value="3" /></li>'+
+                                                            '<li><input id="chk-4-' + index + '" type="radio" name="chk-' + index + '" value="4" /></li>'+
+                                                                                  '<li><input id="chk-5-' + index + '" type="radio" name="chk-' + index + '" value="5" /></li>'+
+                                                                                  '<li><input id="chk-6-' + index + '" type="radio" name="chk-' + index + '" value="6" /></li>'+
+                                                                                  '<li><input id="chk-7-' + index + '" type="radio" name="chk-' + index + '" value="7" /></li>'+
+                                                                                  '<li> Agree </li>'+
+                                                                                '</ul></div><br><br><br><br>'));
+document.getElementById("poll").innerHTML += '<br><div style="text-align:center;"><button onclick="register()">Submit</button></div>';
+
+
+function create_user(){
+  fetch("https://agmodule.herokuapp.com/api/gamers/", { 
+      method: "POST", 
+      body: JSON.stringify({
+        user: {
+            username: document.getElementById("uname_input").value,
+            email: ""
+        },
+        social_profile: {
+            image: "art",
+            description: "Description...",
+            data: {}
+        },
+        gamer_profile: {
+            disruptor: document.getElementById("Disruptor").value,
+            free_spirit: document.getElementById("Free Spirit").value,
+            achiever: document.getElementById("Achiever").value,
+            player: document.getElementById("Player").value,
+            socializer: document.getElementById("Socializer").value,
+            philantropist: document.getElementById("Philantropist").value,
+            no_player: document.getElementById("No Player").value,
+            data: {}
+        },
+        emotion_profile: {
+            valence: 0,
+            arousal: 0
+        }
+      }), 
+      headers: { 
+          "Content-type": "application/json; charset=UTF-8"
+      } 
+  }) 
+  .then(response => response.json()) 
+  .then(json => console.log(json))
+  .catch(error => (console.log("Error: " + error)))
+}
+             
+function register(){
+questions.forEach((item,i) => ([1,2,3,4,5,6,7].forEach((j,k) => ((document.getElementById("chk-" + j + "-" + i).checked) ? profile[questions_PT[i]] += Number(document.getElementById("chk-" + j + "-" + i).value) : console.log("none")))));
+total_sum = profile.reduce((a, b) => a + b, 0);
+profile.forEach((item,index) => (profile[index] /= total_sum));
+  console.log(profile);
+}
+  </script>
+

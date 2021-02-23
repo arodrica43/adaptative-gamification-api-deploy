@@ -188,7 +188,8 @@ function create_user(){
   .then(json => console.log(json))
   .then(function(){
     init_statistics();
-  }); 
+  })
+ .catch(error => (console.log("Error: " + error))); 
 
 }
 </script>

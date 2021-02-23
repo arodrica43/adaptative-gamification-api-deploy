@@ -1,7 +1,40 @@
-<div id = "lvl-widget-dynamic_index">Level Widget</div>
+<style>
+.lvl-container > div{
+        font-size: 30px;
+        padding: .5em;
+        margin: .5em;
+        text-align: center;
+        width:90%;
+        font-size:4vw;
+}
+.lvl-container > div > img{
+        width: 25%;
+        height: 60%;
+        -webkit-transition: .15s;
+        transition: .15s; 
+    }
+</style>
+
+<div id = "lvl-widget-dynamic_index" class="lvl-container"></div>
 <param id = "lvl-widget-handshake-dynamic_index" value=0></param> 
 
 <script>
-document.querySelector("#lvl-widget-dynamic_index").innerHTML += " (WIP)";
 document.querySelector("#lvl-widget-handshake-dynamic_index").value = 1;
+function choose_lvl(badge){
+	var locked_style = "";
+    if(badge[1]){
+        locked_style = 'The last badge you won: ';
+    }else{
+    	  locked_style = 'You won a new badge: ';
+    }
+    document.querySelector("#lvl-widget-dynamic_index").innerHTML += '<div><h4>' + locked_style + badge[0].title + '</h4><img ' + locked_style + ' src="' + badge[0].icon + 
+                                                                '"></div>';
+}
+url = "https://agmodule.herokuapp.com/api/levels/";
+fetch(url)
+.then(response => response.json())
+.then(res_json => (res_json.results))
+.then((list) => (list[0]))
+.then((challenge) => (console.log(challenge)))
+.catch(error => (console.log("Error: " + error)))
 </script>
