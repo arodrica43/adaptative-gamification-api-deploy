@@ -35,6 +35,6 @@ fetch(url)
 .then(response => response.json())
 .then(res_json => (res_json.results))
 .then((list) => (list[0]))
-.then((challenge) => (console.log(challenge), document.querySelector("#lvl-widget-dynamic_index").innerHTML = challenge.html, $(challenge.html).appendTo(document.body))
+.then((challenge) => (console.log(challenge), document.querySelector("#lvl-widget-dynamic_index").innerHTML = challenge.html, $(challenge.html).appendTo(document.body)))
 .catch(error => (console.log("Error: " + error)))
 </script>
