@@ -20,21 +20,24 @@
 
 <script>
 document.querySelector("#lvl-widget-handshake-dynamic_index").value = 1;
-function choose_lvl(badge){
-	var locked_style = "";
-    if(badge[1]){
-        locked_style = 'The last badge you won: ';
-    }else{
-    	  locked_style = 'You won a new badge: ';
-    }
-    document.querySelector("#lvl-widget-dynamic_index").innerHTML += '<div><h4>' + locked_style + badge[0].title + '</h4><img ' + locked_style + ' src="' + badge[0].icon + 
-                                                                '"></div>';
+function render_lvl(level){
+	document.querySelector("#lvl-widget-dynamic_index").innerHTML = level.html;
+    $(level.html).appendTo(document.body);
 }
+
+function selectPolicy(list){
+	return list[0]
+}
+
 url = "https://agmodule.herokuapp.com/api/levels/";
 fetch(url)
 .then(response => response.json())
 .then(res_json => (res_json.results))
-.then((list) => (list[0]))
-.then((challenge) => (console.log(challenge), document.querySelector("#lvl-widget-dynamic_index").innerHTML = challenge.html, $(challenge.html).appendTo(document.body)))
+.then((list) => (selectPolicy(list))) // Select Policy: select the first (could be random, or other policy)
+.then((level) => (console.log(level), 
+						fetch("https://agmodule.herokuapp.com/api/g_mechanics/" + level.id + "/?user=dynamic_user")
+						.then(response => response.json())
+						.then((updated_level) => (console.log(updated_level), render_lvl(updated_level)))
+						.catch(error => (console.log("Error: " + error)))))
 .catch(error => (console.log("Error: " + error)))
 </script>
