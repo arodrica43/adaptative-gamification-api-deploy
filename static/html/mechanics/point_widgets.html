@@ -20,8 +20,8 @@
 
 <script>
 document.querySelector("#pnt-widget-handshake-dynamic_index").value = 1;
-function render_pnt(point, reward){
-	document.querySelector("#pnt-widget-dynamic_index").innerHTML = '<div>Your ' + point.given_by + ' have increased by ' + reward + '</div>';
+function render_pnt(point, point_by, reward){
+	document.querySelector("#pnt-widget-dynamic_index").innerHTML = '<div>Your ' + point_by + ' have increased by ' + reward + '</div>';
 	document.querySelector("#pnt-widget-dynamic_index").innerHTML += point.html;
     $(point.html).appendTo(document.body);
 }
@@ -43,7 +43,7 @@ fetch(url)
 .then((point) => (console.log(point), 
 						fetch("https://agmodule.herokuapp.com/api/g_mechanics/" + point.id + "/?user=dynamic_user&show_title=false&increase=" + reward)
 						.then(response => response.json())
-						.then((updated_point) => (console.log(updated_point), render_pnt(updated_point, reward)))
+						.then((updated_point) => (console.log(updated_point), render_pnt(updated_point, point.given_by, reward)))
 						.catch(error => (console.log("Error: " + error)))))
 .catch(error => (console.log("Error: " + error)))
 </script>
