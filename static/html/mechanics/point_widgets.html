@@ -5,7 +5,7 @@
         margin: .5em;
         text-align: center;
         width:90%;
-        font-size:4vw;
+        font-size:3vw;
 }
 .pnt-container > div > img{
         width: 25%;
@@ -21,7 +21,7 @@
 <script>
 document.querySelector("#pnt-widget-handshake-dynamic_index").value = 1;
 function render_pnt(point, point_by, reward){
-	document.querySelector("#pnt-widget-dynamic_index").innerHTML = '<div>Your won a reward!</div><div>+' + reward + ' ' + point_by + '!</div>';
+	document.querySelector("#pnt-widget-dynamic_index").innerHTML = '<p>Your won a reward!</p><p>+' + reward + ' ' + point_by + '</p>';
 }
 
 function selectPolicy(list){
