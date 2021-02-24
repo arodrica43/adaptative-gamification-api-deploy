@@ -20,9 +20,10 @@
 
 <script>
 document.querySelector("#pnt-widget-handshake-dynamic_index").value = 1;
-function render_pnt(level){
-	document.querySelector("#pnt-widget-dynamic_index").innerHTML = level.html;
-    $(level.html).appendTo(document.body);
+function render_pnt(point, reward){
+	document.querySelector("#pnt-widget-dynamic_index").innerHTML = '<div>Your ' + point.given_by + ' have increased by ' + reward + '</div>';
+	document.querySelector("#pnt-widget-dynamic_index").innerHTML += point.html;
+    $(point.html).appendTo(document.body);
 }
 
 function selectPolicy(list){
@@ -34,14 +35,15 @@ function chooseReward(){
 }
 
 url = "https://agmodule.herokuapp.com/api/points/";
+reward = chooseReward();
 fetch(url)
 .then(response => response.json())
 .then(res_json => (res_json.results))
 .then((list) => (selectPolicy(list))) // Select Policy: select the first (could be random, or other policy)
-.then((level) => (console.log(level), 
-						fetch("https://agmodule.herokuapp.com/api/g_mechanics/" + level.id + "/?user=dynamic_user&show_title=false&increase=" + chooseReward())
+.then((point) => (console.log(point), 
+						fetch("https://agmodule.herokuapp.com/api/g_mechanics/" + point.id + "/?user=dynamic_user&show_title=false&increase=" + reward)
 						.then(response => response.json())
-						.then((updated_level) => (console.log(updated_level), render_pnt(updated_level)))
+						.then((updated_point) => (console.log(updated_point), render_pnt(updated_point, reward)))
 						.catch(error => (console.log("Error: " + error)))))
 .catch(error => (console.log("Error: " + error)))
 </script>
