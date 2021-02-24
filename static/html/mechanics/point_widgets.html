@@ -21,9 +21,7 @@
 <script>
 document.querySelector("#pnt-widget-handshake-dynamic_index").value = 1;
 function render_pnt(point, point_by, reward){
-	document.querySelector("#pnt-widget-dynamic_index").innerHTML = '<div>Your ' + point_by + ' have increased by ' + reward + '</div>';
-	document.querySelector("#pnt-widget-dynamic_index").innerHTML += point.html;
-    $(point.html).appendTo(document.body);
+	document.querySelector("#pnt-widget-dynamic_index").innerHTML = '<div>Your ' + point_by + ' have increased by ' + reward + '!</div>';
 }
 
 function selectPolicy(list){
